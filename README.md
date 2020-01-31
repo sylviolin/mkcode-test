@@ -12,5 +12,5 @@ MIT
 (The metadata above is needed for package search.)
 
 ```package
-tools=github:sylviolin/mkcode-test
+mkcode-test=github:sylviolin/mkcode-test
 ```

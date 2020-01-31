@@ -1,7 +1,7 @@
 {
-    "name": "mytools",
+    "name": "pixetto",
     "version": "0.0.1",
-    "description": "這是專為測試用的micro:bit積木",
+    "description": "Pixetto blocks for micro:bit",
     "license": "MIT",
     "dependencies": {
         "core": "*"

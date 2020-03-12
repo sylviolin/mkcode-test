@@ -1,14 +1,8 @@
-enum ser_pins {
-    P0 = 1,
-    P1 = 2,
-    P2 = 3
-}
-
 //% weight=0 color=#A88002 icon="\uf0ad" block="pixetto"
 namespace pixetto {
 
 	//% block="初始化視覺感測器 RX %rx TX %tx"
-	export function ss_init(rx: ser_pins, tx: ser_pins): boolean {
+	export function ss_init(rx: TouchPin, tx: TouchPin): boolean {
 		return true;
     }
     

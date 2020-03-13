@@ -1,4 +1,5 @@
-#include "mbed.h"
+#include "pxt.h"
+#include "MicroBit.h"
 
 #define PXT_PACKET_START 	0xFD
 #define PXT_PACKET_END   	0xFE

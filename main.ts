@@ -9,7 +9,7 @@ namespace PIXETTO {
     
     //% block="識別到物體"
     //% shim=pixetto::isDetected
-    export function isDetected(): ManagedString {
+    export function isDetected(): number {
 
     }
     

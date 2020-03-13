@@ -1,5 +1,8 @@
 #include "mbed.h"
 
+#define PXT_PACKET_START 	0xFD
+#define PXT_PACKET_END   	0xFE
+
 //% color=#D400D4 weight=111 icon="\uf192"
 namespace pixetto {
     //% 
@@ -11,9 +14,25 @@ namespace pixetto {
     }
     
     //%
-    ManagedString isDetected(){
-		return serial.readUntil(";");
+    int isDetected(){
+		uint8_t data_buf[10] = {0};
+		int read_len = 0;
+		do {
+			read_len = serial.read(data_buf, 1);
+			if (read_len == 0) return SERVER_RESPONSE_TIMEOUT;
+		} while (data_buf[0] != PXT_PACKET_START);
 
+		int i = 0;
+		do {
+			i++;
+			read_len = serial.read(&data_buf[i], 1);
+			if (read_len == 0) return SERVER_RESPONSE_TIMEOUT;
+		} while (data_buf[i] != PXT_PACKET_END && i < 9);
+		
+		if (data_buf[2] < 20)
+			return data_buf[2];
+		else
+			return 0;
 	}
 	
 }

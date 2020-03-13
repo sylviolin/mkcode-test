@@ -2,6 +2,7 @@
 
 #define PXT_PACKET_START 	0xFD
 #define PXT_PACKET_END   	0xFE
+#define PXT_CMD_STREAMON	0x79
 
 //% color=#D400D4 weight=111 icon="\uf192"
 namespace pixetto {
@@ -9,12 +10,14 @@ namespace pixetto {
 	
     //% 
     void begin(PinName rx, PinName tx){
+		uint8_t data_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON, 0, PXT_PACKET_END};
         serial=new MicroBitSerial(rx, tx);
         serial.baud(38400);
         
-        serial.send("{\"header\":\"STREAMON\"};");
+        serial.send(data_buf, 5);
     }
     
+    /*
     //%
     int isDetected(){
 		uint8_t data_buf[10] = {0};
@@ -36,5 +39,5 @@ namespace pixetto {
 		else
 			return 0;
 	}
-	
+	*/
 }

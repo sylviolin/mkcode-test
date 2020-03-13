@@ -2,7 +2,7 @@
 namespace pixetto {
 
 	//% block="初始化視覺感測器 RX %rx TX %tx"
-	export function ss_init(rx: TouchPin, tx: TouchPin): boolean {
+	export function ss_init(rx: SerialPin, tx: SerialPin): boolean {
 		return true;
     }
     

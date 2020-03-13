@@ -8,6 +8,7 @@
     },
     "files": [
         "README.md",
+        "pixetto.cpp",
         "main.ts",
         "_locales/zh/tools-strings.json"
     ],

@@ -10,9 +10,10 @@ namespace pixetto {
         serial.send("{\"header\":\"STREAMON\"};");
     }
     
+    //%
     ManagedString isDetected(){
-		a = serial.readUntil(";")
-		return a;
+		return serial.readUntil(";");
+
 	}
 	
 }

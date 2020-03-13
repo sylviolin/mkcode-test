@@ -1,9 +1,10 @@
 //% weight=0 color=#A88002 icon="\uf0ad" block="pixetto"
-namespace pixetto {
+namespace PIXETTO {
 
 	//% block="初始化視覺感測器 RX %rx TX %tx"
-	export function ss_init(rx: SerialPin, tx: SerialPin): boolean {
-		return true;
+	//% shim=pixetto::ss_init
+	export function ss_init(rx: SerialPin, tx: SerialPin): void {
+		
     }
     
     //% block="識別到物體"

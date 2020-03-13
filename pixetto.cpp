@@ -18,7 +18,6 @@ namespace pixetto {
         serial.send(data_buf, 5);
     }
     
-    /*
     //%
     int isDetected(){
 		uint8_t data_buf[10] = {0};
@@ -40,5 +39,4 @@ namespace pixetto {
 		else
 			return 0;
 	}
-	*/
 }

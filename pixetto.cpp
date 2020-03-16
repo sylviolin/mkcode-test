@@ -14,8 +14,10 @@ namespace pixetto {
 		uint8_t data_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON, 0, PXT_PACKET_END};
         serial=new MicroBitSerial(rx, tx);
         serial->baud(38400);
+        uBit.sleep(100);
         
         serial->send(data_buf, 5);
+        uBit.sleep(1000);
     }
     
     //%

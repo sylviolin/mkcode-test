@@ -36,6 +36,7 @@ namespace pixetto {
 			if (read_len == 0) return 0;
 		} while (data_buf[i] != PXT_PACKET_END && i < 9);
 		
+		return 5;
 		if (data_buf[2] < 20)
 			return data_buf[2];
 		else

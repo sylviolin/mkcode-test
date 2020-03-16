@@ -24,6 +24,8 @@ namespace pixetto {
     int isDetected(){
 		uint8_t data_buf[10] = {0};
 		int read_len = 0;
+		return 5;
+		/*
 		do {
 			read_len = serial->read(data_buf, 1);
 			if (read_len == 0) return 0;
@@ -40,6 +42,6 @@ namespace pixetto {
 		if (data_buf[2] < 20)
 			return data_buf[2];
 		else
-			return 0;
+			return 0;*/
 	}
 }

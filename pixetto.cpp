@@ -17,7 +17,7 @@ namespace pixetto {
         uBit.sleep(100);
         
         serial->send(data_buf, 5);
-        uBit.sleep(1000);
+        //uBit.sleep(1000);
     }
     
     //%

@@ -10,6 +10,8 @@
         "README.md",
         "pixetto.cpp",
         "main.ts",
+        "shims.d.ts",
+        "enums.d.ts",
         "_locales/zh/tools-strings.json"
     ],
     "public": true

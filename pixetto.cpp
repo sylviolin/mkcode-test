@@ -13,9 +13,9 @@ namespace pixetto {
     void begin(PinName rx, PinName tx){
 		uint8_t data_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON, 0, PXT_PACKET_END};
         serial=new MicroBitSerial(rx, tx);
-        serial.baud(38400);
+        serial->baud(38400);
         
-        serial.send(data_buf, 5);
+        serial->send(data_buf, 5);
     }
     
     //%
@@ -23,14 +23,14 @@ namespace pixetto {
 		uint8_t data_buf[10] = {0};
 		int read_len = 0;
 		do {
-			read_len = serial.read(data_buf, 1);
+			read_len = serial->read(data_buf, 1);
 			if (read_len == 0) return 0;
 		} while (data_buf[0] != PXT_PACKET_START);
 
 		int i = 0;
 		do {
 			i++;
-			read_len = serial.read(&data_buf[i], 1);
+			read_len = serial->read(&data_buf[i], 1);
 			if (read_len == 0) return 0;
 		} while (data_buf[i] != PXT_PACKET_END && i < 9);
 		

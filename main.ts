@@ -10,7 +10,7 @@ namespace PIXETTO {
     //% block="識別到物體"
     //% shim=pixetto::isDetected
     export function isDetected(): number {
-		return 0;
+		return 4;
     }
     
     //% block="目前功能"

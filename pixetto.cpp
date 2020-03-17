@@ -47,9 +47,12 @@ namespace pixetto {
 		} while (data_buf[i] != PXT_PACKET_END && i < 9);
 		
 		if (data_buf[i] == PXT_PACKET_END)
-			return 2;
+			if (data_buf[2] == 0xE0)
+				return 2;
+			else 
+				return 3;
 		if (i == 9)
-			return 3;
+			return 5;
 		
 		if (data_buf[2] < 20)
 			return data_buf[2];

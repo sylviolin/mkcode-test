@@ -15,6 +15,7 @@ namespace pixetto {
     void begin(PinName rx, PinName tx){
 		PinName txn;
 		PinName rxn;
+
 		//if (tryResolvePin(tx, txn) && tryResolvePin(rx, rxn))
 		{
 			serial=new MicroBitSerial(MICROBIT_PIN_P2, MICROBIT_PIN_P1);//(txn, rxn);
@@ -31,19 +32,19 @@ namespace pixetto {
     int isDetected(){
 		uint8_t data_buf[10] = {0};
 		int read_len = 0;
-		
+		uBit.serial.send("detected ");
 		do {
 			read_len = serial->read(data_buf, 1);
 			if (read_len == 0) return 0;
 		} while (data_buf[0] != PXT_PACKET_START);
-
+		uBit.serial.send("start ");
 		int i = 0;
 		do {
 			i++;
 			read_len = serial->read(&data_buf[i], 1);
 			if (read_len == 0) return 0;
 		} while (data_buf[i] != PXT_PACKET_END && i < 9);
-		
+		uBit.serial.send("end ");
 		//return 5;
 		if (data_buf[2] < 20)
 			return data_buf[2];

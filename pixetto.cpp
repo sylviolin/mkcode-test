@@ -36,19 +36,18 @@ namespace pixetto {
 			read_len = serial->read(data_buf, 1);
 			if (read_len == 0) return 0;
 		} while (data_buf[0] != PXT_PACKET_START);
-		return 8;
-		/*
+
 		int i = 0;
 		do {
 			i++;
 			read_len = serial->read(&data_buf[i], 1);
 			if (read_len == 0) return 0;
 		} while (data_buf[i] != PXT_PACKET_END && i < 9);
-		//return 5;
+		return 8;
+		
 		if (data_buf[2] < 20)
 			return data_buf[2];
 		else
 			return 0;
-		*/
 	}
 }

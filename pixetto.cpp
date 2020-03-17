@@ -18,7 +18,7 @@ namespace pixetto {
     void begin(PinName rx, PinName tx){
 		PinName txn;
 		PinName rxn;
-
+		
 		//if (tryResolvePin(tx, txn) && tryResolvePin(rx, rxn))
 		{
 			serial=new MicroBitSerial(MICROBIT_PIN_P2, MICROBIT_PIN_P1);//(txn, rxn);
@@ -27,7 +27,17 @@ namespace pixetto {
 
 			uint8_t data_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON, 0, PXT_PACKET_END};
 			serial->send(data_buf, 5);
-			//uBit.sleep(1000);
+			uBit.sleep(100);
+			
+			int read_len = 0;
+			
+			do {
+				read_len = serial->read(data_buf, 1, ASYNC);
+				if (read_len == 0) return;
+			} while (data_buf[0] != PXT_PACKET_START);
+
+			read_len = serial->read(&data_buf[1], 4);
+			
 		}
     }
     
@@ -35,16 +45,6 @@ namespace pixetto {
     int isDetected(){
 		uint8_t data_buf[10] = {0};
 		int read_len = 0;
-
-		/*
-		read_len = serial->read(data_buf, 1);
-		if (read_len == 0) return 0;
-		switch(data_buf[0]) {
-			case PXT_PACKET_START:	return 1;
-			case PXT_PACKET_END: return 2;
-			case 0xE0: return 3;
-			default: return 4;
-		}*/
 
 		do {
 			read_len = serial->read(data_buf, 1, ASYNC);
@@ -62,7 +62,7 @@ namespace pixetto {
 		if (data_buf[9] != PXT_PACKET_END) return 9;
 		
 		if (data_buf[3] < 10)
-			return (int)data_buf[3];
+			return data_buf[3];
 		else
 			return 0;
 	}

@@ -27,13 +27,12 @@ namespace pixetto {
 
 			uint8_t data_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON, 0, PXT_PACKET_END};
 			serial->send(data_buf, 5);
-			uBit.sleep(100);
+			//uBit.sleep(100);
 			
 			int read_len = 0;
 			
 			do {
-				read_len = serial->read(data_buf, 1, ASYNC);
-				if (read_len == 0) return;
+				read_len = serial->read(data_buf, 1);
 			} while (data_buf[0] != PXT_PACKET_START);
 
 			read_len = serial->read(&data_buf[1], 4);

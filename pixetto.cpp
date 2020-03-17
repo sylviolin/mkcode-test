@@ -32,13 +32,16 @@ namespace pixetto {
     int isDetected(){
 		uint8_t data_buf[10] = {0};
 		int read_len = 0;
+		int i = 0;
 		do {
+			i++;
 			read_len = serial->read(data_buf, 1);
 			if (read_len == 0) return 0;
 			if (data_buf[0] == 0xFF) return 9;
-		} while (data_buf[0] != PXT_PACKET_START);
+		} while (data_buf[0] != PXT_PACKET_START && i < 20);
+		if (data_buf[0] != PXT_PACKET_START) return 4;
 
-		int i = 0;
+		i = 0;
 		do {
 			i++;
 			read_len = serial->read(&data_buf[i], 1);

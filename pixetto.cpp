@@ -5,6 +5,9 @@
 #define PXT_PACKET_END   	0xFE
 #define PXT_CMD_STREAMON	0x79
 
+#define PXT_RET_CAM_SUCCESS	0xE0
+#define PXT_RET_CAM_ERROR	0xE1
+
 using namespace pxt;
 
 //% color=#D400D4 weight=111 icon="\uf192"
@@ -33,7 +36,16 @@ namespace pixetto {
 		uint8_t data_buf[10] = {0};
 		int read_len = 0;
 		int i = 0;
-		do {
+		
+		read_len = serial->read(data_buf, 1);
+		if (read_len == 0) return 0;
+		switch(data_buf[0]) {
+			case PXT_PACKET_START:	return 1;
+			case PXT_PACKET_END: return 2;
+			case 0xE0: return 3;
+			default: return 4;
+		}
+		/*do {
 			i++;
 			read_len = serial->read(data_buf, 1);
 			if (read_len == 0) return 0;
@@ -60,6 +72,6 @@ namespace pixetto {
 		if (data_buf[2] < 20)
 			return data_buf[2];
 		else
-			return 0;
+			return 0;*/
 	}
 }

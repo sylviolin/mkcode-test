@@ -35,6 +35,7 @@ namespace pixetto {
 		do {
 			read_len = serial->read(data_buf, 1);
 			if (read_len == 0) return 0;
+			if (data_buf[0] == 0xFF) return 9;
 		} while (data_buf[0] != PXT_PACKET_START);
 
 		int i = 0;
@@ -42,12 +43,13 @@ namespace pixetto {
 			i++;
 			read_len = serial->read(&data_buf[i], 1);
 			if (read_len == 0) return 0;
+			if (data_buf[i] == 0xFF) return 9;
 		} while (data_buf[i] != PXT_PACKET_END && i < 9);
 		
 		if (data_buf[i] == PXT_PACKET_END)
-			return i;
+			return 2;
 		if (i == 9)
-			return 0;
+			return 3;
 		
 		if (data_buf[2] < 20)
 			return data_buf[2];

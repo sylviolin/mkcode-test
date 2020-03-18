@@ -73,6 +73,6 @@ namespace pixetto {
 		//if (data_buf[3] < 10)
 		//	return data_buf[3];
 		else
-			return 0;
+			return 4;
 	}
 }

@@ -43,7 +43,9 @@ namespace pixetto {
 				i++;
 			} while (data_buf[i-1] != PXT_PACKET_END && i < 5);
 			if (data_buf[4] != PXT_PACKET_END) return 5;
-			return 2;
+			
+			if (data_buf[2] == PXT_RET_CAM_SUCCESS) return 2;
+			else return 3;
 		}
     }
     

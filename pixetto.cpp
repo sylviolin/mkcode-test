@@ -15,7 +15,7 @@ namespace pixetto {
 	MicroBitSerial *serial=nullptr;
 	
     //% 
-    void begin(PinName rx, PinName tx){
+    int begin(PinName rx, PinName tx){
 		PinName txn;
 		PinName rxn;
 		
@@ -25,18 +25,25 @@ namespace pixetto {
 			serial->baud(38400);
 			uBit.sleep(100);
 
-			uint8_t data_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON, 0, PXT_PACKET_END};
-			serial->send(data_buf, 5);
+			uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON, 0, PXT_PACKET_END};
+			serial->send(cmd_buf, 5);
 			//uBit.sleep(100);
 			
 			int read_len = 0;
 			
+			uint8_t data_buf[5] = {0};
 			do {
-				read_len = serial->read(data_buf, 1);
+				read_len = serial->read(data_buf, 1, ASYNC);
 			} while (data_buf[0] != PXT_PACKET_START);
 
-			read_len = serial->read(&data_buf[1], 4);
-			
+			int i = 1;
+			do {
+				read_len = serial->read(&data_buf[i], 1);
+				if (read_len == 0) continue; //return 0;
+				i++;
+			} while (data_buf[i-1] != PXT_PACKET_END && i < 5);
+			if (data_buf[4] != PXT_PACKET_END) return 5;
+			return 0;
 		}
     }
     
@@ -50,14 +57,14 @@ namespace pixetto {
 			if (read_len == 0) return 0;
 		} while (data_buf[0] != PXT_PACKET_START);
 
-		/*int i = 0;
+		int i = 1;
 		do {
+			read_len = serial->read(&data_buf[i], 1);
+			if (read_len == 0) continue; //return 0;
 			i++;
-			read_len = serial->read(&data_buf[i], 1, ASYNC);
-			if (read_len == 0) return 0;
-		} while (data_buf[i] != PXT_PACKET_END && i < 9);
-		*/
-		read_len = serial->read(&data_buf[1], 9);
+		} while (data_buf[i-1] != PXT_PACKET_END && i < 10);
+		
+		//read_len = serial->read(&data_buf[1], 9);
 		if (data_buf[9] != PXT_PACKET_END) return 9;
 		
 		if (data_buf[3] < 10)

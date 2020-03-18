@@ -66,14 +66,14 @@ namespace pixetto {
 			i++;
 		} while (data_buf[i-1] != PXT_PACKET_END && i < 10);
 		
-		return i;
+		//return i;
 		//read_len = serial->read(&data_buf[1], 9);
-		//if (data_buf[9] != PXT_PACKET_END) return 9;
+		if (data_buf[8] == PXT_PACKET_END) return 8;
 		//if (data_buf[1] == 0x0A) return 8;
 		
 		//if (data_buf[3] < 10)
 		//	return data_buf[3];
-		//else
-		//	return 4;
+		else
+			return 4;
 	}
 }

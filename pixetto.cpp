@@ -68,8 +68,8 @@ namespace pixetto {
 		
 		//return i;
 		//read_len = serial->read(&data_buf[1], 9);
-		if (data_buf[8] == PXT_PACKET_END) return 8;
-		//if (data_buf[1] == 0x0A) return 8;
+		//if (data_buf[8] == PXT_PACKET_END) return 8;
+		if (data_buf[0] == 0x0A) return 7;
 		
 		//if (data_buf[3] < 10)
 		//	return data_buf[3];

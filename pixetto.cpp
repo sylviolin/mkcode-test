@@ -44,8 +44,8 @@ namespace pixetto {
 			} while (data_buf[i-1] != PXT_PACKET_END && i < 5);
 			if (data_buf[4] != PXT_PACKET_END) return 5;
 			
-			if (data_buf[2] == PXT_RET_CAM_SUCCESS) return 2;
-			else return 3;
+			if (data_buf[2] == PXT_RET_CAM_SUCCESS) return 3;
+			else return 2;
 		}
     }
     
@@ -68,7 +68,7 @@ namespace pixetto {
 		
 		//read_len = serial->read(&data_buf[1], 9);
 		//if (data_buf[9] != PXT_PACKET_END) return 9;
-		if (data_buf[1] == 10) return 2;
+		if (data_buf[1] == 0x0A) return 8;
 		
 		//if (data_buf[3] < 10)
 		//	return data_buf[3];

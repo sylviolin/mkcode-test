@@ -67,10 +67,11 @@ namespace pixetto {
 		} while (data_buf[i-1] != PXT_PACKET_END && i < 10);
 		
 		//read_len = serial->read(&data_buf[1], 9);
-		if (data_buf[9] != PXT_PACKET_END) return 9;
+		//if (data_buf[9] != PXT_PACKET_END) return 9;
+		if (data_buf[0] == PXT_PACKET_START) return 1;
 		
-		if (data_buf[3] < 10)
-			return data_buf[3];
+		//if (data_buf[3] < 10)
+		//	return data_buf[3];
 		else
 			return 0;
 	}

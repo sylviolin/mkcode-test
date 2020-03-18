@@ -43,7 +43,7 @@ namespace pixetto {
 				i++;
 			} while (data_buf[i-1] != PXT_PACKET_END && i < 5);
 			if (data_buf[4] != PXT_PACKET_END) return 5;
-			return 0;
+			return 2;
 		}
     }
     

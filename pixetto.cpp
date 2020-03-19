@@ -8,8 +8,6 @@
 #define PXT_RET_CAM_SUCCESS	0xE0
 #define PXT_RET_CAM_ERROR	0xE1
 
-using namespace pxt;
-
 //% color=#D400D4 weight=111 icon="\uf192"
 namespace pixetto {
 	MicroBitSerial *serial = &uBit.serial; //nullptr;
@@ -23,8 +21,10 @@ namespace pixetto {
 		//if (tryResolvePin(tx, txn) && tryResolvePin(rx, rxn))
 		{
 			//serial=new MicroBitSerial(MICROBIT_PIN_P2, MICROBIT_PIN_P1);//(txn, rxn);
-			serial->redirect(MICROBIT_PIN_P0, MICROBIT_PIN_P1);
 			serial->baud(38400);
+			serial->redirect(MICROBIT_PIN_P0, MICROBIT_PIN_P1);
+			serial->setRxBufferSize(32);
+			serial->setTxBufferSize(32);
 			uBit.sleep(100);
 
 			uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON, 0, PXT_PACKET_END};

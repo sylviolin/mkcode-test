@@ -34,7 +34,7 @@ namespace pixetto {
 			
 			uint8_t code_buf[5] = {0};
 			do {
-				read_len = serial->read(code_buf, 1, ASYNC);
+				read_len = serial->read(code_buf, 1);
 			} while (code_buf[0] != PXT_PACKET_START);
 
 			int i = 1;

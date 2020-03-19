@@ -34,15 +34,17 @@ namespace pixetto {
 			
 			uint8_t code_buf[5] = {0};
 			do {
-				read_len = serial->read(code_buf, 1);
+				read_len = serial->read(code_buf, 1, ASYNC);
 			} while (code_buf[0] != PXT_PACKET_START);
-
+			/*
 			int i = 1;
 			do {
 				read_len = serial->read(&code_buf[i], 1);
-				if (read_len == 0) continue; //return 0;
+				//if (read_len == 0) continue; //return 0;
 				i++;
 			} while (code_buf[i-1] != PXT_PACKET_END && i < 5);
+			*/
+			read_len = serial->read(&code_buf[1], 4);
 			if (code_buf[4] != PXT_PACKET_END) return 5;
 			
 			if (code_buf[2] == PXT_RET_CAM_SUCCESS) return 3;

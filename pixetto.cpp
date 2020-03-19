@@ -12,17 +12,18 @@ using namespace pxt;
 
 //% color=#D400D4 weight=111 icon="\uf192"
 namespace pixetto {
-	MicroBitSerial *serial=nullptr;
+	MicroBitSerial *serial = &uBit.serial; //nullptr;
 	uint8_t data_buf[10] = {0};
 
     //% 
-    void begin(PinName rx, PinName tx){
+    int begin(PinName rx, PinName tx){
 		PinName txn;
 		PinName rxn;
 		
 		//if (tryResolvePin(tx, txn) && tryResolvePin(rx, rxn))
 		{
-			serial=new MicroBitSerial(MICROBIT_PIN_P2, MICROBIT_PIN_P1);//(txn, rxn);
+			//serial=new MicroBitSerial(MICROBIT_PIN_P2, MICROBIT_PIN_P1);//(txn, rxn);
+			serial->redirect(MICROBIT_PIN_P1, MICROBIT_PIN_P2);
 			serial->baud(38400);
 			uBit.sleep(100);
 
@@ -50,7 +51,7 @@ namespace pixetto {
 			if (code_buf[1] == 5) aa += 20;
 			if (code_buf[2] == PXT_RET_CAM_SUCCESS) aa +=300;
 			if (code_buf[4] == PXT_PACKET_END) aa += 4000;
-			//return aa;
+			return aa;
 		}
     }
     

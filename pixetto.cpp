@@ -62,7 +62,7 @@ namespace pixetto {
 			data_buf[a] = 0;
 		
 		do {
-			read_len = serial->read(data_buf, 1);//, ASYNC);
+			read_len = serial->read(data_buf, 1, ASYNC);
 			//if (read_len == 0) continue; //return 0;
 		} while (data_buf[0] != PXT_PACKET_START);
 
@@ -75,6 +75,7 @@ namespace pixetto {
 			i++;
 		} while (data_buf[i-1] != PXT_PACKET_END && i < 10);
 		*/
+		/*
 		read_len = serial->read(&data_buf[1], 1);
 		read_len = serial->read(&data_buf[2], 1);
 		read_len = serial->read(&data_buf[3], 1);
@@ -84,8 +85,8 @@ namespace pixetto {
 		read_len = serial->read(&data_buf[7], 1);
 		read_len = serial->read(&data_buf[8], 1);
 		//read_len = serial->read(&data_buf[9], 1);
-		
-		//read_len = serial->read(&data_buf[1], 9);
+		*/
+		read_len = serial->read(&data_buf[1], 8);
 		
 		int aa = 10000;
 		if (data_buf[0] == PXT_PACKET_START) aa += 5000;

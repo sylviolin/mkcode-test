@@ -66,7 +66,7 @@ namespace pixetto {
 			if (read_len == 0) return 0;
 		} while (data_buf[0] != PXT_PACKET_START);
 
-		
+		/*
 		int i = 1;
 		do {
 			read_len = serial->read(&data_buf[i], 1);
@@ -74,15 +74,24 @@ namespace pixetto {
 			if (data_buf[i] == 0xFF) continue;
 			i++;
 		} while (data_buf[i-1] != PXT_PACKET_END && i < 10);
-		
+		*/
+		read_len = serial->read(&data_buf[1], 1);
+		read_len = serial->read(&data_buf[2], 1);
+		read_len = serial->read(&data_buf[3], 1);
+		read_len = serial->read(&data_buf[4], 1);
+		read_len = serial->read(&data_buf[5], 1);
+		read_len = serial->read(&data_buf[6], 1);
+		read_len = serial->read(&data_buf[7], 1);
+		read_len = serial->read(&data_buf[8], 1);
+		//read_len = serial->read(&data_buf[9], 1);
 		
 		//read_len = serial->read(&data_buf[1], 9);
 		
-		int aa = 0;
-		if (data_buf[0] == PXT_PACKET_START) aa += 50000;
-		if (data_buf[8] == PXT_PACKET_END) aa += 6000;
-		if (data_buf[1] == 1) aa += 700;
-		if (data_buf[2] == 4) aa += 80;
+		int aa = 10000;
+		if (data_buf[0] == PXT_PACKET_START) aa += 5000;
+		if (data_buf[8] == PXT_PACKET_END) aa += 600;
+		if (data_buf[1] == 1) aa += 70;
+		if (data_buf[2] == 4) aa += 8;
 		//aa = aa + (data_buf[2] * 10) + data_buf[3];
 		
 		/*for (aa=0; aa<10; aa++)

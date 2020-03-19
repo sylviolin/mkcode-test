@@ -11,7 +11,7 @@
 //% color=#D400D4 weight=111 icon="\uf192"
 namespace pixetto {
 	MicroBitSerial *serial = &uBit.serial; //nullptr;
-	uint8_t data_buf[10] = {0};
+	uint8_t data_buf[10] = {0xFF};
 
     //% 
     int begin(PinName rx, PinName tx){
@@ -66,16 +66,17 @@ namespace pixetto {
 			if (read_len == 0) return 0;
 		} while (data_buf[0] != PXT_PACKET_START);
 
-		/*
+		
 		int i = 1;
 		do {
 			read_len = serial->read(&data_buf[i], 1);
-			if (read_len == 0) continue; //return 0;
+			if (read_len == 0) continue;
+			if (data_buf[i] == 0xFF) continue;
 			i++;
 		} while (data_buf[i-1] != PXT_PACKET_END && i < 10);
-		*/
 		
-		read_len = serial->read(&data_buf[1], 9);
+		
+		//read_len = serial->read(&data_buf[1], 9);
 		
 		int aa = 0;
 		//if (data_buf[0] == PXT_PACKET_START) aa += 50000;

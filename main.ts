@@ -3,8 +3,8 @@ namespace PIXETTO {
 
 	//% block="初始化視覺感測器 RX %rx TX %tx"
 	//% shim=pixetto::begin
-	export function begin(rx: SerialPin, tx: SerialPin): number {
-		return 0
+	export function begin(rx: SerialPin, tx: SerialPin): void {
+		return 
     }
     
     //% block="識別到物體"

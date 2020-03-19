@@ -16,7 +16,7 @@ namespace pixetto {
 	uint8_t data_buf[10] = {0};
 
     //% 
-    int begin(PinName rx, PinName tx){
+    void begin(PinName rx, PinName tx){
 		PinName txn;
 		PinName rxn;
 		
@@ -50,7 +50,7 @@ namespace pixetto {
 			if (code_buf[1] == 5) aa += 20;
 			if (code_buf[2] == PXT_RET_CAM_SUCCESS) aa +=300;
 			if (code_buf[4] == PXT_PACKET_END) aa += 4000;
-			return aa;
+			//return aa;
 		}
     }
     

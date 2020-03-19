@@ -23,7 +23,7 @@ namespace pixetto {
 		//if (tryResolvePin(tx, txn) && tryResolvePin(rx, rxn))
 		{
 			//serial=new MicroBitSerial(MICROBIT_PIN_P2, MICROBIT_PIN_P1);//(txn, rxn);
-			serial->redirect(MICROBIT_PIN_P1, MICROBIT_PIN_P2);
+			serial->redirect(MICROBIT_PIN_P0, MICROBIT_PIN_P1);
 			serial->baud(38400);
 			uBit.sleep(100);
 

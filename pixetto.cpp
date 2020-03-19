@@ -79,14 +79,15 @@ namespace pixetto {
 		//read_len = serial->read(&data_buf[1], 9);
 		
 		int aa = 0;
-		//if (data_buf[0] == PXT_PACKET_START) aa += 50000;
-		//if (data_buf[9] == PXT_PACKET_END) aa += 6000;
-		//if (data_buf[1] == 0x0A) aa += 700;
+		if (data_buf[0] == PXT_PACKET_START) aa += 50000;
+		if (data_buf[8] == PXT_PACKET_END) aa += 6000;
+		if (data_buf[1] == 1) aa += 700;
+		if (data_buf[2] == 4) aa += 80;
 		//aa = aa + (data_buf[2] * 10) + data_buf[3];
 		
-		for (aa=0; aa<10; aa++)
+		/*for (aa=0; aa<10; aa++)
 			if (data_buf[aa] == PXT_PACKET_END)
-				break;
+				break;*/
 		return aa;
 		
 		/*if (data_buf[8] == PXT_PACKET_END) return 8;

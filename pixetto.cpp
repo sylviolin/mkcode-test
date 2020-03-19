@@ -45,10 +45,12 @@ namespace pixetto {
 			} while (code_buf[i-1] != PXT_PACKET_END && i < 5);
 			*/
 			read_len = serial->read(&code_buf[1], 4);
-			if (code_buf[4] != PXT_PACKET_END) return 5;
-			
-			if (code_buf[2] == PXT_RET_CAM_SUCCESS) return 3;
-			else return 2;
+			int aa = 10000;
+			if (code_buf[0] == PXT_PACKET_START) aa += 1;
+			if (code_buf[1] == 5) aa += 20;
+			if (code_buf[2] == PXT_RET_CAM_SUCCESS) aa +=300;
+			if (code_buf[4] == PXT_PACKET_END) aa += 4000;
+			return aa;
 		}
     }
     

@@ -23,7 +23,7 @@ namespace pixetto {
 			//serial=new MicroBitSerial(MICROBIT_PIN_P2, MICROBIT_PIN_P1);//(txn, rxn);
 			serial->baud(38400);
 			serial->redirect(MICROBIT_PIN_P0, MICROBIT_PIN_P1);
-			serial->setRxBufferSize(32);
+			serial->setRxBufferSize(500);
 			serial->setTxBufferSize(32);
 			uBit.sleep(100);
 

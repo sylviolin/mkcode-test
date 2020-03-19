@@ -85,7 +85,7 @@ namespace pixetto {
 		//aa = aa + (data_buf[2] * 10) + data_buf[3];
 		
 		for (aa=0; aa<10; aa++)
-			if (data_buf[aa] == 0x0A)
+			if (data_buf[aa] == 10)
 				break;
 		return aa;
 		

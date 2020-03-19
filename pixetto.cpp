@@ -84,7 +84,9 @@ namespace pixetto {
 	
 	
 	int getFuncID(){
-		return data_buf[1];
+		if (data_buf[0] == PXT_PACKET_START) return 6;
+		else return 9;
+		//return data_buf[1];
 	}
 
 	int getTypeID() {

@@ -77,7 +77,7 @@ namespace pixetto {
 			if (data_buf[i] == 0xFF) continue;
 			i++;
 		} while (data_buf[i-1] != PXT_PACKET_END && i < 10);
-		/*
+		*/
 		
 		read_len = serial->read(&data_buf[1], 9);
 		

@@ -65,6 +65,7 @@ namespace pixetto {
 			read_len = serial->read(data_buf, 1, ASYNC);
 			//if (read_len == 0) continue; //return 0;
 			if (read_len == MICROBIT_SERIAL_IN_USE) return 64;
+			if (read_len == 0) return 0;
 		} while (data_buf[0] != PXT_PACKET_START);
 
 		/*
@@ -87,7 +88,7 @@ namespace pixetto {
 		read_len = serial->read(&data_buf[8], 1);
 		//read_len = serial->read(&data_buf[9], 1);
 		*/
-		read_len = serial->read(&data_buf[1], 8);
+		read_len = serial->read(&data_buf[1], 9);
 		
 		int aa = 10000;
 		if (data_buf[0] == PXT_PACKET_START) aa += 5000;

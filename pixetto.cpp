@@ -80,6 +80,7 @@ namespace pixetto {
 		*/
 		
 		read_len = serial->read(&data_buf[1], 9);
+		if (read_len != 9) return 0;
 		
 		int aa = 10000;
 		if (data_buf[0] == PXT_PACKET_START) aa += 5000;

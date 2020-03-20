@@ -59,11 +59,12 @@ namespace pixetto {
     int isDetected(){
 		int read_len = 0;
 		for (int a=0; a<10; a++)
-			data_buf[a] = 0;
+			data_buf[a] = 0xFF;
 		
 		do {
 			read_len = serial->read(data_buf, 1, ASYNC);
 			//if (read_len == 0) continue; //return 0;
+			if (read_len == MICROBIT_SERIAL_IN_USE) return 64;
 		} while (data_buf[0] != PXT_PACKET_START);
 
 		/*
@@ -93,24 +94,8 @@ namespace pixetto {
 		if (data_buf[8] == PXT_PACKET_END) aa += 600;
 		if (data_buf[1] == 1) aa += 70;
 		if (data_buf[2] == 4) aa += 8;
-		//aa = aa + (data_buf[2] * 10) + data_buf[3];
-		
-		/*for (aa=0; aa<10; aa++)
-			if (data_buf[aa] == PXT_PACKET_END)
-				break;*/
 		return aa;
 		
-		/*if (data_buf[8] == PXT_PACKET_END) return 8;
-		
-		if (data_buf[0] == PXT_PACKET_START) return 5;
-		else return 9;
-		
-		
-		if (data_buf[2] < 10)
-			return data_buf[2];
-		else
-			return 4;*/
-			
 	}
 	
 	

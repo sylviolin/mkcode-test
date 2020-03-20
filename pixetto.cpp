@@ -1,5 +1,6 @@
 #include "pxt.h"
 //#include "MicroBit.h"
+#include "PixData.h"
 
 #define PXT_PACKET_START 	0xFD
 #define PXT_PACKET_END   	0xFE
@@ -9,14 +10,7 @@
 #define PXT_RET_CAM_SUCCESS	0xE0
 #define PXT_RET_CAM_ERROR	0xE1
 
-typedef struct {
-	int funcid;
-	int tid;
-	int posx;
-	int posy;
-	int width;
-	int height;
-} PixData;
+
 
 using namespace pxt;
 
@@ -33,7 +27,7 @@ namespace pixetto {
 		
 		//if (tryResolvePin(tx, txn) && tryResolvePin(rx, rxn))
 		{
-			pixdata = new PixData;
+			pixdata = new PixData();
 			serial = new MicroBitSerial(MICROBIT_PIN_P1, MICROBIT_PIN_P2);//(txn, rxn);
 			serial->baud(38400);
 			//serial->setRxBufferSize(500);

@@ -4,6 +4,7 @@
 #define PXT_PACKET_START 	0xFD
 #define PXT_PACKET_END   	0xFE
 #define PXT_CMD_STREAMON	0x79
+#define PXT_CMD_QUERY		0x7B
 
 #define PXT_RET_CAM_SUCCESS	0xE0
 #define PXT_RET_CAM_ERROR	0xE1
@@ -60,7 +61,10 @@ namespace pixetto {
 		int read_len = 0;
 		for (int a=0; a<10; a++)
 			data_buf[a] = 0xFF;
-		
+	
+		uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_QUERY, 0, PXT_PACKET_END};
+		serial->send(cmd_buf, 5);
+
 		do {
 			read_len = serial->read(data_buf, 1, ASYNC);
 			//if (read_len == 0) continue; //return 0;
@@ -69,7 +73,7 @@ namespace pixetto {
 		} while (data_buf[0] != PXT_PACKET_START);
 
 		
-		int i = 1;
+		/*int i = 1;
 		do {
 			read_len = serial->read(&data_buf[i], 1);
 			//if (read_len == MICROBIT_SERIAL_IN_USE) continue;
@@ -77,9 +81,9 @@ namespace pixetto {
 			if (data_buf[i] == 0xFF) continue;
 			i++;
 		} while (data_buf[i-1] != PXT_PACKET_END && i < 10);
+		*/
 		
-		
-		//read_len = serial->read(&data_buf[1], 9);
+		read_len = serial->read(&data_buf[1], 9);
 		if (i != 9) return 0;
 		
 		int aa = 10000;

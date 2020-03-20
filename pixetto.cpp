@@ -86,6 +86,11 @@ namespace pixetto {
 		if (data_buf[9] == PXT_PACKET_END) aa += 600;
 		if (data_buf[2] == 1) aa += 70;
 		if (data_buf[3] == 4) aa += 8;
+		
+		if (data_buf[8] == PXT_PACKET_END) aa += 200;
+		if (data_buf[1] == 1) aa += 30;
+		if (data_buf[2] == 4) aa += 4;
+		
 		return aa;
 		
 	}

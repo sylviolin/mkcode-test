@@ -1,5 +1,5 @@
 #include "pxt.h"
-#include "MicroBit.h"
+//#include "MicroBit.h"
 
 #define PXT_PACKET_START 	0xFD
 #define PXT_PACKET_END   	0xFE
@@ -9,20 +9,23 @@
 #define PXT_RET_CAM_SUCCESS	0xE0
 #define PXT_RET_CAM_ERROR	0xE1
 
+typedef struct {
+	int funcid;
+	int tid;
+	int posx;
+	int posy;
+	int width;
+	int height;
+} PxtData;
+
+using namespace pxt;
+
 //% color=#D400D4 weight=111 icon="\uf192"
 namespace pixetto {
-typedef struct {
-	int funcid = 0;
-	int tid = 0;
-	int posx = 0;
-	int posy = 0;
-	int width = 0;
-	int height = 0;
-} PxtData;
 
 	MicroBitSerial *serial = nullptr;
 	uint8_t data_buf[10] = {0xFF};
-	PxtData *pxtdata = nullptr;
+	PixData *pixdata = nullptr;
     //% 
     int begin(PinName rx, PinName tx){
 		PinName txn;
@@ -30,8 +33,8 @@ typedef struct {
 		
 		//if (tryResolvePin(tx, txn) && tryResolvePin(rx, rxn))
 		{
-			pxtdata = new PxtData;
-			serial=new MicroBitSerial(MICROBIT_PIN_P1, MICROBIT_PIN_P2);//(txn, rxn);
+			pixdata = new PixData;
+			serial = new MicroBitSerial(MICROBIT_PIN_P1, MICROBIT_PIN_P2);//(txn, rxn);
 			serial->baud(38400);
 			//serial->setRxBufferSize(500);
 			//serial->setTxBufferSize(32);
@@ -76,12 +79,15 @@ typedef struct {
 		if (data_buf[9] != PXT_PACKET_END) return 0;
 		if (data_buf[3] == 0) return 0;
 		
-		pxtdata->funcid	= data_buf[2];
-		pxtdata->tid	= data_buf[3];
-		pxtdata->posx	= data_buf[4];
-		pxtdata->posy	= data_buf[5];
-		pxtdata->width	= data_buf[6];
-		pxtdata->height	= data_buf[7];
+		if (pixdata == nullptr) 
+			pixdata = new PixData;
+			
+		pixdata->funcid	= (int)data_buf[2];
+		pixdata->tid	= (int)data_buf[3];
+		pixdata->posx	= (int)data_buf[4];
+		pixdata->posy	= (int)data_buf[5];
+		pixdata->width	= (int)data_buf[6];
+		pixdata->height	= (int)data_buf[7];
 		return 1;
 		
 		/*
@@ -100,38 +106,38 @@ typedef struct {
 	}
 	
 	int getFuncID(){
-		if (pxtdata != nullptr)
-			return pxtdata->funcid;
+		if (pixdata != nullptr)
+			return pixdata->funcid;
 		return 0;
 	}
 
 	int getTypeID() {
-		if (pxtdata != nullptr)
-			return pxtdata->tid;
+		if (pixdata != nullptr)
+			return pixdata->tid;
 		return 0;
 	}
 
 	int getPosX() {
-		if (pxtdata != nullptr)
-			return pxtdata->posx;
+		if (pixdata != nullptr)
+			return pixdata->posx;
 		return 0;
 	}
 	
 	int getPosY() {
-		if (pxtdata != nullptr)
-			return pxtdata->posy;
+		if (pixdata != nullptr)
+			return pixdata->posy;
 		return 0;
 	}
 
 	int getWidth() {
-		if (pxtdata != nullptr)
-			return pxtdata->width;
+		if (pixdata != nullptr)
+			return pixdata->width;
 		return 0;
 	}
 
 	int getHeight() {
-		if (pxtdata != nullptr)
-			return pxtdata->height;
+		if (pixdata != nullptr)
+			return pixdata->height;
 		return 0;
 	}
 }

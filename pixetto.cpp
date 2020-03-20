@@ -69,6 +69,7 @@ namespace pixetto {
 		read_len = serial->read(&data_buf[1], 9);
 		if (read_len != 9) return 0;
 		if (data_buf[9] != PXT_PACKET_END) return 0;
+		if (data_buf[2] == 0) return 0;
 		
 		funcid	= data_buf[2];
 		tid		= data_buf[3];

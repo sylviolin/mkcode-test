@@ -11,14 +11,18 @@
 
 //% color=#D400D4 weight=111 icon="\uf192"
 namespace pixetto {
-	MicroBitSerial *serial = nullptr;
-	uint8_t data_buf[10] = {0xFF};
+typedef struct {
 	int funcid = 0;
 	int tid = 0;
 	int posx = 0;
 	int posy = 0;
 	int width = 0;
 	int height = 0;
+} PxtData;
+
+	MicroBitSerial *serial = nullptr;
+	uint8_t data_buf[10] = {0xFF};
+	PxtData *pxtdata = nullptr;
     //% 
     int begin(PinName rx, PinName tx){
 		PinName txn;
@@ -26,6 +30,7 @@ namespace pixetto {
 		
 		//if (tryResolvePin(tx, txn) && tryResolvePin(rx, rxn))
 		{
+			pxtdata = new PxtData;
 			serial=new MicroBitSerial(MICROBIT_PIN_P1, MICROBIT_PIN_P2);//(txn, rxn);
 			serial->baud(38400);
 			//serial->setRxBufferSize(500);
@@ -71,12 +76,12 @@ namespace pixetto {
 		if (data_buf[9] != PXT_PACKET_END) return 0;
 		if (data_buf[3] == 0) return 0;
 		
-		funcid	= data_buf[2];
-		tid		= data_buf[3];
-		posx	= data_buf[4];
-		posy	= data_buf[5];
-		width	= data_buf[6];
-		height	= data_buf[7];
+		pxtdata->funcid	= data_buf[2];
+		pxtdata->tid	= data_buf[3];
+		pxtdata->posx	= data_buf[4];
+		pxtdata->posy	= data_buf[5];
+		pxtdata->width	= data_buf[6];
+		pxtdata->height	= data_buf[7];
 		return 1;
 		
 		/*
@@ -94,28 +99,39 @@ namespace pixetto {
 		*/
 	}
 	
-	
 	int getFuncID(){
-		return funcid;
+		if (pxtdata != nullptr)
+			return pxtdata->funcid;
+		return 0;
 	}
 
 	int getTypeID() {
-		return tid;
+		if (pxtdata != nullptr)
+			return pxtdata->tid;
+		return 0;
 	}
 
 	int getPosX() {
-		return posx;
+		if (pxtdata != nullptr)
+			return pxtdata->posx;
+		return 0;
 	}
 	
 	int getPosY() {
-		return posy;
+		if (pxtdata != nullptr)
+			return pxtdata->posy;
+		return 0;
 	}
 
 	int getWidth() {
-		return width;
+		if (pxtdata != nullptr)
+			return pxtdata->width;
+		return 0;
 	}
 
 	int getHeight() {
-		return height;
+		if (pxtdata != nullptr)
+			return pxtdata->height;
+		return 0;
 	}
 }

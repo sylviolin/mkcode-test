@@ -11,9 +11,14 @@
 
 //% color=#D400D4 weight=111 icon="\uf192"
 namespace pixetto {
-	MicroBitSerial *serial = &uBit.serial; //nullptr;
+	MicroBitSerial *serial = nullptr;
 	uint8_t data_buf[10] = {0xFF};
-
+	int funcid = 0;
+	int tid = 0;
+	int posx = 0;
+	int posy = 0;
+	int width = 0;
+	int height = 0;
     //% 
     int begin(PinName rx, PinName tx){
 		PinName txn;
@@ -21,9 +26,8 @@ namespace pixetto {
 		
 		//if (tryResolvePin(tx, txn) && tryResolvePin(rx, rxn))
 		{
-			//serial=new MicroBitSerial(MICROBIT_PIN_P2, MICROBIT_PIN_P1);//(txn, rxn);
+			serial=new MicroBitSerial(MICROBIT_PIN_P1, MICROBIT_PIN_P2);//(txn, rxn);
 			serial->baud(38400);
-			serial->redirect(MICROBIT_PIN_P0, MICROBIT_PIN_P1);
 			//serial->setRxBufferSize(500);
 			//serial->setTxBufferSize(32);
 			uBit.sleep(100);
@@ -38,14 +42,7 @@ namespace pixetto {
 			do {
 				read_len = serial->read(code_buf, 1, ASYNC);
 			} while (code_buf[0] != PXT_PACKET_START);
-			/*
-			int i = 1;
-			do {
-				read_len = serial->read(&code_buf[i], 1);
-				//if (read_len == 0) continue; //return 0;
-				i++;
-			} while (code_buf[i-1] != PXT_PACKET_END && i < 5);
-			*/
+
 			read_len = serial->read(&code_buf[1], 4);
 			int aa = 10000;
 			if (code_buf[0] == PXT_PACKET_START) aa += 1;
@@ -67,25 +64,21 @@ namespace pixetto {
 
 		do {
 			read_len = serial->read(data_buf, 1, ASYNC);
-			//if (read_len == 0) continue; //return 0;
-			//if (read_len == MICROBIT_SERIAL_IN_USE) return 0;
-			//if (read_len == 0) return 0;
 		} while (data_buf[0] != PXT_PACKET_START);
 
-		
-		/*int i = 1;
-		do {
-			read_len = serial->read(&data_buf[i], 1);
-			//if (read_len == MICROBIT_SERIAL_IN_USE) continue;
-			//if (read_len == 0) continue;
-			if (data_buf[i] == 0xFF) continue;
-			i++;
-		} while (data_buf[i-1] != PXT_PACKET_END && i < 10);
-		*/
-		
 		read_len = serial->read(&data_buf[1], 9);
 		if (read_len != 9) return 0;
+		if (data_buf[9] != PXT_PACKET_END) return 0;
 		
+		funcid	= data_buf[2];
+		tid		= data_buf[3];
+		posx	= data_buf[4];
+		posy	= data_buf[5];
+		width	= data_buf[6];
+		height	= data_buf[7];
+		return 1;
+		
+		/*
 		int aa = 10000;
 		if (data_buf[0] == PXT_PACKET_START) aa += 5000;
 		if (data_buf[9] == PXT_PACKET_END) aa += 600;
@@ -97,27 +90,31 @@ namespace pixetto {
 		if (data_buf[2] == 4) aa += 4;
 		
 		return aa;
-		
+		*/
 	}
 	
 	
 	int getFuncID(){
-		if (data_buf[0] == PXT_PACKET_START) return 6;
-		else return 9;
-		//return data_buf[1];
+		return funcid;
 	}
 
 	int getTypeID() {
-		return data_buf[2];
+		return tid;
 	}
 
 	int getPosX() {
-		return data_buf[3];
+		return posx;
 	}
 	
 	int getPosY() {
-		if (data_buf[9] == PXT_PACKET_END) return 6;
-		else return 9;
-		
+		return posy;
+	}
+
+	int getWidth() {
+		return width;
+	}
+
+	int getHeight() {
+		return height;
 	}
 }

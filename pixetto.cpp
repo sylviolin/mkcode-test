@@ -16,7 +16,7 @@ typedef struct {
 	int posy;
 	int width;
 	int height;
-} PxtData;
+} PixData;
 
 using namespace pxt;
 

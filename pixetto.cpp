@@ -75,7 +75,7 @@ namespace pixetto {
 		if (data_buf[3] == 0) return 0;
 		
 		if (pixdata == nullptr) 
-			pixdata = new PixData;
+			pixdata = new PixData();
 			
 		pixdata->funcid	= (int)data_buf[2];
 		pixdata->tid	= (int)data_buf[3];
@@ -101,15 +101,15 @@ namespace pixetto {
 	}
 	
 	int getFuncID(){
-		if (pixdata != nullptr)
+		//if (pixdata != nullptr)
 			return pixdata->funcid;
-		return 0;
+		//return 0;
 	}
 
 	int getTypeID() {
-		if (pixdata != nullptr)
+		//if (pixdata != nullptr)
 			return pixdata->tid;
-		return 0;
+		//return 0;
 	}
 
 	int getPosX() {

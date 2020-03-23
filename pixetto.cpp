@@ -51,7 +51,8 @@ namespace pixetto {
 			if (code_buf[1] == 5) aa += 20;
 			if (code_buf[2] == PXT_RET_CAM_SUCCESS) aa +=300;
 			if (code_buf[4] == PXT_PACKET_END) aa += 4000;
-			return aa;
+			//return aa;
+			return pixdata->posx;
 		}
     }
     

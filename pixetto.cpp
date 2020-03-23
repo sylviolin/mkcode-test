@@ -1,6 +1,4 @@
 #include "pxt.h"
-//#include "MicroBit.h"
-//#include "PixData.h"
 
 #define PXT_PACKET_START 	0xFD
 #define PXT_PACKET_END   	0xFE
@@ -10,8 +8,6 @@
 #define PXT_RET_CAM_SUCCESS	0xE0
 #define PXT_RET_CAM_ERROR	0xE1
 
-
-
 using namespace pxt;
 
 //% color=#D400D4 weight=111 icon="\uf192"
@@ -19,14 +15,14 @@ namespace pixetto {
 
 	MicroBitSerial *serial = nullptr;
 	uint8_t data_buf[10] = {0xFF};
-	//PixData *pixdata = nullptr;
+	/*
 	int funcid = 0;
 	int tid = 0;
 	int posx = 0;
 	int posy = 0;
 	int width = 0;
 	int height = 0;
-	
+	*/
     //% 
     int begin(PinName rx, PinName tx){
 		PinName txn;
@@ -34,7 +30,6 @@ namespace pixetto {
 		
 		//if (tryResolvePin(tx, txn) && tryResolvePin(rx, rxn))
 		{
-			//pixdata = new PixData();
 			serial = new MicroBitSerial(MICROBIT_PIN_P1, MICROBIT_PIN_P2);//(txn, rxn);
 			serial->baud(38400);
 			//serial->setRxBufferSize(500);
@@ -79,58 +74,37 @@ namespace pixetto {
 		if (read_len != 9) return 0;
 		if (data_buf[9] != PXT_PACKET_END) return 0;
 		if (data_buf[3] == 0) return 0;
-		
-		//if (pixdata == nullptr) 
-		//	pixdata = new PixData();
-			
-		//pixdata->
+		/*
 		funcid	= (int)data_buf[2];
-		//pixdata->
-		tid	= (int)data_buf[3];
-		//pixdata->
+		tid	= 	(int)data_buf[3];
 		posx	= (int)data_buf[4];
-		//pixdata->
 		posy	= (int)data_buf[5];
-		//pixdata->
 		width	= (int)data_buf[6];
-		//pixdata->
-		height	= (int)data_buf[7];
+		height	= (int)data_buf[7];*/
 		return 1;
 	}
 	//%
 	int getFuncID(){
-		//if (pixdata != nullptr)
-		//	return pixdata->funcid;
-		return funcid;
+		return data_buf[2];
 	}
 	//%
 	int getTypeID() {
-		//if (pixdata != nullptr)
-		//	return pixdata->tid;
-		return tid;
+		return data_buf[3];
 	}
 	//%
 	int getPosX() {
-		//if (pixdata != nullptr)
-		//	return pixdata->posx;
-		return posx;
+		return data_buf[4];
 	}
 	//%
 	int getPosY() {
-		//if (pixdata != nullptr)
-		//	return pixdata->posy;
-		return posy;
+		return data_buf[5];
 	}
 	//%
 	int getWidth() {
-		//if (pixdata != nullptr)
-		//	return pixdata->width;
-		return width;
+		return data_buf[6];
 	}
 	//%
 	int getHeight() {
-		//if (pixdata != nullptr)
-		//	return pixdata->height;
-		return height;
+		return data_buf[7];
 	}
 }

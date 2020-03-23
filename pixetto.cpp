@@ -1,6 +1,6 @@
 #include "pxt.h"
 //#include "MicroBit.h"
-#include "PixData.h"
+//#include "PixData.h"
 
 #define PXT_PACKET_START 	0xFD
 #define PXT_PACKET_END   	0xFE
@@ -19,7 +19,14 @@ namespace pixetto {
 
 	MicroBitSerial *serial = nullptr;
 	uint8_t data_buf[10] = {0xFF};
-	PixData *pixdata = nullptr;
+	//PixData *pixdata = nullptr;
+	int funcid = 0;
+	int tid = 0;
+	int posx = 0;
+	int posy = 0;
+	int width = 0;
+	int height = 0;
+	
     //% 
     int begin(PinName rx, PinName tx){
 		PinName txn;
@@ -27,7 +34,7 @@ namespace pixetto {
 		
 		//if (tryResolvePin(tx, txn) && tryResolvePin(rx, rxn))
 		{
-			pixdata = new PixData();
+			//pixdata = new PixData();
 			serial = new MicroBitSerial(MICROBIT_PIN_P1, MICROBIT_PIN_P2);//(txn, rxn);
 			serial->baud(38400);
 			//serial->setRxBufferSize(500);
@@ -73,65 +80,57 @@ namespace pixetto {
 		if (data_buf[9] != PXT_PACKET_END) return 0;
 		if (data_buf[3] == 0) return 0;
 		
-		if (pixdata == nullptr) 
-			pixdata = new PixData();
+		//if (pixdata == nullptr) 
+		//	pixdata = new PixData();
 			
-		pixdata->funcid	= (int)data_buf[2];
-		pixdata->tid	= (int)data_buf[3];
-		pixdata->posx	= (int)data_buf[4];
-		pixdata->posy	= (int)data_buf[5];
-		pixdata->width	= (int)data_buf[6];
-		pixdata->height	= (int)data_buf[7];
+		//pixdata->
+		funcid	= (int)data_buf[2];
+		//pixdata->
+		tid	= (int)data_buf[3];
+		//pixdata->
+		posx	= (int)data_buf[4];
+		//pixdata->
+		posy	= (int)data_buf[5];
+		//pixdata->
+		width	= (int)data_buf[6];
+		//pixdata->
+		height	= (int)data_buf[7];
 		return 1;
-		
-		/*
-		int aa = 10000;
-		if (data_buf[0] == PXT_PACKET_START) aa += 5000;
-		if (data_buf[9] == PXT_PACKET_END) aa += 600;
-		if (data_buf[2] == 1) aa += 70;
-		if (data_buf[3] == 4) aa += 8;
-		
-		if (data_buf[8] == PXT_PACKET_END) aa += 200;
-		if (data_buf[1] == 1) aa += 30;
-		if (data_buf[2] == 4) aa += 4;
-		
-		return aa;
-		*/
 	}
 	//%
 	int getFuncID(){
-		if (pixdata != nullptr)
-			return pixdata->funcid;
-		return 0;
+		//if (pixdata != nullptr)
+		//	return pixdata->funcid;
+		return funcid;
 	}
 	//%
 	int getTypeID() {
-		if (pixdata != nullptr)
-			return pixdata->tid;
-		return 0;
+		//if (pixdata != nullptr)
+		//	return pixdata->tid;
+		return tid;
 	}
 	//%
 	int getPosX() {
-		if (pixdata != nullptr)
-			return pixdata->posx;
-		return 0;
+		//if (pixdata != nullptr)
+		//	return pixdata->posx;
+		return posx;
 	}
 	//%
 	int getPosY() {
-		if (pixdata != nullptr)
-			return pixdata->posy;
-		return 0;
+		//if (pixdata != nullptr)
+		//	return pixdata->posy;
+		return posy;
 	}
 	//%
 	int getWidth() {
-		if (pixdata != nullptr)
-			return pixdata->width;
-		return 0;
+		//if (pixdata != nullptr)
+		//	return pixdata->width;
+		return width;
 	}
 	//%
 	int getHeight() {
-		if (pixdata != nullptr)
-			return pixdata->height;
-		return 0;
+		//if (pixdata != nullptr)
+		//	return pixdata->height;
+		return height;
 	}
 }

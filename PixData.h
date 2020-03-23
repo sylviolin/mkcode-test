@@ -3,12 +3,12 @@
 class PixData {
 public:
 	PixData() {
-	funcid = 0;
-	tid = 0;
-	posx = 0;
-	posy = 0;
-	width = 0;
-	height = 0;
+	funcid = 9;
+	tid = 9;
+	posx = 9;
+	posy = 9;
+	width = 9;
+	height = 9;
 	}
 
 	virtual ~PixData(void) {}

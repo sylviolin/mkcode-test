@@ -98,37 +98,37 @@ namespace pixetto {
 		return aa;
 		*/
 	}
-	
+	//%
 	int getFuncID(){
 		if (pixdata != nullptr)
 			return pixdata->funcid;
 		return 0;
 	}
-
+	//%
 	int getTypeID() {
 		if (pixdata != nullptr)
 			return pixdata->tid;
 		return 0;
 	}
-
+	//%
 	int getPosX() {
 		if (pixdata != nullptr)
 			return pixdata->posx;
 		return 0;
 	}
-	
+	//%
 	int getPosY() {
 		if (pixdata != nullptr)
 			return pixdata->posy;
 		return 0;
 	}
-
+	//%
 	int getWidth() {
 		if (pixdata != nullptr)
 			return pixdata->width;
 		return 0;
 	}
-
+	//%
 	int getHeight() {
 		if (pixdata != nullptr)
 			return pixdata->height;

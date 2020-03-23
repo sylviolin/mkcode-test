@@ -14,34 +14,37 @@ namespace PIXETTO {
     }
     
     //% block="目前功能"
+    //% shim=pixetto::getFuncID
     export function getFuncID(): number {
         return 0;
     }
     
     //% block="物體類別"
+    //% shim=pixetto::getTypeID
     export function getTypeID(): number {
         return 0;
     }
     
     //% block="物體座標X"
+    //% shim=pixetto::getPosX
     export function getPosX(): number {
         return 0;
     }
     
     //% block="物體座標Y"
+    //% shim=pixetto::getPosY
     export function getPosY(): number {
         return 0;
     }
 
     //% block="物體寬度"
+    //% shim=pixetto::getWidth
     export function getWidth(): number {
         return 0;
     }
 
-    /**
-    * 計算長方形面積，並回傳
-    */
     //% block="物體高度"
+    //% shim=pixetto::getHeight
     export function getHeight(): number {
         return 0;
     }

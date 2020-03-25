@@ -12,24 +12,15 @@
 #define PXT_RET_CAM_ERROR	0xE1
 
 enum SerialPin2 {
-	//% block="P0"
-    PP0 = 0,
-    //% block="P1"
-    PP1 = 1,
-    //% block="P2"
-    PP2 = 2,
-    //% block="P8"
-    PP8 = 8,
-    //% block="P12"
-    PP12 = 12,
-    //% block="P13"
-    PP13 = 13,
-    //% block="P14"
-    PP14 = 14,
-    //% block="P15"
-    PP15 = 15,
-    //% block="P16"
-    PP16 = 16
+    P0 = 0,
+    P1 = 1,
+    P2 = 2,
+    P8 = 8,
+    P12 = 12,
+    P13 = 13,
+    P14 = 14,
+    P15 = 15,
+    P16 = 16
 };
 
 using namespace pxt;
@@ -40,17 +31,17 @@ namespace pixetto {
 	MicroBitSerial *serial = nullptr;
 	uint8_t data_buf[10] = {0xFF};
 	
-    bool tryResolvePin(SerialPin2 p, PinName& name) {
+    bool getPinName(SerialPin2 p, PinName& name) {
       switch(p) {
-        case PP0: name = MICROBIT_PIN_P0;  return true;
-        case PP1: name = MICROBIT_PIN_P1;  return true;
-        case PP2: name = MICROBIT_PIN_P2;  return true;
-        case PP8: name = MICROBIT_PIN_P8;  return true;
-        case PP12: name = MICROBIT_PIN_P12; return true;
-        case PP13: name = MICROBIT_PIN_P13; return true;
-        case PP14: name = MICROBIT_PIN_P14; return true;
-        case PP15: name = MICROBIT_PIN_P15; return true;
-        case PP16: name = MICROBIT_PIN_P16; return true;
+        case P0: name = MICROBIT_PIN_P0;  return true;
+        case P1: name = MICROBIT_PIN_P1;  return true;
+        case P2: name = MICROBIT_PIN_P2;  return true;
+        case P8: name = MICROBIT_PIN_P8;  return true;
+        case P12: name = MICROBIT_PIN_P12; return true;
+        case P13: name = MICROBIT_PIN_P13; return true;
+        case P14: name = MICROBIT_PIN_P14; return true;
+        case P15: name = MICROBIT_PIN_P15; return true;
+        case P16: name = MICROBIT_PIN_P16; return true;
       }
       return false;
     }
@@ -58,7 +49,7 @@ namespace pixetto {
     //% 
     int begin(SerialPin2 rx, SerialPin2 tx){
 		PinName txn, rxn;
-		if (tryResolvePin(tx, txn) && tryResolvePin(rx, rxn))
+		if (getPinName(tx, txn) && getPinName(rx, rxn))
 		{
 			serial = new MicroBitSerial(txn, rxn); //(MICROBIT_PIN_P1, MICROBIT_PIN_P2);
 			serial->baud(38400);

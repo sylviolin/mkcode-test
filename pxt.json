@@ -8,8 +8,8 @@
     },
     "files": [
         "README.md",
-        "pixetto.cpp",
         "main.ts",
+        "pixetto.cpp",
         "shims.d.ts",
         "enums.d.ts",
         "_locales/zh/tools-strings.json"

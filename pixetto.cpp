@@ -1,5 +1,7 @@
 #include "pxt.h"
-//#include "MicroBitPin.h"
+#include "mbed.h"
+#include "MicroBitConfig.h"
+#include "MicroBitPin.h"
 #include "MicroBitSerial.h"
 
 #define PXT_PACKET_START 	0xFD
@@ -12,23 +14,23 @@
 
 enum SerialPin2 {
 	//% block="P0"
-    PP0 = MICROBIT_ID_IO_P0,
+    PP0 = 0,
     //% block="P1"
-    PP1 = MICROBIT_ID_IO_P1,
+    PP1 = 1,
     //% block="P2"
-    PP2 = MICROBIT_ID_IO_P2,
+    PP2 = 2,
     //% block="P8"
-    PP8 = MICROBIT_ID_IO_P8,
+    PP8 = 8,
     //% block="P12"
-    PP12 = MICROBIT_ID_IO_P12,
+    PP12 = 12,
     //% block="P13"
-    PP13 = MICROBIT_ID_IO_P13,
+    PP13 = 13,
     //% block="P14"
-    PP14 = MICROBIT_ID_IO_P14,
+    PP14 = 14,
     //% block="P15"
-    PP15 = MICROBIT_ID_IO_P15,
+    PP15 = 15,
     //% block="P16"
-    PP16 = MICROBIT_ID_IO_P16
+    PP16 = 16
 };
 
 using namespace pxt;
@@ -40,16 +42,17 @@ namespace pixetto {
 	uint8_t data_buf[10] = {0xFF};
 
     bool tryResolvePin(SerialPin2 p, PinName& name) {
-      //switch(p) {
-      //  case SerialPin::USB_TX: name = USBTX; return true;
-      //  case SerialPin::USB_RX: name = USBRX; return true;
-        //default: 
-          auto pin = getPin(p); 
-          if (NULL != pin) {
-            name = pin->name;
-            return true;
-          }
-      //}
+      switch(p) {
+        case PP0: name = MICROBIT_PIN_P0;  return true;
+        case PP1: name = MICROBIT_PIN_P0;  return true;
+        case PP2: name = MICROBIT_PIN_P0;  return true;
+        case PP8: name = MICROBIT_PIN_P0;  return true;
+        case PP12: name = MICROBIT_PIN_P0; return true;
+        case PP13: name = MICROBIT_PIN_P0; return true;
+        case PP14: name = MICROBIT_PIN_P0; return true;
+        case PP15: name = MICROBIT_PIN_P0; return true;
+        case PP16: name = MICROBIT_PIN_P0; return true;
+      }
       return false;
     }
 

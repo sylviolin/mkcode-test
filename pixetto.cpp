@@ -11,23 +11,14 @@
 #define PXT_RET_CAM_ERROR	0xE1
 
 enum SerialPin2 {
-	//% block="P0"
     PP0 = MICROBIT_ID_IO_P0,
-    //% block="P1"
     PP1 = MICROBIT_ID_IO_P1,
-    //% block="P2"
     PP2 = MICROBIT_ID_IO_P2,
-    //% block="P8"
     PP8 = MICROBIT_ID_IO_P8,
-    //% block="P12"
     PP12 = MICROBIT_ID_IO_P12,
-    //% block="P13"
     PP13 = MICROBIT_ID_IO_P13,
-    //% block="P14"
     PP14 = MICROBIT_ID_IO_P14,
-    //% block="P15"
     PP15 = MICROBIT_ID_IO_P15,
-    //% block="P16"
     PP16 = MICROBIT_ID_IO_P16
 };
 

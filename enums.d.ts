@@ -21,5 +21,7 @@
     //% block="P16"
     PP16 = 16,
     }
+declare namespace pixetto {
+}
 
 // Auto-generated. Do not edit. Really.

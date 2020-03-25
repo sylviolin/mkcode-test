@@ -1,4 +1,4 @@
-//% color=#D400D4 weight=111 icon="\uf192" block="Pixetto"
+//% weight=0 color=#A88002 icon="\uf0ad" block="Pixetto"
 namespace pixetto {
 	//% block="初始化視覺感測器 RX %rx TX %tx"
 	//% shim=pixetto::begin

@@ -49,9 +49,10 @@ namespace pixetto {
     //% 
     int begin(PixSerialPin rx, PixSerialPin tx){
 		PinName txn, rxn;
+		uBit.sleep(10000);
 		if (getPinName(tx, txn) && getPinName(rx, rxn))
 		{
-			serial = new MicroBitSerial(txn, rxn); //(MICROBIT_PIN_P1, MICROBIT_PIN_P2);
+			serial = new MicroBitSerial(txn, rxn);
 			serial->baud(38400);
 			//serial->setRxBufferSize(500);
 			//serial->setTxBufferSize(32);
@@ -74,7 +75,9 @@ namespace pixetto {
 			if (code_buf[1] == 5) aa += 20;
 			if (code_buf[2] == PXT_RET_CAM_SUCCESS) aa +=300;
 			if (code_buf[4] == PXT_PACKET_END) aa += 4000;
-			return aa;
+			
+			if (aa = 14321) return 1;
+			else return 0;
 		}
     }
     

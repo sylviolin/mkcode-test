@@ -1,5 +1,8 @@
 #include "pxt.h"
-#include "pixetto.h"
+#include "mbed.h"
+#include "MicroBitConfig.h"
+#include "MicroBitPin.h"
+#include "MicroBitSerial.h"
 
 #define PXT_PACKET_START 	0xFD
 #define PXT_PACKET_END   	0xFE
@@ -8,6 +11,27 @@
 
 #define PXT_RET_CAM_SUCCESS	0xE0
 #define PXT_RET_CAM_ERROR	0xE1
+
+enum SerialPin2 {
+	//% block="P0"
+    PP0 = 0,
+    //% block="P1"
+    PP1 = 1,
+    //% block="P2"
+    PP2 = 2,
+    //% block="P8"
+    PP8 = 8,
+    //% block="P12"
+    PP12 = 12,
+    //% block="P13"
+    PP13 = 13,
+    //% block="P14"
+    PP14 = 14,
+    //% block="P15"
+    PP15 = 15,
+    //% block="P16"
+    PP16 = 16
+};
 
 using namespace pxt;
 

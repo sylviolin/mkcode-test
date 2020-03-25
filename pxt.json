@@ -10,7 +10,6 @@
         "README.md",
         "main.ts",
         "pixetto.cpp",
-        "pixetto.h",
         "shims.d.ts",
         "enums.d.ts"
     ],

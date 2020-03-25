@@ -35,7 +35,7 @@ enum SerialPin2 {
 
 using namespace pxt;
 
-//% color=#D400D4 weight=111 icon="\uf192"
+//% color=#A88002 weight=111 icon="\uf192"
 namespace pixetto {
 
 	MicroBitSerial *serial = nullptr;

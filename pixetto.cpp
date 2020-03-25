@@ -1,6 +1,5 @@
 #include "pxt.h"
 #include "mbed.h"
-#include "MicroBitConfig.h"
 #include "MicroBitPin.h"
 #include "MicroBitSerial.h"
 
@@ -40,22 +39,22 @@ namespace pixetto {
 
 	MicroBitSerial *serial = nullptr;
 	uint8_t data_buf[10] = {0xFF};
-
+	
     bool tryResolvePin(SerialPin2 p, PinName& name) {
       switch(p) {
         case PP0: name = MICROBIT_PIN_P0;  return true;
-        case PP1: name = MICROBIT_PIN_P0;  return true;
-        case PP2: name = MICROBIT_PIN_P0;  return true;
-        case PP8: name = MICROBIT_PIN_P0;  return true;
-        case PP12: name = MICROBIT_PIN_P0; return true;
-        case PP13: name = MICROBIT_PIN_P0; return true;
-        case PP14: name = MICROBIT_PIN_P0; return true;
-        case PP15: name = MICROBIT_PIN_P0; return true;
-        case PP16: name = MICROBIT_PIN_P0; return true;
+        case PP1: name = MICROBIT_PIN_P1;  return true;
+        case PP2: name = MICROBIT_PIN_P2;  return true;
+        case PP8: name = MICROBIT_PIN_P8;  return true;
+        case PP12: name = MICROBIT_PIN_P12; return true;
+        case PP13: name = MICROBIT_PIN_P13; return true;
+        case PP14: name = MICROBIT_PIN_P14; return true;
+        case PP15: name = MICROBIT_PIN_P15; return true;
+        case PP16: name = MICROBIT_PIN_P16; return true;
       }
       return false;
     }
-
+	
     //% 
     int begin(SerialPin2 rx, SerialPin2 tx){
 		PinName txn, rxn;

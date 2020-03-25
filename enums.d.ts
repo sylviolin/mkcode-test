@@ -1,7 +1,7 @@
 // Auto-generated. Do not edit.
 
 
-    declare const enum PixUartPin {
+    declare const enum PixSerialPin {
     P0 = 0,
     P1 = 1,
     P2 = 2,

@@ -11,7 +11,7 @@
 #define PXT_RET_CAM_SUCCESS	0xE0
 #define PXT_RET_CAM_ERROR	0xE1
 
-enum PixUartPin {
+enum PixSerialPin {
     P0 = 0,
     P1 = 1,
     P2 = 2,
@@ -31,7 +31,7 @@ namespace pixetto {
 	MicroBitSerial *serial = nullptr;
 	uint8_t data_buf[10] = {0xFF};
 	
-    bool getPinName(PixUartPin p, PinName& name) {
+    bool getPinName(PixSerialPin p, PinName& name) {
       switch(p) {
         case P0: name = MICROBIT_PIN_P0;  return true;
         case P1: name = MICROBIT_PIN_P1;  return true;
@@ -47,7 +47,7 @@ namespace pixetto {
     }
 	
     //% 
-    int begin(PixUartPin rx, PixUartPin tx){
+    int begin(PixSerialPin rx, PixSerialPin tx){
 		PinName txn, rxn;
 		if (getPinName(tx, txn) && getPinName(rx, rxn))
 		{

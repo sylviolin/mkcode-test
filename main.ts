@@ -2,8 +2,7 @@
 namespace PIXETTO {
 
 	//% block="初始化視覺感測器 RX %rx TX %tx"
-	//% shim=pixetto::begin
-	export function begin(rx: SerialPin, tx: SerialPin): number {
+	export function begin(rx: SerialPin2, tx: SerialPin2): number {
 		return 0
     }
     

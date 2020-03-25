@@ -1,4 +1,6 @@
 #include "pxt.h"
+//#include "MicroBitPin.h"
+#include "MicroBitSerial.h"
 
 #define PXT_PACKET_START 	0xFD
 #define PXT_PACKET_END   	0xFE
@@ -8,6 +10,27 @@
 #define PXT_RET_CAM_SUCCESS	0xE0
 #define PXT_RET_CAM_ERROR	0xE1
 
+enum SerialPin2 {
+	//% block="P0"
+    PP0 = MICROBIT_ID_IO_P0,
+    //% block="P1"
+    PP1 = MICROBIT_ID_IO_P1,
+    //% block="P2"
+    PP2 = MICROBIT_ID_IO_P2,
+    //% block="P8"
+    PP8 = MICROBIT_ID_IO_P8,
+    //% block="P12"
+    PP12 = MICROBIT_ID_IO_P12,
+    //% block="P13"
+    PP13 = MICROBIT_ID_IO_P13,
+    //% block="P14"
+    PP14 = MICROBIT_ID_IO_P14,
+    //% block="P15"
+    PP15 = MICROBIT_ID_IO_P15,
+    //% block="P16"
+    PP16 = MICROBIT_ID_IO_P16
+};
+
 using namespace pxt;
 
 //% color=#D400D4 weight=111 icon="\uf192"
@@ -15,22 +38,27 @@ namespace pixetto {
 
 	MicroBitSerial *serial = nullptr;
 	uint8_t data_buf[10] = {0xFF};
-	/*
-	int funcid = 0;
-	int tid = 0;
-	int posx = 0;
-	int posy = 0;
-	int width = 0;
-	int height = 0;
-	*/
+
+    bool tryResolvePin(SerialPin2 p, PinName& name) {
+      //switch(p) {
+      //  case SerialPin::USB_TX: name = USBTX; return true;
+      //  case SerialPin::USB_RX: name = USBRX; return true;
+        //default: 
+          auto pin = getPin(p); 
+          if (NULL != pin) {
+            name = pin->name;
+            return true;
+          }
+      //}
+      return false;
+    }
+
     //% 
-    int begin(PinName rx, PinName tx){
-		PinName txn;
-		PinName rxn;
-		
-		//if (tryResolvePin(tx, txn) && tryResolvePin(rx, rxn))
+    int begin(SerialPin2 rx, SerialPin2 tx){
+		PinName txn, rxn;
+		if (tryResolvePin(tx, txn) && tryResolvePin(rx, rxn))
 		{
-			serial = new MicroBitSerial(MICROBIT_PIN_P1, MICROBIT_PIN_P2);//(txn, rxn);
+			serial = new MicroBitSerial(txn, rxn); //(MICROBIT_PIN_P1, MICROBIT_PIN_P2);
 			serial->baud(38400);
 			//serial->setRxBufferSize(500);
 			//serial->setTxBufferSize(32);
@@ -74,13 +102,6 @@ namespace pixetto {
 		if (read_len != 9) return 0;
 		if (data_buf[9] != PXT_PACKET_END) return 0;
 		if (data_buf[3] == 0) return 0;
-		/*
-		funcid	= (int)data_buf[2];
-		tid	= 	(int)data_buf[3];
-		posx	= (int)data_buf[4];
-		posy	= (int)data_buf[5];
-		width	= (int)data_buf[6];
-		height	= (int)data_buf[7];*/
 		return 1;
 	}
 	//%

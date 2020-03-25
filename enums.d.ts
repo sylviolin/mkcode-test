@@ -1,7 +1,7 @@
 // Auto-generated. Do not edit.
 
 
-    declare const enum SerialPin2 {
+    declare const enum PixUartPin {
     P0 = 0,
     P1 = 1,
     P2 = 2,

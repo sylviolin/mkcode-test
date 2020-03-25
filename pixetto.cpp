@@ -10,6 +10,7 @@
 #define PXT_RET_CAM_ERROR	0xE1
 
 using namespace pxt;
+
 namespace pixetto {
 
 	MicroBitSerial *serial = nullptr;

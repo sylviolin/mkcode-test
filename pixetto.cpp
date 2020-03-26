@@ -47,7 +47,7 @@ namespace pixetto {
     }
 	
     //% 
-    int begin(PixSerialPin rx, PixSerialPin tx){
+    bool begin(PixSerialPin rx, PixSerialPin tx){
 		PinName txn, rxn;
 		uBit.sleep(10000);
 		if (getPinName(tx, txn) && getPinName(rx, rxn))
@@ -76,13 +76,13 @@ namespace pixetto {
 			if (code_buf[2] == PXT_RET_CAM_SUCCESS) aa +=300;
 			if (code_buf[4] == PXT_PACKET_END) aa += 4000;
 			
-			if (aa = 14321) return 1;
-			else return 0;
+			if (aa = 14321) return true;
+			else return false;
 		}
     }
     
     //%
-    int isDetected(){
+    bool isDetected(){
 		int read_len = 0;
 		for (int a=0; a<10; a++)
 			data_buf[a] = 0xFF;
@@ -95,10 +95,10 @@ namespace pixetto {
 		} while (data_buf[0] != PXT_PACKET_START);
 
 		read_len = serial->read(&data_buf[1], 9);
-		if (read_len != 9) return 0;
-		if (data_buf[9] != PXT_PACKET_END) return 0;
-		if (data_buf[3] == 0) return 0;
-		return 1;
+		if (read_len != 9) return false;
+		if (data_buf[9] != PXT_PACKET_END) return false;
+		if (data_buf[3] == 0) return false;
+		return true;
 	}
 	//%
 	int getFuncID(){

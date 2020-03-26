@@ -100,7 +100,7 @@ namespace pixetto {
 		read_len = serial->read(&data_buf[1], 9);
 		if (read_len != 9) return false;
 		if (data_buf[9] != PXT_PACKET_END) return false;
-		if (data_buf[3] == 0) return false;
+		if (data_buf[2] == 0) return false;
 		return true;
 	}
 	//%

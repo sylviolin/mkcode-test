@@ -5,8 +5,9 @@
 
 #define PXT_PACKET_START 	0xFD
 #define PXT_PACKET_END   	0xFE
-#define PXT_CMD_STREAMON	0x79
-#define PXT_CMD_QUERY		0x7B
+#define PXT_CMD_STREAMOFF	0x7A
+#define PXT_CMD_STREAMON_CB 0x7B
+#define PXT_CMD_QUERY		0x7C
 
 #define PXT_RET_CAM_SUCCESS	0xE0
 #define PXT_RET_CAM_ERROR	0xE1
@@ -60,7 +61,7 @@ namespace pixetto {
 			
 			int try_streamon = 0;
 			do {
-				uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON, 0, PXT_PACKET_END};
+				uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON_CB, 0, PXT_PACKET_END};
 				serial->send(cmd_buf, 5);
 				
 				int read_len = 0;

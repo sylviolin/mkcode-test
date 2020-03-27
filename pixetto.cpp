@@ -107,7 +107,7 @@ namespace pixetto {
 		int aa = 1000;
 		if (read_len == 9) aa+=200;
 		if (data_buf[9] == PXT_PACKET_END) aa+=30;
-		if (data_buf[2] == 4) aa+=4;
+		if (data_buf[3] == 4) aa+=4;
 		return aa;
 	}
 	//%

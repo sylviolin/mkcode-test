@@ -98,17 +98,17 @@ namespace pixetto {
 		} while (data_buf[0] != PXT_PACKET_START);
 
 		read_len = serial->read(&data_buf[1], 9);
-		/*
+		
 		if (read_len != 9) return false;
 		if (data_buf[9] != PXT_PACKET_END) return false;
 		if (data_buf[2] == 0) return false;
-		return true;*/
-		
+		return true;
+		/*
 		int aa = 1000;
 		if (read_len == 9) aa+=200;
 		if (data_buf[9] == PXT_PACKET_END) aa+=30;
 		if (data_buf[3] == 4) aa+=4;
-		return aa;
+		return aa;*/
 	}
 	//%
 	int getFuncID(){

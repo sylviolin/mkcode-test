@@ -50,7 +50,7 @@ namespace pixetto {
     //% 
     bool begin(PixSerialPin rx, PixSerialPin tx){
 		PinName txn, rxn;
-		uBit.sleep(8000);
+		//uBit.sleep(8000);
 		if (getPinName(tx, txn) && getPinName(rx, rxn))
 		{
 			serial = new MicroBitSerial(txn, rxn);

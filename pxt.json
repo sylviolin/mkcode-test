@@ -12,7 +12,8 @@
         "pixetto.cpp",
         "shims.d.ts",
         "enums.d.ts",
-        "_locales/zh/Pixetto-strings.json"
+        "_locales/zh/Pixetto-strings.json",
+        "_locales/zh/Pixetto-jsdoc-strings.json"
     ],
     "public": true
 }

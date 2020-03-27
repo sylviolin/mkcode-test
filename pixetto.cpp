@@ -55,7 +55,7 @@ namespace pixetto {
 		{
 			serial = new MicroBitSerial(txn, rxn);
 			serial->baud(38400);
-			//serial->setRxBufferSize(500);
+			serial->setRxBufferSize(64);
 			//serial->setTxBufferSize(32);
 			uBit.sleep(100);
 			
@@ -85,7 +85,7 @@ namespace pixetto {
     }
     
     //%
-    int isDetected(){
+    bool isDetected(){
 		int read_len = 0;
 		for (int a=0; a<10; a++)
 			data_buf[a] = 0xFF;
@@ -103,12 +103,6 @@ namespace pixetto {
 		if (data_buf[9] != PXT_PACKET_END) return false;
 		if (data_buf[2] == 0) return false;
 		return true;
-		/*
-		int aa = 1000;
-		if (read_len == 9) aa+=200;
-		if (data_buf[9] == PXT_PACKET_END) aa+=30;
-		if (data_buf[3] == 4) aa+=4;
-		return aa;*/
 	}
 	//%
 	int getFuncID(){

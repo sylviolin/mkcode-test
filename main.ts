@@ -1,5 +1,21 @@
 //% weight=0 color=#A88002 icon="\uf0ad" block="Pixetto"
 namespace pixetto {
+
+    export enum PixColorType {
+        //% block="red"
+        RED=1,
+        //% block="yellow"
+        YELLOW,
+        //% block="green"
+        GREEN,
+        //% block="blue"
+        BLUE,
+        //% block="purple"
+        PURPLE,
+        //% block="black"
+        BLACK
+    }
+    
 	//% block="initialize vision sensor RX %rx TX %tx"
 	//% shim=pixetto::begin
 	export function begin(rx: PixSerialPin, tx: PixSerialPin): boolean {
@@ -46,5 +62,11 @@ namespace pixetto {
     //% shim=pixetto::getHeight
     export function getHeight(): number {
         return 0;
+    }
+    
+    //% block="is detected Color Detection color%color" color="#2E8B57"
+    //% shim=pixetto::getColorDetectType
+    export function getColorDetectType(color: PixColorType):boolean{
+        return true
     }
 }

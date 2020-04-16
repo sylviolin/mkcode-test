@@ -142,4 +142,12 @@ namespace pixetto {
 	int getHeight() {
 		return data_buf[7];
 	}
+	
+	bool getColorDetectType(int color) {
+		if (isDetected()) {
+			if (getFuncID() == 1 && getTypeID() == color)
+				return true;
+		}
+        return false;
+    }
 }

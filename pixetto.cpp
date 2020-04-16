@@ -157,38 +157,50 @@ namespace pixetto {
 	
     //% 
     bool get_colordetect_color(int color) {
-		if (data_buf[3] == color)
+		if (data_buf[2] == COLOR_DETECTION && data_buf[3] == color)
 			return true;
         return false;
     }
     
     //% 
     bool get_shapedetect_shape(int shape) {
+		if (data_buf[2] == SHAPE_DETECTION && data_buf[3] == shape)
+			return true;
         return false;
     }
 
     //% 
     bool get_circledetect_color(int color) {
+		if (data_buf[2] == CIRCLE_DETECTION && data_buf[3] == color)
+			return true;
         return false;
     }
 
     //%
     bool get_nn_id(int id) {
+		if (data_buf[2] == NEURAL_NETWORK && data_buf[3] == id)
+			return true;
         return false;
     }
 
     //%
     bool get_traffic_sign(int sign) {
+		if (data_buf[2] == TRAFFIC_SIGN_DETECTION && data_buf[3] == sign)
+			return true;
         return false;
     }
 
     //%
-    bool get_hand_digits(int digit) {
+    bool get_hand_digit(int digit) {
+		if (data_buf[2] == HANDWRITING_DIGITS_DETECTION && data_buf[3] == digit)
+			return true;
         return false;
     }
 
     //%
     bool get_hand_letter(int letter) {
+		if (data_buf[2] == HANDWRITING_LETTERS_DETECTION && data_buf[3] == letter)
+			return true;
         return false;
     }	
 	

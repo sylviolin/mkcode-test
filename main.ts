@@ -168,7 +168,7 @@ namespace pixetto {
     
     //% block="Shape Detection detects shape %shape"
     //% shim=pixetto::get_shapedetect_shape
-    export function get_shapedetect_shape(color: PixShapeType): boolean {
+    export function get_shapedetect_shape(shape: PixShapeType): boolean {
         return false;
     }
 
@@ -192,7 +192,7 @@ namespace pixetto {
 
     //% block="Handwriting Digits Detection detects %digit"
     //% shim=pixetto::get_hand_digit
-    export function get_hand_digits(digit: PixHandDigit): boolean {
+    export function get_hand_digit(digit: PixHandDigit): boolean {
         return false;
     }
 

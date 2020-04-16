@@ -1,33 +1,6 @@
 //% weight=0 color=#A88002 icon="\uf0ad" block="Pixetto"
 namespace pixetto {
 
-	 export enum PixFunction {
-        //% block="Color Detection"
-        COLOR_DETECTION=1,
-        //% block="Color Label Detection"
-        COLOR_LABEL,
-        //% block="Shape Detection"
-        SHAPE_DETECTION,
-        //% block="Circle Detection"
-        CIRCLE_DETECTION,
-        //% block="Template Matching"
-        TEMPLATE,
-        //% block="Keypoint"
-        KEYPOINT,
-        //% block="Neural Network"
-        NEURAL_NETWORK,
-        //% block="Face Detection"
-        FACE_DETECTION,
-        //% block="Traffic Sign Detection"
-        TRAFFIC_SIGN_DETECTION,
-        //% block="Handwriting Digits Detection"
-        HANDWRITING_DIGITS_DETECTION,
-        //% block="Handwriting Letters Detection"
-        HANDWRITING_LETTERS_DETECTION,
-        //% block="AprilTag(16h5)"
-        APRILTAG
-    }
-    
     export enum PixColorType {
         //% block="red"
         RED=1,

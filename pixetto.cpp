@@ -24,6 +24,34 @@ enum PixSerialPin {
     P16 = 16
 };
 
+enum PixFunction {
+        //% block="Color Detection"
+        COLOR_DETECTION=1,
+        //% block="Color Label Detection"
+        COLOR_LABEL,
+        //% block="Shape Detection"
+        SHAPE_DETECTION,
+        //% block="Circle Detection"
+        CIRCLE_DETECTION,
+        //% block="Template Matching"
+        TEMPLATE,
+        //% block="Keypoint"
+        KEYPOINT,
+        //% block="Neural Network"
+        NEURAL_NETWORK,
+        //% block="Face Detection"
+        FACE_DETECTION,
+        //% block="Traffic Sign Detection"
+        TRAFFIC_SIGN_DETECTION,
+        //% block="Handwriting Digits Detection"
+        HANDWRITING_DIGITS_DETECTION,
+        //% block="Handwriting Letters Detection"
+        HANDWRITING_LETTERS_DETECTION,
+        //% block="AprilTag(16h5)"
+        APRILTAG
+};
+    
+
 using namespace pxt;
 
 //% color=#A88002 weight=111 icon="\uf192"
@@ -126,6 +154,44 @@ namespace pixetto {
 	int getTypeID() {
 		return data_buf[3];
 	}
+	
+    //% 
+    bool get_colordetect_color(int color) {
+		if (data_buf[3] == color)
+			return true;
+        return false;
+    }
+    
+    //% 
+    bool get_shapedetect_shape(int shape) {
+        return false;
+    }
+
+    //% 
+    bool get_circledetect_color(int color) {
+        return false;
+    }
+
+    //%
+    bool get_nn_id(int id) {
+        return false;
+    }
+
+    //%
+    bool get_traffic_sign(int sign) {
+        return false;
+    }
+
+    //%
+    bool get_hand_digits(int digit) {
+        return false;
+    }
+
+    //%
+    bool get_hand_letter(int letter) {
+        return false;
+    }	
+	
 	//%
 	int getPosX() {
 		return data_buf[4];

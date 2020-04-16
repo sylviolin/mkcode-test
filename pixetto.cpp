@@ -119,8 +119,8 @@ namespace pixetto {
 		return true;
 	}
 	//%
-	int getFuncID(){
-		return data_buf[2];
+	bool getFuncID(int func_id){
+		return data_buf[2] == func_id;
 	}
 	//%
 	int getTypeID() {
@@ -143,11 +143,4 @@ namespace pixetto {
 		return data_buf[7];
 	}
 	
-	bool getColorDetectType(int color) {
-		if (isDetected()) {
-			if (getFuncID() == 1 && getTypeID() == color)
-				return true;
-		}
-        return false;
-    }
 }

@@ -147,7 +147,7 @@ namespace pixetto {
 		return true;
 	}
 	//%
-	bool getFuncID(int func_id){
+	bool getFuncID(PixFunction func_id){
 		return data_buf[2] == func_id;
 	}
 	//%

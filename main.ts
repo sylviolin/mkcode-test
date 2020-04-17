@@ -36,7 +36,7 @@ namespace pixetto {
 		SIGN_NO_RIGHT_TURN,
 		//% block="Wrong way"
 		SIGN_WRONG_WAY,
-		//% block=""No U turn
+		//% block="No U turn"
 		SIGN_NO_U_TURN,
 		//% block="Maximum speed"
 		SIGN_MAX_SPEED,
@@ -52,7 +52,7 @@ namespace pixetto {
 		SIGN_U_TURN,
 		//% block="Tunnel ahead"
 		SIGN_TUNNEL_AHEAD,
-		//% block=" Beware of children "
+		//% block="Beware of children"
 		SIGN_BEWARE_OF_CHILDREN,
 		//% block="Roundabout"
 		SIGN_ROUNDABOUT,

@@ -24,21 +24,21 @@
     //% block="Circle Detection"
     CIRCLE_DETECTION = 4,
     //% block="Template Matching"
-    TEMPLATE = 5,
+    TEMPLATE = 6,
     //% block="Keypoint"
-    KEYPOINT = 6,
+    KEYPOINT = 8,
     //% block="Neural Network"
-    NEURAL_NETWORK = 7,
+    NEURAL_NETWORK = 15,
     //% block="Face Detection"
-    FACE_DETECTION = 8,
+    FACE_DETECTION = 11,
     //% block="Traffic Sign Detection"
-    TRAFFIC_SIGN_DETECTION = 9,
+    TRAFFIC_SIGN_DETECTION = 12,
     //% block="Handwriting Digits Detection"
-    HANDWRITING_DIGITS_DETECTION = 10,
+    HANDWRITING_DIGITS_DETECTION = 13,
     //% block="Handwriting Letters Detection"
-    HANDWRITING_LETTERS_DETECTION = 11,
+    HANDWRITING_LETTERS_DETECTION = 14,
     //% block="AprilTag(16h5)"
-    APRILTAG = 12,
+    APRILTAG = 10,
     }
 declare namespace pixetto {
 }

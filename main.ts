@@ -1,4 +1,4 @@
-//% weight=111 color=#A88002 icon="\uf065" block="VIA Pixetto" 
+//% weight=111 color=#A88002 icon="\uf030" block="VIA Pixetto" 
 namespace pixetto {
 
     export enum PixColorType {

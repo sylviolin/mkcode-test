@@ -103,7 +103,7 @@ namespace pixetto {
 			do {
 				uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON_CB, 0, PXT_PACKET_END};
 				serial->send(cmd_buf, 5);
-				uBit.sleep(500);
+				uBit.sleep(100);
 				
 				int read_len = 0;
 				int loop = 0;

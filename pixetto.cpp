@@ -113,7 +113,7 @@ namespace pixetto {
 					if (read_len == 0) {
 						loop++; //uBit.sleep(100);
 					}
-				} while (code_buf[0] != PXT_PACKET_START || loop > 100);
+				} while (code_buf[0] != PXT_PACKET_START && loop < 100);
 				
 				if (read_len == 0) break;
 					

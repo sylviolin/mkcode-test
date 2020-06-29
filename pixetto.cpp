@@ -110,10 +110,10 @@ namespace pixetto {
 				do {
 					read_len = serial->read(code_buf, 1, ASYNC);
 					
-					if (read_len == 0) {
+					if (read_len == 0 || read_len == MICROBIT_NO_DATA) {
 						loop++;
 					}
-				} while (code_buf[0] != PXT_PACKET_START && loop < 500);
+				} while (code_buf[0] != PXT_PACKET_START && loop < 1000);
 				
 				if (read_len == 0) break;
 					

@@ -103,21 +103,20 @@ namespace pixetto {
 			do {
 				uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON_CB, 0, PXT_PACKET_END};
 				serial->send(cmd_buf, 5);
-				uBit.sleep(100);
 				
 				int read_len = 0;
 				int loop = 0;
 				uint8_t code_buf[5] = {0xFF};
 				do {
 					read_len = serial->read(code_buf, 1, ASYNC);
-					/*if (read_len == 0) {
+					if (read_len == 0) {
 						loop++; //uBit.sleep(100);
 					}
 					if (loop > 100) break;
-					*/
+					
 				} while (code_buf[0] != PXT_PACKET_START);
 				
-				//if (read_len == 0) break;
+				if (read_len == 0) break;
 					
 				read_len = serial->read(&code_buf[1], 4);
 

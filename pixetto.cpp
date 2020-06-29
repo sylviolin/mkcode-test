@@ -106,7 +106,7 @@ namespace pixetto {
 				uBit.sleep(500);
 				
 				int read_len = 0;
-			
+				int loop = 0;
 				uint8_t code_buf[5] = {0xFF};
 				do {
 					read_len = serial->read(code_buf, 1, ASYNC);

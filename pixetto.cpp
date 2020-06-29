@@ -100,17 +100,22 @@ namespace pixetto {
 			uBit.sleep(100);
 			
 			int try_streamon = 0;
-			//do {
+			do {
 				uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON_CB, 0, PXT_PACKET_END};
 				serial->send(cmd_buf, 5);
-			/*	
+				uBit.sleep(500);
+				
 				int read_len = 0;
 			
 				uint8_t code_buf[5] = {0xFF};
 				do {
 					read_len = serial->read(code_buf, 1, ASYNC);
+					if (read_len == MICROBIT_NO_DATA) break;
 				} while (code_buf[0] != PXT_PACKET_START);
-		
+				
+				if (read_len == MICROBIT_NO_DATA) 
+					break;
+					
 				read_len = serial->read(&code_buf[1], 4);
 
 				if (code_buf[0] == PXT_PACKET_START &&
@@ -119,7 +124,7 @@ namespace pixetto {
 					return true;
 				try_streamon++;
 				uBit.sleep(500);
-			} while (try_streamon < 4);*/
+			} while (try_streamon < 4);
 		}
 		return false;
     }

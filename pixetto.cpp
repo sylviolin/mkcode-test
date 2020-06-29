@@ -98,7 +98,7 @@ namespace pixetto {
 			//serial->setRxBufferSize(64);
 			//serial->setTxBufferSize(32);
 			uBit.sleep(100);
-			
+			/*
 			int try_streamon = 0;
 			do {
 				uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON_CB, 0, PXT_PACKET_END};
@@ -119,7 +119,7 @@ namespace pixetto {
 					return true;
 				try_streamon++;
 				uBit.sleep(500);
-			} while (try_streamon < 4);
+			} while (try_streamon < 4);*/
 		}
 		return false;
     }

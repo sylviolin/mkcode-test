@@ -111,9 +111,9 @@ namespace pixetto {
 					read_len = serial->read(code_buf, 1, ASYNC);
 					
 					if (read_len == 0) {
-						loop++; //uBit.sleep(100);
+						loop++;
 					}
-				} while (code_buf[0] != PXT_PACKET_START && loop < 100);
+				} while (code_buf[0] != PXT_PACKET_START && loop < 500);
 				
 				if (read_len == 0) break;
 					

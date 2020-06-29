@@ -113,7 +113,7 @@ namespace pixetto {
 					if (read_len == 0 || read_len == MICROBIT_NO_DATA) {
 						loop++;
 					}
-				} while (code_buf[0] != PXT_PACKET_START && loop < 5000);
+				} while (code_buf[0] != PXT_PACKET_START && loop < 50000);
 				
 				if (read_len == 0) break;
 					

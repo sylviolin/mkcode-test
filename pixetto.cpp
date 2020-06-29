@@ -110,7 +110,7 @@ namespace pixetto {
 				do {
 					read_len = serial->read(code_buf, 1, ASYNC);
 					if (read_len == 0) {
-						loop++; uBit.sleep(100);
+						loop++; //uBit.sleep(100);
 					}
 					if (loop > 10) break;
 					

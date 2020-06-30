@@ -125,7 +125,7 @@ namespace pixetto {
 					return true;
 				try_streamon++;
 				uBit.sleep(500);
-			} while (try_streamon < 1);
+			} while (try_streamon < 4);
 		}
 		return false;
     }

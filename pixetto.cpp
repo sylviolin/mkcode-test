@@ -92,10 +92,10 @@ namespace pixetto {
 		for (uint8_t i=1; i<len-2; i++)
 			sum += buf[i];
 		
-		if (sum == PXT_PACKET_START || sum == PXT_PACKET_END)
+		if (sum == PXT_PACKET_START || sum == PXT_PACKET_END || sum == 0xFF)
 			sum = 0xAA;
 		
-		return (sum == buf[8]);
+		return (sum == buf[len-2]);
 	}
 
     //% 

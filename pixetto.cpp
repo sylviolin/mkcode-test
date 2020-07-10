@@ -184,6 +184,7 @@ namespace pixetto {
 		read_len = serial->read(&data_buf[1], 2); // <len, func_id>
 		data_len = data_buf[1];
 		read_len = serial->read(&data_buf[3], data_len - 3);
+		return true;
 		
 		if (read_len != (data_len-3)) return false;
 		if (data_buf[data_len-1] != PXT_PACKET_END) return false;

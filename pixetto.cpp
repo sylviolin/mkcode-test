@@ -189,7 +189,7 @@ namespace pixetto {
 		if (data_buf[data_len-1] != PXT_PACKET_END) return false;
 		if (!verifyChecksum(data_buf, data_len)) return false;
 		if (data_buf[2] == 0) return false;
-		return true;
+		
 		if (data_buf[2] == EQUATION_DETECTION) {
 			m_x = data_buf[3];
 			m_y = data_buf[4];

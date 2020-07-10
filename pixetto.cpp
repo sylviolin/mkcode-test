@@ -48,7 +48,9 @@ enum PixFunction {
         //% block="Handwriting Letters Detection"
         HANDWRITING_LETTERS_DETECTION=14,
         //% block="AprilTag(16h5)"
-        APRILTAG=10
+        APRILTAG=10,
+        //% block="Equation Detection"
+        EQUATION_DETECTION=17
 };
     
 
@@ -57,7 +59,16 @@ using namespace pxt;
 namespace pixetto {
 
 	MicroBitSerial *serial = nullptr;
-	uint8_t data_buf[10] = {0xFF};
+	const int DATA_SIZE = 33;
+	uint8_t data_buf[DATA_SIZE] = {0xFF};
+	int data_len = 0;
+	int m_x = 0;
+	int m_y = 0;
+	int m_w = 0;
+	int m_h = 0;
+	int m_eqLen = 0;
+	float m_eqAnswer = 0;
+	char m_eqExpr[17] = {0};
 	
     bool getPinName(PixSerialPin p, PinName& name) {
       switch(p) {
@@ -129,7 +140,7 @@ namespace pixetto {
 		}
 		return false;
     }
-    
+    /*
     //%
     bool isDetected(){
 		int read_len = 0;
@@ -144,13 +155,70 @@ namespace pixetto {
 		} while (data_buf[0] != PXT_PACKET_START);
 
 		read_len = serial->read(&data_buf[1], 9);
+		 
+		m_x = data_buf[4];
+		m_y = data_buf[5];
+		m_w = data_buf[6];
+		m_h = data_buf[7];
 		
 		if (read_len != 9) return false;
 		if (data_buf[9] != PXT_PACKET_END) return false;
 		if (!verifyChecksum(data_buf, 10)) return false;
 		if (data_buf[2] == 0) return false;
 		return true;
+	} */
+	//%
+    bool isDetected(){
+		int read_len = 0;
+		int a = 0;
+		for (a=0; a<DATA_SIZE; a++)
+			data_buf[a] = 0xFF;
+	
+		uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_QUERY, 0, PXT_PACKET_END};
+		serial->send(cmd_buf, 5);
+
+		do {
+			read_len = serial->read(data_buf, 1, ASYNC);
+		} while (data_buf[0] != PXT_PACKET_START);
+
+		read_len = serial->read(&data_buf[1], 2); // <len, func_id>
+		data_len = data_buf[1];
+		read_len = serial->read(&data_buf[3], data_len - 3);
+		
+		if (read_len != (data_len-3)) return false;
+		if (data_buf[data_len-1] != PXT_PACKET_END) return false;
+		if (!verifyChecksum(data_buf, data_len)) return false;
+		if (data_buf[2] == 0) return false;
+		
+		if (data_buf[2] == EQUATION_DETECTION) {
+			m_x = data_buf[3];
+			m_y = data_buf[4];
+			m_w = data_buf[5];
+			m_h = data_buf[6];
+			
+			m_eqAnswer = 0;
+			for (a=8; a<=14; a++) 
+				m_eqAnswer = m_eqAnswer * 10 + data_buf[a];
+
+			m_eqAnswer /= 100;
+			if (data_buf[7] == 0) m_eqAnswer = 0 - m_eqAnswer;
+			
+			memset(m_eqExpr, 0, sizeof(m_eqExpr));
+			m_eqLen = data_len - 17;
+			for (a=0; a<m_eqLen; a++)
+				m_eqExpr[a] = (char)data_buf[a+15];
+		}
+		else {
+			m_x = data_buf[4];
+			m_y = data_buf[5];
+			m_w = data_buf[6];
+			m_h = data_buf[7];
+		}
+		return true;
 	}
+
+
+
 	//%
 	bool getFuncID(int func_id){
 		return (data_buf[2] == func_id);
@@ -207,19 +275,30 @@ namespace pixetto {
 	
 	//%
 	int getPosX() {
-		return data_buf[4];
+		return m_x;
 	}
 	//%
 	int getPosY() {
-		return data_buf[5];
+		return m_y;
 	}
 	//%
 	int getWidth() {
-		return data_buf[6];
+		return m_w;
 	}
 	//%
 	int getHeight() {
-		return data_buf[7];
+		return m_h;
+	}
+
+	//%
+	float getEquationAnswer() {
+		return m_eqAnswer;
+	}
+
+	//%
+	String getEquationExpr() {
+		ManagedString s = m_eqExpr;
+		return PSTR(s);
 	}
 	
 }

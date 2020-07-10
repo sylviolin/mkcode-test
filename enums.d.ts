@@ -39,6 +39,8 @@
     HANDWRITING_LETTERS_DETECTION = 14,
     //% block="AprilTag(16h5)"
     APRILTAG = 10,
+    //% block="Equation Detection"
+    EQUATION_DETECTION = 17,
     }
 
 // Auto-generated. Do not edit. Really.

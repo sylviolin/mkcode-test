@@ -112,10 +112,6 @@ namespace pixetto {
 			//serial->setTxBufferSize(32);
 			uBit.sleep(100);
 			
-			int size = serial->getRxBufferSize();
-			if (size == 65) return true;
-			else return false;
-			
 			int try_streamon = 0;
 			do {
 				uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON_CB, 0, PXT_PACKET_END};

@@ -126,7 +126,7 @@ namespace pixetto {
 					}
 				} while (code_buf[0] != PXT_PACKET_START && loop < 50000);
 				
-				if (read_len == 0) break;
+				if (read_len == 0 || read_len == MICROBIT_NO_DATA) break;
 					
 				read_len = serial->read(&code_buf[1], 4);
 
@@ -170,6 +170,7 @@ namespace pixetto {
 	//%
     bool isDetected(){
 		int read_len = 0;
+		int loop = 0;
 		int a = 0;
 		for (a=0; a<DATA_SIZE; a++)
 			data_buf[a] = 0xFF;
@@ -179,7 +180,10 @@ namespace pixetto {
 
 		do {
 			read_len = serial->read(data_buf, 1, ASYNC);
-		} while (data_buf[0] != PXT_PACKET_START);
+			loop++;
+		} while (data_buf[0] != PXT_PACKET_START && loop < 5000);
+		
+		if (read_len == 0 || read_len == MICROBIT_NO_DATA) return false;
 
 		read_len = serial->read(&data_buf[1], 2);//, ASYNC); // <len, func_id>
 		data_len = data_buf[1];

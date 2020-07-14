@@ -112,7 +112,7 @@ namespace pixetto {
 			uBit.sleep(100);
 			
 			int size = serial->getRxBufferSize();
-			if (size == 32) return true;
+			if (size == 64) return true;
 			else return false;
 			
 			int try_streamon = 0;

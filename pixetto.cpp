@@ -12,6 +12,9 @@
 #define PXT_RET_CAM_SUCCESS	0xE0
 #define PXT_RET_CAM_ERROR	0xE1
 
+#define SERIAL_BUF_SIZE		64
+#define DATA_SIZE			33
+
 enum PixSerialPin {
     P0 = 0,
     P1 = 1,
@@ -59,8 +62,6 @@ using namespace pxt;
 namespace pixetto {
 
 	MicroBitSerial *serial = nullptr;
-	const int SERIAL_BUF_SIZE = 64;
-	const int DATA_SIZE = 33;
 	uint8_t data_buf[DATA_SIZE] = {0xFF};
 	int data_len = 0;
 	int m_x = 0;
@@ -105,7 +106,7 @@ namespace pixetto {
 		uBit.sleep(8000);
 		if (getPinName(tx, txn) && getPinName(rx, rxn))
 		{
-			serial = new MicroBitSerial(txn, rxn, SERIAL_BUF_SIZE);
+			serial = new MicroBitSerial(txn, rxn, 64, 20);
 			serial->baud(38400);
 			//serial->setRxBufferSize(64);
 			//serial->setTxBufferSize(32);

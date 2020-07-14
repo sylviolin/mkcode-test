@@ -110,6 +110,10 @@ namespace pixetto {
 			//serial->setTxBufferSize(32);
 			uBit.sleep(100);
 			
+			int size = serial->getRxBufferSize();
+			if (size == 64) return true;
+			else return false;
+			
 			int try_streamon = 0;
 			do {
 				uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON_CB, 0, PXT_PACKET_END};
@@ -170,7 +174,7 @@ namespace pixetto {
 	//%
     bool isDetected(){
 		int read_len = 0;
-		int loop = 0;
+		//int loop = 0;
 		int a = 0;
 		for (a=0; a<DATA_SIZE; a++)
 			data_buf[a] = 0xFF;
@@ -180,10 +184,10 @@ namespace pixetto {
 
 		do {
 			read_len = serial->read(data_buf, 1, ASYNC);
-			loop++;
-		} while (data_buf[0] != PXT_PACKET_START && loop < 100000);
+			//loop++;
+		} while (data_buf[0] != PXT_PACKET_START);// && loop < 100000);
 		
-		if (read_len == 0 || read_len == MICROBIT_NO_DATA) return false;
+		//if (read_len == 0 || read_len == MICROBIT_NO_DATA) return false;
 
 		read_len = serial->read(&data_buf[1], 2);//, ASYNC); // <len, func_id>
 		data_len = data_buf[1];

@@ -181,7 +181,7 @@ namespace pixetto {
 		do {
 			read_len = serial->read(data_buf, 1, ASYNC);
 			loop++;
-		} while (data_buf[0] != PXT_PACKET_START && loop < 50000);
+		} while (data_buf[0] != PXT_PACKET_START && loop < 100000);
 		
 		if (read_len == 0 || read_len == MICROBIT_NO_DATA) return false;
 
@@ -195,7 +195,7 @@ namespace pixetto {
 		if (read_len != (data_len-3)) return false;
 		if (data_buf[data_len-1] != PXT_PACKET_END) return false;
 		if (!verifyChecksum(data_buf, data_len)) return false;
-		if (data_buf[2] == 0) return false;
+		if (data_buf[2] == 0) return false; // num == 0
 		
 		if (data_buf[2] == EQUATION_DETECTION) {
 			m_x = data_buf[3];

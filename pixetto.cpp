@@ -112,6 +112,7 @@ namespace pixetto {
 
 	bool opencam() 
 	{
+		uBit.sleep(8000);
 		int try_streamon = 0;
 		do {
 			uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON_CB, 0, PXT_PACKET_END};
@@ -146,7 +147,7 @@ namespace pixetto {
     bool begin(PixSerialPin rx, PixSerialPin tx){
 		int ret = false;
 		PinName txn, rxn;
-		uBit.sleep(8000);
+		//uBit.sleep(8000);
 		if (getPinName(tx, txn) && getPinName(rx, rxn))
 		{
 			serial = new MicroBitSerial(txn, rxn, 64, 20);

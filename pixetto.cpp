@@ -44,7 +44,7 @@ enum PixFunction {
         //% block="Neural Network"
         NEURAL_NETWORK=9,
         //% block="AprilTag(16h5)"
-        //APRILTAG=10,
+        APRILTAG=10,
         //% block="Face Detection"
         FACE_DETECTION=11,
         //% block="Traffic Sign Detection"

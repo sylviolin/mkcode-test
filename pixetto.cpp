@@ -44,7 +44,7 @@ enum PixFunction {
         //% block="Neural Network"
         NEURAL_NETWORK=9,
         //% block="AprilTag(16h5)"
-        APRILTAG=10,
+        //APRILTAG=10,
         //% block="Face Detection"
         FACE_DETECTION=11,
         //% block="Traffic Sign Detection"
@@ -53,16 +53,20 @@ enum PixFunction {
         HANDWRITING_DIGITS_DETECTION=13,
         //% block="Handwriting Letters Detection"
         HANDWRITING_LETTERS_DETECTION=14,
+        /*
         //% block="Remote Computing"
         REMOTE_COMPUTING=15,
         //% block="Lanes Detection"
         LANES_DETECTION=16,
+        */
         //% block="Digits Operation"
-        DIGITS_OPERATION=17,
+        DIGITS_OPERATION=17
+        /*
         //% block="Simple Classifier"
         SIMPLE_CLASSIFIER=18,
         //% block="Voice Commands"
         VOICE_COMMANDS=19
+        */
 };
     
 
@@ -80,7 +84,6 @@ namespace pixetto {
 	int m_eqLen = 0;
 	float m_eqAnswer = 0;
 	char m_eqExpr[17] = {0};
-	//PixSerialPin m_rx, m_tx;
 	
     bool getPinName(PixSerialPin p, PinName& name) {
       switch(p) {
@@ -242,10 +245,12 @@ namespace pixetto {
 			for (a=0; a<m_eqLen; a++)
 				m_eqExpr[a] = (char)data_buf[a+15];
 		}
+		/*
 		else if (data_buf[2] == LANES_DETECTION) {
 		}
 		else if (data_buf[2] == APRILTAG) {
 		}
+		*/
 		else {
 			m_x = data_buf[4];
 			m_y = data_buf[5];

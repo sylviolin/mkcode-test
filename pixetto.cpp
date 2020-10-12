@@ -8,6 +8,7 @@
 #define PXT_CMD_STREAMOFF	0x7A
 #define PXT_CMD_STREAMON_CB 0x7B
 #define PXT_CMD_QUERY		0x7C
+#define PXT_CMD_RESET		0x53 //(83)
 
 #define PXT_RET_CAM_SUCCESS	0xE0
 #define PXT_RET_CAM_ERROR	0xE1
@@ -30,7 +31,7 @@ enum PixSerialPin {
 enum PixFunction {
         //% block="Color Detection"
         COLOR_DETECTION=1,
-        //% block="Color Label Detection"
+        //% block="Color Codes Detection"
         COLOR_LABEL=2,
         //% block="Shape Detection"
         SHAPE_DETECTION=3,
@@ -41,7 +42,9 @@ enum PixFunction {
         //% block="Keypoint"
         KEYPOINT=8,
         //% block="Neural Network"
-        NEURAL_NETWORK=15,
+        NEURAL_NETWORK=9,
+        //% block="AprilTag(16h5)"
+        APRILTAG=10,
         //% block="Face Detection"
         FACE_DETECTION=11,
         //% block="Traffic Sign Detection"
@@ -50,10 +53,16 @@ enum PixFunction {
         HANDWRITING_DIGITS_DETECTION=13,
         //% block="Handwriting Letters Detection"
         HANDWRITING_LETTERS_DETECTION=14,
-        //% block="AprilTag(16h5)"
-        APRILTAG=10,
-        //% block="Equation Detection"
-        EQUATION_DETECTION=17
+        //% block="Remote Computing"
+        REMOTE_COMPUTING=15,
+        //% block="Lanes Detection"
+        LANES_DETECTION=16,
+        //% block="Digits Operation"
+        DIGITS_OPERATION=17,
+        //% block="Simple Classifier"
+        SIMPLE_CLASSIFIER=18,
+        //% block="Voice Commands"
+        VOICE_COMMANDS=19
 };
     
 
@@ -71,6 +80,7 @@ namespace pixetto {
 	int m_eqLen = 0;
 	float m_eqAnswer = 0;
 	char m_eqExpr[17] = {0};
+	PixSerialPin m_rx, m_tx;
 	
     bool getPinName(PixSerialPin p, PinName& name) {
       switch(p) {
@@ -102,6 +112,9 @@ namespace pixetto {
 
     //% 
     bool begin(PixSerialPin rx, PixSerialPin tx){
+		m_rx = rx;
+		m_tx = tx;
+		
 		PinName txn, rxn;
 		uBit.sleep(8000);
 		if (getPinName(tx, txn) && getPinName(rx, rxn))
@@ -172,7 +185,7 @@ namespace pixetto {
 	//%
     bool isDetected(){
 		int read_len = 0;
-		//int loop = 0;
+		int loop = 0;
 		int a = 0;
 		for (a=0; a<DATA_SIZE; a++)
 			data_buf[a] = 0xFF;
@@ -182,10 +195,15 @@ namespace pixetto {
 
 		do {
 			read_len = serial->read(data_buf, 1, ASYNC);
-			//loop++;
-		} while (data_buf[0] != PXT_PACKET_START);// && loop < 100000);
+			loop++;
+		} while (data_buf[0] != PXT_PACKET_START && loop < 50000);
 		
-		//if (read_len == 0 || read_len == MICROBIT_NO_DATA) return false;
+		if (read_len == 0 || read_len == MICROBIT_NO_DATA) {
+			uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON_CB, 0, PXT_PACKET_END};
+			serial->send(cmd_buf, 5);
+			begin(m_rx, m_tx);
+			return false;
+		}
 
 		read_len = serial->read(&data_buf[1], 2);//, ASYNC); // <len, func_id>
 		data_len = data_buf[1];
@@ -199,7 +217,7 @@ namespace pixetto {
 		if (!verifyChecksum(data_buf, data_len)) return false;
 		if (data_buf[2] == 0) return false; // num == 0
 		
-		if (data_buf[2] == EQUATION_DETECTION) {
+		if (data_buf[2] == DIGITS_OPERATION) {
 			m_x = data_buf[3];
 			m_y = data_buf[4];
 			m_w = data_buf[5];
@@ -216,6 +234,10 @@ namespace pixetto {
 			m_eqLen = data_len - 17;
 			for (a=0; a<m_eqLen; a++)
 				m_eqExpr[a] = (char)data_buf[a+15];
+		}
+		else if (data_buf[2] == LANES_DETECTION) {
+		}
+		else if (data_buf[2] == APRILTAG) {
 		}
 		else {
 			m_x = data_buf[4];

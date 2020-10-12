@@ -80,7 +80,7 @@ namespace pixetto {
 	int m_eqLen = 0;
 	float m_eqAnswer = 0;
 	char m_eqExpr[17] = {0};
-	PixSerialPin m_rx, m_tx;
+	//PixSerialPin m_rx, m_tx;
 	
     bool getPinName(PixSerialPin p, PinName& name) {
       switch(p) {
@@ -110,9 +110,11 @@ namespace pixetto {
 		return (sum == buf[len-2]);
 	}
 
-	bool opencam() 
+	bool opencam(bool reset) 
 	{
-		uBit.sleep(8000);
+		if (reset)
+			uBit.sleep(8000);
+			
 		int try_streamon = 0;
 		do {
 			uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON_CB, 0, PXT_PACKET_END};
@@ -147,7 +149,7 @@ namespace pixetto {
     bool begin(PixSerialPin rx, PixSerialPin tx){
 		int ret = false;
 		PinName txn, rxn;
-		//uBit.sleep(8000);
+		uBit.sleep(8000);
 		if (getPinName(tx, txn) && getPinName(rx, rxn))
 		{
 			serial = new MicroBitSerial(txn, rxn, 64, 20);
@@ -156,7 +158,7 @@ namespace pixetto {
 			//serial->setTxBufferSize(32);
 			uBit.sleep(100);
 			
-			ret = opencam();
+			ret = opencam(false);
 		}
 		return ret;
     }
@@ -206,7 +208,7 @@ namespace pixetto {
 		if (read_len == 0 || read_len == MICROBIT_NO_DATA) {
 			uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_RESET, 0, PXT_PACKET_END};
 			serial->send(cmd_buf, 5);
-			opencam();
+			opencam(true);
 			return false;
 		}
 

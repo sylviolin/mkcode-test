@@ -113,7 +113,7 @@ namespace pixetto {
 	bool opencam(bool reset) 
 	{
 		if (reset)
-			uBit.sleep(4000);
+			uBit.sleep(6000);
 			
 		int try_streamon = 0;
 		do {

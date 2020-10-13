@@ -53,22 +53,37 @@ enum PixFunction {
         HANDWRITING_DIGITS_DETECTION=13,
         //% block="Handwriting Letters Detection"
         HANDWRITING_LETTERS_DETECTION=14,
-        /*
         //% block="Remote Computing"
         REMOTE_COMPUTING=15,
         //% block="Lanes Detection"
         LANES_DETECTION=16,
-        */
         //% block="Digits Operation"
-        DIGITS_OPERATION=17
-        /*
+        DIGITS_OPERATION=17,
         //% block="Simple Classifier"
         SIMPLE_CLASSIFIER=18,
         //% block="Voice Commands"
         VOICE_COMMANDS=19
-        */
 };
     
+enum PixApriltagField {
+        //% block="position x"
+        APRILTAG_POS_X=1,
+        //% block="position y"
+        APRILTAG_POS_Y,
+        //% block="position z"
+        APRILTAG_POS_Z,
+        //% block="rotation x"
+        APRILTAG_ROT_X,
+        //% block="rotation y"
+        APRILTAG_ROT_Y,
+        //% block="rotation z"
+        APRILTAG_ROT_Z,
+        //% block="center x"
+        APRILTAG_CENTER_X,
+        //% block="center y"
+        APRILTAG_CENTER_Y
+};
+
 
 using namespace pxt;
 
@@ -84,6 +99,7 @@ namespace pixetto {
 	int m_eqLen = 0;
 	float m_eqAnswer = 0;
 	char m_eqExpr[17] = {0};
+	float m_posx=0, m_posy=0, m_posz=0, m_rotx=0, m_roty=0, m_rotz=0, m_centerx=0, m_centery=0;
 	
     bool getPinName(PixSerialPin p, PinName& name) {
       switch(p) {
@@ -245,12 +261,24 @@ namespace pixetto {
 			for (a=0; a<m_eqLen; a++)
 				m_eqExpr[a] = (char)data_buf[a+15];
 		}
-		/*
 		else if (data_buf[2] == LANES_DETECTION) {
 		}
 		else if (data_buf[2] == APRILTAG) {
+			int value = 0;
+			value = (short)(data_buf[8] * 256 + data_buf[9]);
+			m_posx = (float)value / 100.0;
+			value = (short)(data_buf[10] * 256 + data_buf[11]);
+			m_posy = (float)value / 100.0;
+			value = (short)(data_buf[12] * 256 + data_buf[13]);
+			m_posz = (float)value / 100.0;
+			
+			m_rotx = (short)(data_buf[14] * 256 + data_buf[15]);
+			m_roty = (short)(data_buf[16] * 256 + data_buf[17]);
+			m_rotz = (short)(data_buf[18] * 256 + data_buf[19]);
+			
+			m_centerx = (short)(data_buf[20] * 256 + data_buf[21]);
+			m_centery = (short)(data_buf[22] * 256 + data_buf[23]);
 		}
-		*/
 		else {
 			m_x = data_buf[4];
 			m_y = data_buf[5];
@@ -343,5 +371,28 @@ namespace pixetto {
 		ManagedString s = m_eqExpr;
 		return PSTR(s);
 	}
-	
+
+	float getApriltagField(int field) {
+		switch(field) {
+			case APRILTAG_POS_X:
+				return m_posx;
+			case APRILTAG_POS_Y:
+				return m_posy;
+			case APRILTAG_POS_Z:
+				return m_posz;
+			case APRILTAG_ROT_X:
+				return m_rotx;
+			case APRILTAG_ROT_Y:
+				return m_roty;
+			case APRILTAG_ROT_Z:
+				return m_rotz;
+			case APRILTAG_CENTER_X:
+				return m_centerx;
+			case APRILTAG_CENTER_Y:
+				return m_centery;
+			default:
+				return 0;
+		}
+	}
+		
 }

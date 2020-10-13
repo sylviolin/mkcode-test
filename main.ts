@@ -228,7 +228,7 @@ namespace pixetto {
     
     //% block="equation answer"
     //% shim=pixetto::getEquationAnswer
-    export function getEquationAnswer() {
+    export function getEquationAnswer(): number {
         return 0;
     }
 
@@ -238,4 +238,12 @@ namespace pixetto {
         return 0;
     }
     
+
+    //% block="Pixetto gets Apriltag |%number1"
+    //% shim=pixetto::getApriltagField
+    //% weight=65
+    export function getApriltagField(number1: PixApriltagField): number {
+        return 0;
+    }
+
 }

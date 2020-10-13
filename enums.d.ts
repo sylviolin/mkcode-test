@@ -39,20 +39,36 @@
     HANDWRITING_DIGITS_DETECTION = 13,
     //% block="Handwriting Letters Detection"
     HANDWRITING_LETTERS_DETECTION = 14,
-    /*
     //% block="Remote Computing"
     REMOTE_COMPUTING = 15,
     //% block="Lanes Detection"
     LANES_DETECTION = 16,
-     */
     //% block="Digits Operation"
     DIGITS_OPERATION = 17,
-    /*
     //% block="Simple Classifier"
     SIMPLE_CLASSIFIER = 18,
     //% block="Voice Commands"
     VOICE_COMMANDS = 19,
-     */
+    }
+
+
+    declare const enum PixApriltagField {
+    //% block="position x"
+    APRILTAG_POS_X = 1,
+    //% block="position y"
+    APRILTAG_POS_Y = 2,
+    //% block="position z"
+    APRILTAG_POS_Z = 3,
+    //% block="rotation x"
+    APRILTAG_ROT_X = 4,
+    //% block="rotation y"
+    APRILTAG_ROT_Y = 5,
+    //% block="rotation z"
+    APRILTAG_ROT_Z = 6,
+    //% block="center x"
+    APRILTAG_CENTER_X = 7,
+    //% block="center y"
+    APRILTAG_CENTER_Y = 8,
     }
 
 // Auto-generated. Do not edit. Really.

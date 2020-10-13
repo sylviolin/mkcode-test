@@ -239,7 +239,7 @@ namespace pixetto {
     }
     
 
-    //% block="Pixetto gets Apriltag |%number1"
+    //% block="Apriltag |%number1"
     //% shim=pixetto::getApriltagField
     //% weight=65
     export function getApriltagField(number1: PixApriltagField): number {

@@ -371,7 +371,8 @@ namespace pixetto {
 		ManagedString s = m_eqExpr;
 		return PSTR(s);
 	}
-
+	
+	//%
 	float getApriltagField(int field) {
 		switch(field) {
 			case APRILTAG_POS_X:

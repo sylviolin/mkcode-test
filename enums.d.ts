@@ -71,4 +71,24 @@
     APRILTAG_CENTER_Y = 8,
     }
 
+
+    declare const enum PixLanesField {
+    //% block="Left X1"
+    LANES_LX1 = 1,
+    //% block="Left Y1"
+    LANES_LY1 = 2,
+    //% block="Left X2"
+    LANES_LX2 = 3,
+    //% block="Left Y2"
+    LANES_LY2 = 4,
+    //% block="Right X1"
+    LANES_RX1 = 5,
+    //% block="Right Y1"
+    LANES_RY1 = 6,
+    //% block="Right X2"
+    LANES_RX2 = 7,
+    //% block="Right Y2"
+    LANES_RY2 = 8,
+    }
+
 // Auto-generated. Do not edit. Really.

@@ -84,6 +84,24 @@ enum PixApriltagField {
         APRILTAG_CENTER_Y
 };
 
+enum PixLanesField {
+        //% block="Left X1"
+        LANES_LX1=1,
+        //% block="Left Y1"
+        LANES_LY1,
+        //% block="Left X2"
+        LANES_LX2,
+        //% block="Left Y2"
+        LANES_LY2,
+        //% block="Right X1"
+        LANES_RX1,
+        //% block="Right Y1"
+        LANES_RY1,
+        //% block="Right X2"
+        LANES_RX2,
+        //% block="Right Y2"
+        LANES_RY2
+};
 
 using namespace pxt;
 
@@ -264,6 +282,8 @@ namespace pixetto {
 				m_eqExpr[a] = (char)data_buf[a+15];
 		}
 		else if (data_buf[2] == LANES_DETECTION) {
+			m_x = data_buf[3];
+			m_y = data_buf[4];
 		}
 		else {
 			m_type = data_buf[3];
@@ -425,4 +445,27 @@ namespace pixetto {
 		}
 	}
 		
+	//%
+	int getLanesField(int field) {
+		switch(field) {
+			case LANES_LX1:
+				return data_buf[5];
+			case LANES_LY1:
+				return data_buf[6];
+			case LANES_LX2:
+				return data_buf[7];
+			case LANES_LY2:
+				return data_buf[8];
+			case LANES_RX1:
+				return data_buf[9];
+			case LANES_RY1:
+				return data_buf[10];
+			case LANES_RX2:
+				return data_buf[11];
+			case LANES_RY2:
+				return data_buf[12];
+			default:
+				return 0;
+		}
+	}
 }

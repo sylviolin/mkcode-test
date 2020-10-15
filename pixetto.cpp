@@ -92,6 +92,7 @@ namespace pixetto {
 	MicroBitSerial *serial = nullptr;
 	uint8_t data_buf[DATA_SIZE] = {0xFF};
 	int data_len = 0;
+	int m_type = 0;
 	int m_x = 0;
 	int m_y = 0;
 	int m_w = 0;
@@ -243,6 +244,7 @@ namespace pixetto {
 		if (!verifyChecksum(data_buf, data_len)) return false;
 		if (data_buf[2] == 0) return false; // num == 0
 		
+		
 		if (data_buf[2] == DIGITS_OPERATION) {
 			m_x = data_buf[3];
 			m_y = data_buf[4];
@@ -263,27 +265,29 @@ namespace pixetto {
 		}
 		else if (data_buf[2] == LANES_DETECTION) {
 		}
-		else if (data_buf[2] == APRILTAG) {
-			int value = 0;
-			value = (short)(data_buf[8] * 256 + data_buf[9]);
-			m_posx = (float)value / 100.0;
-			value = (short)(data_buf[10] * 256 + data_buf[11]);
-			m_posy = (float)value / 100.0;
-			value = (short)(data_buf[12] * 256 + data_buf[13]);
-			m_posz = (float)value / 100.0;
-			
-			m_rotx = (short)(data_buf[14] * 256 + data_buf[15]);
-			m_roty = (short)(data_buf[16] * 256 + data_buf[17]);
-			m_rotz = (short)(data_buf[18] * 256 + data_buf[19]);
-			
-			m_centerx = (short)(data_buf[20] * 256 + data_buf[21]);
-			m_centery = (short)(data_buf[22] * 256 + data_buf[23]);
-		}
 		else {
+			m_type = data_buf[3];
 			m_x = data_buf[4];
 			m_y = data_buf[5];
 			m_w = data_buf[6];
 			m_h = data_buf[7];
+			
+			if (data_buf[2] == APRILTAG) {
+				int value = 0;
+				value = (short)(data_buf[8] * 256 + data_buf[9]);
+				m_posx = (float)value / 100.0;
+				value = (short)(data_buf[10] * 256 + data_buf[11]);
+				m_posy = (float)value / 100.0;
+				value = (short)(data_buf[12] * 256 + data_buf[13]);
+				m_posz = (float)value / 100.0;
+				
+				m_rotx = (short)(data_buf[14] * 256 + data_buf[15]);
+				m_roty = (short)(data_buf[16] * 256 + data_buf[17]);
+				m_rotz = (short)(data_buf[18] * 256 + data_buf[19]);
+				
+				m_centerx = (short)(data_buf[20] * 256 + data_buf[21]);
+				m_centery = (short)(data_buf[22] * 256 + data_buf[23]);
+			}
 		}
 		return true;
 	}
@@ -343,7 +347,32 @@ namespace pixetto {
 			return true;
         return false;
     }	
+
+    //%
+    bool get_remote_computing(int id) {
+		if (data_buf[2] == REMOTE_COMPUTING && data_buf[3] == id)
+			return true;
+        return false;
+    }
 	
+    //%
+    bool get_simple_classifier(int id) {
+		if (data_buf[2] == SIMPLE_CLASSIFIER && data_buf[3] == id)
+			return true;
+        return false;
+    }
+
+    //%
+    bool get_voice_command(int vcmd) {
+		if (data_buf[2] == VOICE_COMMANDS && data_buf[3] == vcmd)
+			return true;
+        return false;
+    }
+
+	//%
+	int getTypeID() {
+		return m_type;
+	}
 	//%
 	int getPosX() {
 		return m_x;

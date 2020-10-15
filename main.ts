@@ -142,6 +142,61 @@ namespace pixetto {
 		Z
     }
       
+    export enum PixVoiceCommand {
+		//% block="你好"
+		VOICE_Hello = 1,
+		//% block="謝謝"
+		VOICE_Thanks,
+		//% block="再見"
+		VOICE_Bye,
+		//% block="這是甚麼"
+		VOICE_WhatsThis,
+		//% block="現在幾點"
+		VOICE_WhatTime,
+		//% block="我幾歲"
+		VOICE_HowOld,
+		//% block="今天星期幾"
+		VOICE_WhatDay,
+		//% block="講故事"
+		VOICE_TellStory,
+		//% block="說笑話"
+		VOICE_TellJoke,
+		//% block="念唐詩"
+		VOICE_ReadPoem,
+		//% block="開燈"
+		VOICE_TurnOnLight,
+		//% block="關燈"
+		VOICE_TurnOffLight,
+		//% block="左轉"
+		VOICE_TurnLeft,
+		//% block="右轉"
+		VOICE_TurnRight,
+		//% block="前進"
+		VOICE_GoAhead,
+		//% block="後退"
+		VOICE_MoveBack,
+		//% block="停止"
+		VOICE_Stop,
+		//% block="開啟"
+		VOICE_Open,
+		//% block="關閉"
+		VOICE_Close,
+		//% block="睜開眼睛"
+		VOICE_OpenEyes1,
+		//% block="睜眼"
+		VOICE_OpenEyes2,
+		//% block="閉上眼睛"
+		VOICE_CloseEyes1,
+		//% block="閉眼"
+		VOICE_CloseEyes2,
+		//% block="跳一下"
+		VOICE_Jump,
+		//% block="起立"
+		VOICE_StandUp,
+		//% block="蹲下"
+		VOICE_SquatDown
+    }
+    
 	//% block="initialize vision sensor RX %rx TX %tx"
 	//% shim=pixetto::begin
 	//% weight=100
@@ -163,30 +218,37 @@ namespace pixetto {
         return false;
     }
 
+    //% block="current function is %type_id"
+    //% shim=pixetto::getTypeID
+    //% weight=89
+    export function getTypeID(): number {
+        return 0;
+    }
+
     //% block="object position x"
     //% shim=pixetto::getPosX
-    //% weight=89
+    //% weight=88
     export function getPosX(): number {
         return 0;
     }
     
     //% block="object position y"
     //% shim=pixetto::getPosY
-    //% weight=88
+    //% weight=87
     export function getPosY(): number {
         return 0;
     }
 
     //% block="object width"
     //% shim=pixetto::getWidth
-    //% weight=87
+    //% weight=86
     export function getWidth(): number {
         return 0;
     }
 
     //% block="object height"
     //% shim=pixetto::getHeight
-    //% weight=86
+    //% weight=85
     export function getHeight(): number {
         return 0;
     }
@@ -221,22 +283,43 @@ namespace pixetto {
 
     //% block="Traffic Sign Detection detects %sign"
     //% shim=pixetto::get_traffic_sign
-    //% weight=77
+    //% weight=76
     export function get_traffic_sign(sign: PixTrafficSign): boolean {
         return false;
     }
 
     //% block="Handwriting Digits Detection detects %digit"
     //% shim=pixetto::get_hand_digit
-    //% weight=76
+    //% weight=75
     export function get_hand_digit(digit: PixHandDigit): boolean {
         return false;
     }
 
     //% block="Handwriting Lettes Detection detects %letter"
     //% shim=pixetto::get_hand_letter
-    //% weight=75
+    //% weight=74
     export function get_hand_letter(letter: PixHandLetter): boolean {
+        return false;
+    }
+
+    //% block="Remote Computing detects %id"
+    //% shim=pixetto::get_remote_computing
+    //% weight=73
+    export function get_remote_computing(id: number): boolean {
+        return false;
+    }
+    
+    //% block="Simple Classifier detects %id"
+    //% shim=pixetto::get_simple_classifier
+    //% weight=72
+    export function get_simple_classifier(id: number): boolean {
+        return false;
+    }
+
+    //% block="Voice Command detects %vcmd"
+    //% shim=pixetto::get_voice_command
+    //% weight=71
+    export function get_voice_command(vcmd: PixVoiceCommand): boolean {
         return false;
     }
 

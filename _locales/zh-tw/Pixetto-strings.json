@@ -108,5 +108,14 @@
   "PixApriltagField.APRILTAG_ROT_Z|block": "Z旋轉角度",
   "PixApriltagField.APRILTAG_CENTER_X|block": "中心X",
   "PixApriltagField.APRILTAG_CENTER_Y|block": "中心Y",
+  "PixLanesField.LANES_LX1|block": "車道左側 X1 座標",
+  "PixLanesField.LANES_LY1|block": "車道左側 Y1 座標",
+  "PixLanesField.LANES_LX2|block": "車道左側 X2 座標",
+  "PixLanesField.LANES_LY2|block": "車道左側 Y2 座標",
+  "PixLanesField.LANES_RX1|block": "車道右側 X1 座標",
+  "PixLanesField.LANES_RY1|block": "車道右側 Y1 座標",
+  "PixLanesField.LANES_RX2|block": "車道右側 X2 座標",
+  "PixLanesField.LANES_RY2|block": "車道右側 Y2 座標",
+  
   "{id:category}Pixetto": "Pixetto"
 }

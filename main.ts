@@ -325,21 +325,28 @@ namespace pixetto {
 
     //% block="Apriltag |%number1"
     //% shim=pixetto::getApriltagField
-    //% weight=70
+    //% weight=60
     export function getApriltagField(number1: PixApriltagField): number {
+        return 0;
+    }
+
+    //% block="Lanes Detection |%number1"
+    //% shim=pixetto::getLanesField
+    //% weight=59
+    export function getLanesField(number1: PixLanesField): number {
         return 0;
     }
 
     //% block="equation answer"
     //% shim=pixetto::getEquationAnswer
-    //% weight=65
+    //% weight=55
     export function getEquationAnswer(): number {
         return 0;
     }
 
     //% block="equation expression"
     //% shim=pixetto::getEquationExpr
-    //% weight=64
+    //% weight=54
     export function getEquationExpr() {
         return 0;
     }

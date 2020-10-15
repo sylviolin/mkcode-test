@@ -98,6 +98,7 @@
   "pixetto.get_remote_computing|block": "遠端運算 辨識到 %id",
   "pixetto.get_simple_classifier|block": "簡易分類器 辨識到 %id",
   "pixetto.get_voice_command|block": "語音命令 辨識到 %vcmd",
+  "pixetto.getLanesField|block": "車道偵測| %number1",
   "pixetto.isDetected|block": "辨識到物體",
   "PixApriltagField.APRILTAG_POS_X|block": "X方向座標",
   "PixApriltagField.APRILTAG_POS_Y|block": "Y方向座標",

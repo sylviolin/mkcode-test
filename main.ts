@@ -144,106 +144,120 @@ namespace pixetto {
       
 	//% block="initialize vision sensor RX %rx TX %tx"
 	//% shim=pixetto::begin
+	//% weight=100
 	export function begin(rx: PixSerialPin, tx: PixSerialPin): boolean {
 		return false
     }
     
     //% block="object is detected"
     //% shim=pixetto::isDetected
+    //% weight=95
     export function isDetected(): boolean {
 		return false;
     }
     
     //% block="current function is %func_id"
     //% shim=pixetto::getFuncID
+    //% weight=90
     export function getFuncID(func_id: PixFunction): boolean {
-        return false;
-    }
-    
-    //% block="Color Detection detects color %color"
-    //% shim=pixetto::get_colordetect_color
-    export function get_colordetect_color(color: PixColorType): boolean {
-        return false;
-    }
-    
-    //% block="Shape Detection detects shape %shape"
-    //% shim=pixetto::get_shapedetect_shape
-    export function get_shapedetect_shape(shape: PixShapeType): boolean {
-        return false;
-    }
-
-    //% block="Circle Detection detects color %color"
-    //% shim=pixetto::get_circledetect_color
-    export function get_circledetect_color(color: PixColorType): boolean {
-        return false;
-    }
-
-    //% block="Neural Network detects %id"
-    //% shim=pixetto::get_nn_id
-    export function get_nn_id(id: number): boolean {
-        return false;
-    }
-
-    //% block="Traffic Sign Detection detects %sign"
-    //% shim=pixetto::get_traffic_sign
-    export function get_traffic_sign(sign: PixTrafficSign): boolean {
-        return false;
-    }
-
-    //% block="Handwriting Digits Detection detects %digit"
-    //% shim=pixetto::get_hand_digit
-    export function get_hand_digit(digit: PixHandDigit): boolean {
-        return false;
-    }
-
-    //% block="Handwriting Lettes Detection detects %letter"
-    //% shim=pixetto::get_hand_letter
-    export function get_hand_letter(letter: PixHandLetter): boolean {
         return false;
     }
 
     //% block="object position x"
     //% shim=pixetto::getPosX
+    //% weight=89
     export function getPosX(): number {
         return 0;
     }
     
     //% block="object position y"
     //% shim=pixetto::getPosY
+    //% weight=88
     export function getPosY(): number {
         return 0;
     }
 
     //% block="object width"
     //% shim=pixetto::getWidth
+    //% weight=87
     export function getWidth(): number {
         return 0;
     }
 
     //% block="object height"
     //% shim=pixetto::getHeight
+    //% weight=86
     export function getHeight(): number {
         return 0;
     }
+
+    //% block="Color Detection detects color %color"
+    //% shim=pixetto::get_colordetect_color
+    //% weight=80
+    export function get_colordetect_color(color: PixColorType): boolean {
+        return false;
+    }
     
+    //% block="Shape Detection detects shape %shape"
+    //% shim=pixetto::get_shapedetect_shape
+    //% weight=79
+    export function get_shapedetect_shape(shape: PixShapeType): boolean {
+        return false;
+    }
+
+    //% block="Circle Detection detects color %color"
+    //% shim=pixetto::get_circledetect_color
+    //% weight=78
+    export function get_circledetect_color(color: PixColorType): boolean {
+        return false;
+    }
+
+    //% block="Neural Network detects %id"
+    //% shim=pixetto::get_nn_id
+    //% weight=77
+    export function get_nn_id(id: number): boolean {
+        return false;
+    }
+
+    //% block="Traffic Sign Detection detects %sign"
+    //% shim=pixetto::get_traffic_sign
+    //% weight=77
+    export function get_traffic_sign(sign: PixTrafficSign): boolean {
+        return false;
+    }
+
+    //% block="Handwriting Digits Detection detects %digit"
+    //% shim=pixetto::get_hand_digit
+    //% weight=76
+    export function get_hand_digit(digit: PixHandDigit): boolean {
+        return false;
+    }
+
+    //% block="Handwriting Lettes Detection detects %letter"
+    //% shim=pixetto::get_hand_letter
+    //% weight=75
+    export function get_hand_letter(letter: PixHandLetter): boolean {
+        return false;
+    }
+
+    //% block="Apriltag |%number1"
+    //% shim=pixetto::getApriltagField
+    //% weight=70
+    export function getApriltagField(number1: PixApriltagField): number {
+        return 0;
+    }
+
     //% block="equation answer"
     //% shim=pixetto::getEquationAnswer
+    //% weight=65
     export function getEquationAnswer(): number {
         return 0;
     }
 
     //% block="equation expression"
     //% shim=pixetto::getEquationExpr
+    //% weight=64
     export function getEquationExpr() {
         return 0;
     }
-    
-
-    //% block="Apriltag |%number1"
-    //% shim=pixetto::getApriltagField
-    //% weight=65
-    export function getApriltagField(number1: PixApriltagField): number {
-        return 0;
-    }
-
 }

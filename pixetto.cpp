@@ -147,7 +147,34 @@ namespace pixetto {
 		
 		return (sum == buf[len-2]);
 	}
+	
+	bool checkcam()
+	{
+		uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON_CB, 0, PXT_PACKET_END};
+		serial->send(cmd_buf, 5);
+			
+		int read_len = 0;
+		int loop = 0;
+		uint8_t code_buf[5] = {0xFF};
+		do {
+			read_len = serial->read(code_buf, 1, ASYNC);
+			
+			if (read_len == 0 || read_len == MICROBIT_NO_DATA) {
+				loop++;
+			}
+		} while (code_buf[0] != PXT_PACKET_START && loop < 50000);
+		
+		if (read_len == 0 || read_len == MICROBIT_NO_DATA) return false;
+			
+		read_len = serial->read(&code_buf[1], 4);
 
+		if (code_buf[0] == PXT_PACKET_START &&
+			code_buf[4] == PXT_PACKET_END &&
+			code_buf[2] == PXT_RET_CAM_SUCCESS)
+			return true;
+		return false;
+	}
+	
 	bool opencam(bool reset) 
 	{
 		if (reset)
@@ -242,12 +269,14 @@ namespace pixetto {
 			read_len = serial->read(data_buf, 1, ASYNC);
 			loop++;
 			//uBit.sleep(100);
-		} while (data_buf[0] != PXT_PACKET_START && loop < 300000);
+		} while (data_buf[0] != PXT_PACKET_START && loop < 200000);
 		
 		if (read_len == 0 || read_len == MICROBIT_NO_DATA) {
-			uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_RESET, 0, PXT_PACKET_END};
-			serial->send(cmd_buf, 5);
-			opencam(true);
+			if (!checkcam()) {
+				uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_RESET, 0, PXT_PACKET_END};
+				serial->send(cmd_buf, 5);
+				opencam(true);
+			}
 			return false;
 		}
 

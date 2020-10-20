@@ -216,16 +216,13 @@ namespace pixetto {
 		
 		int ret = false;
 		PinName txn, rxn;
-		uBit.sleep(8000);
-		
-		if (serial != nullptr) {
-			delete serial;
-			serial = nullptr;
-		}
+		//uBit.sleep(8000);
 		
 		if (getPinName(tx, txn) && getPinName(rx, rxn))
 		{
-			serial = new MicroBitSerial(txn, rxn, 64, 20);
+			if (serial == nullptr)
+				serial = new MicroBitSerial(txn, rxn, 64, 20);
+
 			serial->baud(38400);
 			//serial->setRxBufferSize(64);
 			//serial->setTxBufferSize(32);

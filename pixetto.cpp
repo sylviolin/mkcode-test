@@ -106,7 +106,6 @@ enum PixLanesField {
 using namespace pxt;
 
 namespace pixetto {
-
 	MicroBitSerial *serial = nullptr;
 	uint8_t data_buf[DATA_SIZE] = {0xFF};
 	int data_len = 0;
@@ -119,6 +118,7 @@ namespace pixetto {
 	float m_eqAnswer = 0;
 	char m_eqExpr[17] = {0};
 	float m_posx=0, m_posy=0, m_posz=0, m_rotx=0, m_roty=0, m_rotz=0, m_centerx=0, m_centery=0;
+	bool bOnStarting = false;
 	
     bool getPinName(PixSerialPin p, PinName& name) {
       switch(p) {
@@ -212,6 +212,8 @@ namespace pixetto {
 	}
     //% 
     bool begin(PixSerialPin rx, PixSerialPin tx){
+		bOnStarting = true;
+		
 		int ret = false;
 		PinName txn, rxn;
 		uBit.sleep(8000);
@@ -231,6 +233,9 @@ namespace pixetto {
 			
 			ret = opencam(false);
 		}
+		if (ret)
+			bOnStarting = false;
+			
 		return ret;
     }
     /*
@@ -262,6 +267,9 @@ namespace pixetto {
 	} */
 	//%
     bool isDetected(){
+		if (bOnStarting) 
+			return false;
+		
 		int read_len = 0;
 		int loop = 0;
 		int a = 0;

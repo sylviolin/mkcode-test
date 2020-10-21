@@ -216,7 +216,7 @@ namespace pixetto {
 		
 		int ret = false;
 		PinName txn, rxn;
-		//uBit.sleep(8000);
+		uBit.sleep(3000);
 		
 		if (getPinName(tx, txn) && getPinName(rx, rxn))
 		{

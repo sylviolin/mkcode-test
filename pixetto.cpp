@@ -326,6 +326,13 @@ namespace pixetto {
 			m_x = data_buf[3];
 			m_y = data_buf[4];
 		}
+		else if (data_buf[2] == SIMPLE_CLASSIFIER) {
+			m_type = data_buf[3] * 256 + data_buf[4];
+			m_x = data_buf[5];
+			m_y = data_buf[6];
+			m_w = data_buf[7];
+			m_h = data_buf[8];
+		}
 		else {
 			m_type = data_buf[3];
 			m_x = data_buf[4];

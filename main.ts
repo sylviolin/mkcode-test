@@ -350,4 +350,13 @@ namespace pixetto {
     export function getEquationExpr() {
         return 0;
     }
+    
+    //% block="test function"
+    //% shim=pixetto::isTested
+    //% weight=0
+    export function isTested(): number {
+		return 0;
+    }
+    
+
 }

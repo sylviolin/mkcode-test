@@ -360,6 +360,7 @@ namespace pixetto {
 		return true;
 	}
 
+	//%
 	int isTested(){
 		if (bOnStarting) 
 			return -1;

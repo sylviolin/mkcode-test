@@ -214,7 +214,7 @@ namespace pixetto {
     bool begin(PixSerialPin rx, PixSerialPin tx){
 		bOnStarting = true;
 		
-		int ret = false;
+		bool ret = false;
 		PinName txn, rxn;
 		uBit.sleep(3000);
 		
@@ -229,6 +229,68 @@ namespace pixetto {
 			uBit.sleep(100);
 			
 			ret = opencam(false);
+		}
+		if (ret)
+			bOnStarting = false;
+			
+		return ret;
+    }
+    
+    
+    int test_opencam(bool reset) 
+	{
+		if (reset)
+			uBit.sleep(8000);
+			
+		int try_streamon = 0;
+		do {
+			uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON_CB, 0, PXT_PACKET_END};
+			serial->send(cmd_buf, 5);
+			
+			int read_len = 0;
+			int loop = 0;
+			uint8_t code_buf[5] = {0xFF};
+			do {
+				read_len = serial->read(code_buf, 1, ASYNC);
+				
+				if (read_len == 0 || read_len == MICROBIT_NO_DATA) {
+					loop++;
+				}
+			} while (code_buf[0] != PXT_PACKET_START && loop < 50000);
+			
+			if (read_len == 0 || read_len == MICROBIT_NO_DATA) return 2;
+				
+			read_len = serial->read(&code_buf[1], 4);
+
+			if (code_buf[0] == PXT_PACKET_START &&
+				code_buf[4] == PXT_PACKET_END &&
+				code_buf[2] == PXT_RET_CAM_SUCCESS)
+				return 1;
+			try_streamon++;
+			uBit.sleep(500);
+		} while (try_streamon < 4);
+		
+		return 3;
+	}
+    //% 
+    int test_begin(PixSerialPin rx, PixSerialPin tx){
+		bOnStarting = true;
+		
+		int ret = false;
+		PinName txn, rxn;
+		uBit.sleep(3000);
+		
+		if (getPinName(tx, txn) && getPinName(rx, rxn))
+		{
+			if (serial == nullptr)
+				serial = new MicroBitSerial(txn, rxn, 64, 20);
+
+			serial->baud(38400);
+			//serial->setRxBufferSize(64);
+			//serial->setTxBufferSize(32);
+			uBit.sleep(100);
+			
+			ret = test_opencam(false);
 		}
 		if (ret)
 			bOnStarting = false;

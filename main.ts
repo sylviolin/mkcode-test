@@ -358,5 +358,11 @@ namespace pixetto {
 		return 0;
     }
     
+    //% block="test begin"
+    //% shim=pixetto::test_begin
+    //% weight=0
+    export function test_begin(): number {
+		return 0;
+    }
 
 }

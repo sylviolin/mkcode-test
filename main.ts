@@ -358,10 +358,10 @@ namespace pixetto {
 		return 0;
     }
     
-    //% block="test begin"
-    //% shim=pixetto::test_begin
-    //% weight=0
-    export function test_begin(): number {
+	//% block="test initialize vision sensor RX %rx TX %tx"
+	//% shim=pixetto::test_begin
+	//% weight=1
+	export function test_begin(rx: PixSerialPin, tx: PixSerialPin): number {
 		return 0;
     }
 

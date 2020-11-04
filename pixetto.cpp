@@ -449,7 +449,7 @@ namespace pixetto {
 			read_len = serial->read(data_buf, 1, ASYNC);
 			loop++;
 			//uBit.sleep(100);
-		} while (data_buf[0] != PXT_PACKET_START && loop < 200000);
+		} while (data_buf[0] != PXT_PACKET_START && loop < 300000);
 		
 		if (read_len == 0 || read_len == MICROBIT_NO_DATA) {
 			if (!checkcam()) {

@@ -135,6 +135,14 @@ namespace pixetto {
       return false;
     }
 	
+	void ssflush()
+	{
+		uint8_t a;
+		do {
+			read_len = serial->read(&a, 1, ASYNC);
+		} while (read_len == 0 && read_len == MICROBIT_NO_DATA);
+	}
+	
 	bool verifyChecksum(uint8_t *buf, int len)
 	{
 		uint8_t sum = 0;
@@ -150,6 +158,8 @@ namespace pixetto {
 	
 	bool checkcam()
 	{
+		ssflush();
+		
 		uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON_CB, 0, PXT_PACKET_END};
 		serial->send(cmd_buf, 5);
 			
@@ -182,6 +192,8 @@ namespace pixetto {
 			
 		int try_streamon = 0;
 		do {
+			ssflush();
+			
 			uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON_CB, 0, PXT_PACKET_END};
 			serial->send(cmd_buf, 5);
 			
@@ -245,6 +257,7 @@ namespace pixetto {
 		int ret = 0;
 		int try_streamon = 0;
 		do {
+			ssflush();
 			uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON_CB, 0, PXT_PACKET_END};
 			serial->send(cmd_buf, 5);
 			
@@ -344,6 +357,7 @@ namespace pixetto {
 		for (a=0; a<DATA_SIZE; a++)
 			data_buf[a] = 0xFF;
 	
+		ssflush();
 		uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_QUERY, 0, PXT_PACKET_END};
 		serial->send(cmd_buf, 5);
 
@@ -351,7 +365,7 @@ namespace pixetto {
 			read_len = serial->read(data_buf, 1, ASYNC);
 			loop++;
 			//uBit.sleep(100);
-		} while (data_buf[0] != PXT_PACKET_START && loop < 200000);
+		} while (data_buf[0] != PXT_PACKET_START && loop < 300000);
 		
 		if (read_len == 0 || read_len == MICROBIT_NO_DATA) {
 			if (!checkcam()) {
@@ -442,6 +456,7 @@ namespace pixetto {
 		for (a=0; a<DATA_SIZE; a++)
 			data_buf[a] = 0xFF;
 	
+		ssflush();
 		uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_QUERY, 0, PXT_PACKET_END};
 		serial->send(cmd_buf, 5);
 

@@ -135,12 +135,14 @@ namespace pixetto {
       return false;
     }
 	
-	void ssflush()
+	bool ssflush()
 	{
 		uint8_t a;
+		int read_len = 0;
 		do {
 			read_len = serial->read(&a, 1, ASYNC);
 		} while (read_len == 0 && read_len == MICROBIT_NO_DATA);
+		return true;
 	}
 	
 	bool verifyChecksum(uint8_t *buf, int len)

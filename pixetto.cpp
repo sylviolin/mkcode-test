@@ -141,7 +141,7 @@ namespace pixetto {
 		int read_len = 0;
 		do {
 			read_len = serial->read(&a, 1, ASYNC);
-		} while (read_len == 0 && read_len == MICROBIT_NO_DATA);
+		} while (read_len > 0 && read_len != MICROBIT_NO_DATA);
 		return true;
 	}
 	

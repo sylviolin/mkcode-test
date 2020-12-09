@@ -21,8 +21,8 @@
     COLOR_LABEL = 2,
     //% block="Shape Detection"
     SHAPE_DETECTION = 3,
-    //% block="Circle Detection"
-    CIRCLE_DETECTION = 4,
+    //% block="Sphere Detection"
+    SPHERE_DETECTION = 4,
     //% block="Template Matching"
     TEMPLATE = 6,
     //% block="Keypoint"
@@ -35,10 +35,10 @@
     FACE_DETECTION = 11,
     //% block="Traffic Sign Detection"
     TRAFFIC_SIGN_DETECTION = 12,
-    //% block="Handwriting Digits Detection"
-    HANDWRITING_DIGITS_DETECTION = 13,
-    //% block="Handwriting Letters Detection"
-    HANDWRITING_LETTERS_DETECTION = 14,
+    //% block="Handwritten Digits Detection"
+    HANDWRITTEN_DIGITS_DETECTION = 13,
+    //% block="Handwritten Letters Detection"
+    HANDWRITTEN_LETTERS_DETECTION = 14,
     //% block="Remote Computing"
     REMOTE_COMPUTING = 15,
     //% block="Lanes Detection"

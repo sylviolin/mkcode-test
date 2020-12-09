@@ -38,7 +38,7 @@ namespace pixetto {
 		SIGN_WRONG_WAY,
 		//% block="No U turn"
 		SIGN_NO_U_TURN,
-		//% block="Maximum speed"
+		//% block="Maximum speed limit"
 		SIGN_MAX_SPEED,
 		//% block="One-way traffic"
 		SIGN_ONEWAY_TRAFFIC,
@@ -46,7 +46,7 @@ namespace pixetto {
 		SIGN_LEFT_TURN,
 		//% block="Right turn"
 		SIGN_RIGHT_TURN,
-		//% block="Minimum speed"
+		//% block="Minimum speed limit"
 		SIGN_MIN_SPEED,
 		//% block="U turn"
 		SIGN_U_TURN,
@@ -267,10 +267,10 @@ namespace pixetto {
         return false;
     }
 
-    //% block="Circle Detection detects color %color"
-    //% shim=pixetto::get_circledetect_color
+    //% block="Sphere Detection detects color %color"
+    //% shim=pixetto::get_spheredetect_color
     //% weight=78
-    export function get_circledetect_color(color: PixColorType): boolean {
+    export function get_spheredetect_color(color: PixColorType): boolean {
         return false;
     }
 
@@ -288,14 +288,14 @@ namespace pixetto {
         return false;
     }
 
-    //% block="Handwriting Digits Detection detects %digit"
+    //% block="Handwritten Digits Detection detects %digit"
     //% shim=pixetto::get_hand_digit
     //% weight=75
     export function get_hand_digit(digit: PixHandDigit): boolean {
         return false;
     }
 
-    //% block="Handwriting Lettes Detection detects %letter"
+    //% block="Handwritten Lettes Detection detects %letter"
     //% shim=pixetto::get_hand_letter
     //% weight=74
     export function get_hand_letter(letter: PixHandLetter): boolean {

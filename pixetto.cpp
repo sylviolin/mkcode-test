@@ -35,8 +35,8 @@ enum PixFunction {
         COLOR_LABEL=2,
         //% block="Shape Detection"
         SHAPE_DETECTION=3,
-        //% block="Circle Detection"
-        CIRCLE_DETECTION=4,
+        //% block="Sphere Detection"
+        SPHERE_DETECTION=4,
         //% block="Template Matching"
         TEMPLATE=6,
         //% block="Keypoint"
@@ -49,10 +49,10 @@ enum PixFunction {
         FACE_DETECTION=11,
         //% block="Traffic Sign Detection"
         TRAFFIC_SIGN_DETECTION=12,
-        //% block="Handwriting Digits Detection"
-        HANDWRITING_DIGITS_DETECTION=13,
-        //% block="Handwriting Letters Detection"
-        HANDWRITING_LETTERS_DETECTION=14,
+        //% block="Handwritten Digits Detection"
+        HANDWRITTEN_DIGITS_DETECTION=13,
+        //% block="Handwritten Letters Detection"
+        HANDWRITTEN_LETTERS_DETECTION=14,
         //% block="Remote Computing"
         REMOTE_COMPUTING=15,
         //% block="Lanes Detection"
@@ -567,8 +567,8 @@ namespace pixetto {
     }
 
     //% 
-    bool get_circledetect_color(int color) {
-		if (data_buf[2] == CIRCLE_DETECTION && data_buf[3] == color)
+    bool get_spheredetect_color(int color) {
+		if (data_buf[2] == SPHERE_DETECTION && data_buf[3] == color)
 			return true;
         return false;
     }
@@ -589,14 +589,14 @@ namespace pixetto {
 
     //%
     bool get_hand_digit(int digit) {
-		if (data_buf[2] == HANDWRITING_DIGITS_DETECTION && data_buf[3] == digit)
+		if (data_buf[2] == HANDWRITTEN_DIGITS_DETECTION && data_buf[3] == digit)
 			return true;
         return false;
     }
 
     //%
     bool get_hand_letter(int letter) {
-		if (data_buf[2] == HANDWRITING_LETTERS_DETECTION && data_buf[3] == letter)
+		if (data_buf[2] == HANDWRITTEN_LETTERS_DETECTION && data_buf[3] == letter)
 			return true;
         return false;
     }	

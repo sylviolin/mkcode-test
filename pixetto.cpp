@@ -1,7 +1,8 @@
 #include "pxt.h"
-#include "mbed.h"
-#include "MicroBitPin.h"
-#include "MicroBitSerial.h"
+//#include "mbed.h"
+//#include "MicroBitPin.h"
+//#include "MicroBitSerial.h"
+#include "MicroBit.h"
 
 #define PXT_PACKET_START 	0xFD
 #define PXT_PACKET_END   	0xFE
@@ -11,7 +12,7 @@
 #define PXT_CMD_RESET		0x53 //(83)
 
 #define PXT_RET_CAM_SUCCESS	0xE0
-#define PXT_RET_CAM_ERROR	0xE1
+#define PXT_RET_CAM_ERROR	0xE1   
 
 #define SERIAL_BUF_SIZE		64
 #define DATA_SIZE			33
@@ -103,9 +104,11 @@ enum PixLanesField {
         LANES_RY2
 };
 
-using namespace pxt;
+//using namespace pxt;
 
 namespace pixetto {
+	MicroBit uBit;
+	
 	MicroBitSerial *serial = nullptr;
 	uint8_t data_buf[DATA_SIZE] = {0xFF};
 	int data_len = 0;
@@ -227,6 +230,8 @@ namespace pixetto {
     //% 
     bool begin(PixSerialPin rx, PixSerialPin tx){
 		bOnStarting = true;
+		
+		uBit.init();
 		
 		bool ret = false;
 		PinName txn, rxn;

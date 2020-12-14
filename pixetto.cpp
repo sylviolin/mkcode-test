@@ -233,7 +233,7 @@ namespace pixetto {
 	}
 #endif
     //% 
-    bool begin(PixSerialPin rx, PixSerialPin tx){
+    bool begin() //(PixSerialPin rx, PixSerialPin tx){
 		bOnStarting = true;
 		
 		uBit.init();
@@ -242,10 +242,11 @@ namespace pixetto {
 		PinName txn, rxn;
 		uBit.sleep(3000);
 		
-		if (getPinName(tx, txn) && getPinName(rx, rxn))
+		//if (getPinName(tx, txn) && getPinName(rx, rxn))
 		{
 			if (serial == nullptr)
-				serial = new NRF52Serial(*new NRF52Pin(txn, txn, PIN_CAPABILITY_ALL), *new NRF52Pin(rxn, rxn, PIN_CAPABILITY_ALL));
+				serial = &(uBit.serial);
+				//serial = new NRF52Serial(*new NRF52Pin(txn, txn, PIN_CAPABILITY_ALL), *new NRF52Pin(rxn, rxn, PIN_CAPABILITY_ALL));
 				//serial = new NRF52Serial(txn, rxn);//, 64, 20);
 				//serial = new MicroBitSerial(txn, rxn, 64, 20);
 				

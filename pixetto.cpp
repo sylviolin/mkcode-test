@@ -1,4 +1,4 @@
-#include "pxt.h"
+//#include "pxt.h"
 //#include "mbed.h"
 //#include "MicroBitPin.h"
 //#include "MicroBitSerial.h"
@@ -105,6 +105,7 @@ enum PixLanesField {
 };
 
 //using namespace pxt;
+using namespace codal;
 
 namespace pixetto {
 	MicroBit uBit;
@@ -239,10 +240,11 @@ namespace pixetto {
 		
 		if (getPinName(tx, txn) && getPinName(rx, rxn))
 		{
-			if (serial == nullptr)
-				serial = new MicroBitSerial(txn, rxn, 64, 20);
+			//if (serial == nullptr)
+			//	serial = new MicroBitSerial(txn, rxn, 64, 20);
 
-			serial->baud(38400);
+			//serial->baud(38400);
+			serial->setBaudrate(38400);
 			//serial->setRxBufferSize(64);
 			//serial->setTxBufferSize(32);
 			uBit.sleep(100);
@@ -267,6 +269,7 @@ namespace pixetto {
 			ssflush();
 			uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON_CB, 0, PXT_PACKET_END};
 			serial->send(cmd_buf, 5);
+			//serial->write(cmd_buf, 5);
 			
 			int read_len = 0;
 			int loop = 0;
@@ -314,7 +317,8 @@ namespace pixetto {
 			if (serial == nullptr)
 				serial = new MicroBitSerial(txn, rxn, 64, 20);
 
-			serial->baud(38400);
+			//serial->baud(38400);
+			serial->setBaudrate(38400);
 			//serial->setRxBufferSize(64);
 			//serial->setTxBufferSize(32);
 			uBit.sleep(100);
@@ -653,11 +657,11 @@ namespace pixetto {
 		return m_eqAnswer;
 	}
 
-	//%
+	/*//%
 	String getEquationExpr() {
 		ManagedString s = m_eqExpr;
 		return PSTR(s);
-	}
+	}*/
 	
 	//%
 	float getApriltagField(int field) {

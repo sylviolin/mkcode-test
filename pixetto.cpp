@@ -233,7 +233,7 @@ namespace pixetto {
 	}
 #endif
     //% 
-    bool begin() //(PixSerialPin rx, PixSerialPin tx){
+    bool begin() { //(PixSerialPin rx, PixSerialPin tx){
 		bOnStarting = true;
 		
 		uBit.init();

@@ -4,6 +4,7 @@
 //#include "MicroBitSerial.h"
 #include "MicroBit.h"
 
+
 #define PXT_PACKET_START 	0xFD
 #define PXT_PACKET_END   	0xFE
 #define PXT_CMD_STREAMOFF	0x7A
@@ -29,6 +30,7 @@ enum PixSerialPin {
     P16 = 16
 };
 
+#if 0
 enum PixFunction {
         //% block="Color Detection"
         COLOR_DETECTION=1,
@@ -103,7 +105,7 @@ enum PixLanesField {
         //% block="Right Y2"
         LANES_RY2
 };
-
+#endif
 //using namespace pxt;
 using namespace codal;
 
@@ -139,7 +141,7 @@ namespace pixetto {
       }
       return false;
     }
-	
+#if 0	
 	bool ssflush()
 	{
 		uint8_t a;
@@ -229,6 +231,7 @@ namespace pixetto {
 		
 		return false;
 	}
+#endif
     //% 
     bool begin(PixSerialPin rx, PixSerialPin tx){
 		bOnStarting = true;
@@ -253,7 +256,7 @@ namespace pixetto {
 			//serial->setTxBufferSize(32);
 			uBit.sleep(100);
 			
-			ret = opencam(false);
+			//ret = opencam(false);
 		}
 		if (ret)
 			bOnStarting = false;
@@ -261,7 +264,7 @@ namespace pixetto {
 		return ret;
     }
     
-    
+#if 0    
     int test_opencam(bool reset) 
 	{
 		if (reset)
@@ -714,4 +717,5 @@ namespace pixetto {
 				return 0;
 		}
 	}
+#endif
 }

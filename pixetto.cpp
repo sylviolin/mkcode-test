@@ -18,6 +18,7 @@
 #define SERIAL_BUF_SIZE		64
 #define DATA_SIZE			33
 
+#if 0
 enum PixSerialPin {
     P0 = 0,
     P1 = 1,
@@ -30,7 +31,6 @@ enum PixSerialPin {
     P16 = 16
 };
 
-#if 0
 enum PixFunction {
         //% block="Color Detection"
         COLOR_DETECTION=1,
@@ -126,6 +126,8 @@ namespace pixetto {
 	char m_eqExpr[17] = {0};
 	float m_posx=0, m_posy=0, m_posz=0, m_rotx=0, m_roty=0, m_rotz=0, m_centerx=0, m_centery=0;
 	bool bOnStarting = false;
+
+#if 0	
 	
     bool getPinName(PixSerialPin p, PinName& name) {
       switch(p) {
@@ -141,7 +143,6 @@ namespace pixetto {
       }
       return false;
     }
-#if 0	
 	bool ssflush()
 	{
 		uint8_t a;

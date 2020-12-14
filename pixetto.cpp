@@ -110,8 +110,8 @@ using namespace codal;
 namespace pixetto {
 	MicroBit uBit;
 	
-	//NRF52Serial *serial = nullptr;
-	MicroBitSerial *serial = nullptr;
+	NRF52Serial *serial = nullptr;
+	//MicroBitSerial *serial = nullptr;
 	uint8_t data_buf[DATA_SIZE] = {0xFF};
 	int data_len = 0;
 	int m_type = 0;
@@ -242,7 +242,10 @@ namespace pixetto {
 		if (getPinName(tx, txn) && getPinName(rx, rxn))
 		{
 			if (serial == nullptr)
-				serial = new MicroBitSerial(txn, rxn, 64, 20);
+				serial = new NRF52Serial(*new NRF52Pin(txn, txn, PIN_CAPABILITY_ALL), *new NRF52Pin(rxn, rxn, PIN_CAPABILITY_ALL));
+				//serial = new NRF52Serial(txn, rxn);//, 64, 20);
+				//serial = new MicroBitSerial(txn, rxn, 64, 20);
+				
 
 			//serial->baud(38400);
 			serial->setBaudrate(38400);

@@ -244,15 +244,15 @@ namespace pixetto {
 		
 		//if (getPinName(tx, txn) && getPinName(rx, rxn))
 		{
-			if (serial == nullptr)
-				serial = &(uBit.serial);
+			//if (serial == nullptr)
+				//serial = &(uBit.serial);
 				//serial = new NRF52Serial(*new NRF52Pin(txn, txn, PIN_CAPABILITY_ALL), *new NRF52Pin(rxn, rxn, PIN_CAPABILITY_ALL));
 				//serial = new NRF52Serial(txn, rxn);//, 64, 20);
 				//serial = new MicroBitSerial(txn, rxn, 64, 20);
 				
 
 			//serial->baud(38400);
-			serial->setBaudrate(38400);
+			uBit.serial.setBaudrate(38400);
 			//serial->setRxBufferSize(64);
 			//serial->setTxBufferSize(32);
 			uBit.sleep(100);
@@ -276,14 +276,14 @@ namespace pixetto {
 		do {
 			ssflush();
 			uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON_CB, 0, PXT_PACKET_END};
-			serial->send(cmd_buf, 5);
+			uBit.serial.send(cmd_buf, 5);
 			//serial->write(cmd_buf, 5);
 			
 			int read_len = 0;
 			int loop = 0;
 			uint8_t code_buf[5] = {0xFF};
 			do {
-				read_len = serial->read(code_buf, 1, ASYNC);
+				read_len = uBit.serial.read(code_buf, 1, ASYNC);
 				
 				if (read_len == 0 || read_len == MICROBIT_NO_DATA) {
 					loop++;
@@ -292,7 +292,7 @@ namespace pixetto {
 			
 			if (read_len == 0 || read_len == MICROBIT_NO_DATA) return 1;
 				
-			read_len = serial->read(&code_buf[1], 4);
+			read_len = uBit.serial.read(&code_buf[1], 4);
 
 			if (code_buf[0] == PXT_PACKET_START &&
 				code_buf[4] == PXT_PACKET_END &&
@@ -326,7 +326,7 @@ namespace pixetto {
 				serial = new MicroBitSerial(txn, rxn, 64, 20);
 
 			//serial->baud(38400);
-			serial->setBaudrate(38400);
+			uBit.serial.setBaudrate(38400);
 			//serial->setRxBufferSize(64);
 			//serial->setTxBufferSize(32);
 			uBit.sleep(100);
@@ -378,10 +378,10 @@ namespace pixetto {
 	
 		ssflush();
 		uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_QUERY, 0, PXT_PACKET_END};
-		serial->send(cmd_buf, 5);
+		uBit.serial.send(cmd_buf, 5);
 
 		do {
-			read_len = serial->read(data_buf, 1, ASYNC);
+			read_len = uBit.serial.read(data_buf, 1, ASYNC);
 			loop++;
 			//uBit.sleep(100);
 		} while (data_buf[0] != PXT_PACKET_START && loop < 300000);

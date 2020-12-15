@@ -104,7 +104,7 @@ enum PixLanesField {
         LANES_RY2
 };
 
-using namespace pxt;
+//using namespace pxt;
 //using namespace codal;
 
 namespace pixetto {

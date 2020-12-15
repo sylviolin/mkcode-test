@@ -19,8 +19,8 @@
 #define SERIAL_BUF_SIZE		64
 #define DATA_SIZE			33
 
-//using namespace codal;
-using namespace pxt;
+using namespace codal;
+//using namespace pxt;
 
 namespace pixetto {
 	Serial *serial = nullptr;

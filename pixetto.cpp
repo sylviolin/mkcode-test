@@ -252,9 +252,9 @@ namespace pixetto {
 				serial = new MicroBitSerial(txn, rxn, 64, 20);
 				
 #if MICROBIT_CODAL
-			serial->setBaudrate(38400);
-#else
 			serial->baud(38400);
+#else
+			serial->setBaudrate(38400);
 #endif
 			//serial->setRxBufferSize(64);
 			//serial->setTxBufferSize(32);
@@ -329,9 +329,9 @@ namespace pixetto {
 				serial = new MicroBitSerial(txn, rxn, 64, 20);
 
 #if MICROBIT_CODAL
-			serial->setBaudrate(38400);
-#else
 			serial->baud(38400);
+#else
+			serial->setBaudrate(38400);
 #endif
 			//serial->setRxBufferSize(64);
 			//serial->setTxBufferSize(32);

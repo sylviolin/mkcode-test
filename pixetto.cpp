@@ -21,7 +21,7 @@
 using namespace codal;
 //using namespace pxt;
 
-namespace pixetto2 {
+namespace pixetto {
 	//NRF52Serial *serial = nullptr;
 	//MicroBitSerial *serial = nullptr;
 	uint8_t data_buf[DATA_SIZE] = {0xFF};

@@ -251,10 +251,10 @@ namespace pixetto {
 				//serial = new NRF52Serial(txn, rxn);//, 64, 20);
 				serial = new MicroBitSerial(txn, rxn, 64, 20);
 				
-#if MICROBIT_CODAL
-			serial->baud(38400);
-#else
+#ifdef mbcodal 
 			serial->setBaudrate(38400);
+#else
+			serial->baud(38400);
 #endif
 			//serial->setRxBufferSize(64);
 			//serial->setTxBufferSize(32);
@@ -328,10 +328,10 @@ namespace pixetto {
 			if (serial == nullptr)
 				serial = new MicroBitSerial(txn, rxn, 64, 20);
 
-#if MICROBIT_CODAL
-			serial->baud(38400);
-#else
+#ifdef mbcodal 
 			serial->setBaudrate(38400);
+#else
+			serial->baud(38400);
 #endif
 			//serial->setRxBufferSize(64);
 			//serial->setTxBufferSize(32);

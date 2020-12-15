@@ -22,7 +22,7 @@
 //using namespace pxt;
 
 namespace pixetto {
-	//NRF52Serial *serial = nullptr;
+	NRF52Serial *serial = nullptr;
 	//MicroBitSerial *serial = nullptr;
 	//bool bOnStarting = false;
 	MicroBit uBit;
@@ -35,7 +35,10 @@ namespace pixetto {
 		
 		uBit.sleep(3000);
 		
-		uBit.serial.printf("data");
+		serial = new NRF52Serial(P0, P1);
+		//serial->setBaudrate(38400);
+		
+		//uBit.serial.printf("data");
 		//uBit.serial.setBaudrate(38400);
 		//uBit.sleep(100);
 

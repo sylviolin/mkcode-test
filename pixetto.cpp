@@ -25,16 +25,17 @@ namespace pixetto {
 	//NRF52Serial *serial = nullptr;
 	//MicroBitSerial *serial = nullptr;
 	//bool bOnStarting = false;
-
+	MicroBit uBit;
+	
     //% 
     bool begin() { 
 		//bOnStarting = true;
-
+		uBit.init();
 		bool ret = false;
-		uBit.sleep(3000);
+		//uBit.sleep(3000);
 		
 		//uBit.serial.setBaudrate(38400);
-		uBit.sleep(100);
+		//uBit.sleep(100);
 
 		//if (ret)
 			//bOnStarting = false;

@@ -22,7 +22,7 @@
 //using namespace pxt;
 
 namespace pixetto {
-	//NRF52Serial *serial = nullptr;
+	NRF52Serial *serial = nullptr;
 	//MicroBitSerial *serial = nullptr;
 	//bool bOnStarting = false;
 	MicroBit uBit;

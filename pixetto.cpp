@@ -106,6 +106,11 @@ enum PixLanesField {
 
 //using namespace pxt;
 //using namespace codal;
+#if MICROBIT_CODAL
+#error "This is V2"
+#else
+#error "This is V1"
+#endif
 
 namespace pixetto {
 	MicroBit uBit;

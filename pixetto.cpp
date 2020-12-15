@@ -41,8 +41,9 @@ namespace pixetto {
 		bool ret = false;
 		
 		uBit.sleep(3000);
-		
-		serial = new Serial(uBit.io.P0, uBit.io.P1);
+		Pin *aa = &uBit.io.P0;
+		Pin *bb = &uBit.io.P1;
+		//serial = new Serial(&uBit.io.P0, &uBit.io.P1);
 
 		//serial->setBaudrate(38400);
 		

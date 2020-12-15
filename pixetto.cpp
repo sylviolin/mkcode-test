@@ -252,8 +252,8 @@ namespace pixetto {
 				serial = new MicroBitSerial(txn, rxn, 64, 20);
 				
 
-			serial->baud(38400);
-			serial->setBaudrate(38400);
+			//serial->baud(38400);
+			//serial->setBaudrate(38400);
 			//serial->setRxBufferSize(64);
 			//serial->setTxBufferSize(32);
 			uBit.sleep(100);

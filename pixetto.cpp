@@ -42,7 +42,7 @@ namespace pixetto {
 		
 		uBit.sleep(3000);
 		
-		serial = new codal::NRF52Serial(P0, P1);
+		//serial = new codal::NRF52Serial(P0, P1);
 
 		//serial->setBaudrate(38400);
 		

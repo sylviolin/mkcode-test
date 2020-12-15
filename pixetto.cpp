@@ -24,11 +24,12 @@
 
 namespace pixetto {
 	//Serial *serial = nullptr;
-#if MICROBIT_CODAL
+	
+//#if MICROBIT_CODAL
 	codal::NRF52Serial *serial = nullptr;
-#else
-	MicroBitSerial *serial = nullptr;
-#endif
+//#else
+	//MicroBitSerial *serial = nullptr;
+//#endif
 
 	//bool bOnStarting = false;
 	MicroBit uBit;
@@ -41,7 +42,8 @@ namespace pixetto {
 		
 		uBit.sleep(3000);
 		
-		//serial = new NRF52Serial(P0, P1);
+		serial = new codal::NRF52Serial(P0, P1);
+
 		//serial->setBaudrate(38400);
 		
 		//uBit.serial.printf("data");

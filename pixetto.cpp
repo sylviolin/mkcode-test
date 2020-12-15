@@ -42,7 +42,7 @@ namespace pixetto {
 		
 		uBit.sleep(3000);
 		
-		serial = new Serial(P0, P1);
+		serial = new Serial(uBit.io.P0, uBit.io.P1);
 
 		//serial->setBaudrate(38400);
 		

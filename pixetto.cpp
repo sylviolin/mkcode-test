@@ -32,7 +32,8 @@ namespace pixetto {
 		//bOnStarting = true;
 		uBit.init();
 		bool ret = false;
-		//uBit.sleep(3000);
+		
+		uBit.sleep(3000);
 		
 		uBit.serial.printf("data");
 		//uBit.serial.setBaudrate(38400);

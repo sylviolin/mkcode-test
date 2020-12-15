@@ -18,11 +18,11 @@
 #define SERIAL_BUF_SIZE		64
 #define DATA_SIZE			33
 
-//using namespace codal;
+using namespace codal;
 //using namespace pxt;
 
 namespace pixetto {
-	NRF52Serial *serial = nullptr;
+	//NRF52Serial *serial = nullptr;
 	//MicroBitSerial *serial = nullptr;
 	//bool bOnStarting = false;
 	MicroBit uBit;
@@ -35,7 +35,7 @@ namespace pixetto {
 		
 		uBit.sleep(3000);
 		
-		serial = new NRF52Serial(P0, P1);
+		//serial = new NRF52Serial(P0, P1);
 		//serial->setBaudrate(38400);
 		
 		//uBit.serial.printf("data");

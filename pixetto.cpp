@@ -2,6 +2,7 @@
 //#include "mbed.h"
 //#include "MicroBitPin.h"
 //#include "MicroBitSerial.h"
+#include "NRF52Serial.h"
 #include "MicroBit.h"
 
 

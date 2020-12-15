@@ -23,13 +23,13 @@
 //using namespace pxt;
 
 namespace pixetto {
-	//Serial *serial = nullptr;
+	Serial *serial = nullptr;
 	
-#if MICROBIT_CODAL
-	codal::NRF52Serial *serial = nullptr;
+//#if MICROBIT_CODAL
+	//codal::NRF52Serial *serial = nullptr;
 //#else
 	//MicroBitSerial *serial = nullptr;
-#endif
+//#endif
 
 	//bool bOnStarting = false;
 	MicroBit uBit;

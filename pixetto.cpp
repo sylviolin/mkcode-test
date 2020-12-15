@@ -19,16 +19,16 @@
 #define SERIAL_BUF_SIZE		64
 #define DATA_SIZE			33
 
-//using namespace codal;
+using namespace codal;
 //using namespace pxt;
 
 namespace pixetto {
-	Serial *serial = nullptr;
+	//Serial *serial = nullptr;
 	
 //#if MICROBIT_CODAL
 	//codal::NRF52Serial *serial = nullptr;
 //#else
-	//MicroBitSerial *serial = nullptr;
+	MicroBitSerial *serial = nullptr;
 //#endif
 
 	//bool bOnStarting = false;
@@ -40,7 +40,7 @@ namespace pixetto {
 		bool ret = false;
 		
 		uBit.sleep(3000);
-		//Pin aa = uBit.io.P0;
+		Pin *aa = &uBit.io.P0;
 		//Pin bb = uBit.io.P1;
 		//serial = new Serial(&uBit.io.P0, &uBit.io.P1);
 

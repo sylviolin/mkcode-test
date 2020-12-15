@@ -19,9 +19,10 @@
 #define DATA_SIZE			33
 
 using namespace codal;
+//using namespace pxt;
 
-namespace pixetto {
-	NRF52Serial *serial = nullptr;
+namespace pixetto2 {
+	//NRF52Serial *serial = nullptr;
 	//MicroBitSerial *serial = nullptr;
 	uint8_t data_buf[DATA_SIZE] = {0xFF};
 	int data_len = 0;
@@ -39,30 +40,13 @@ namespace pixetto {
     //% 
     bool begin() { 
 		bOnStarting = true;
-		
-		//uBit.init();
-		
+
 		bool ret = false;
-		PinName txn, rxn;
 		uBit.sleep(3000);
 		
-		//if (getPinName(tx, txn) && getPinName(rx, rxn))
-		{
-			//if (serial == nullptr)
-				//serial = &(uBit.serial);
-				//serial = new NRF52Serial(*new NRF52Pin(txn, txn, PIN_CAPABILITY_ALL), *new NRF52Pin(rxn, rxn, PIN_CAPABILITY_ALL));
-				//serial = new NRF52Serial(txn, rxn);//, 64, 20);
-				//serial = new MicroBitSerial(txn, rxn, 64, 20);
-				
+		//uBit.serial.setBaudrate(38400);
+		uBit.sleep(100);
 
-			//serial->baud(38400);
-			uBit.serial.setBaudrate(38400);
-			//serial->setRxBufferSize(64);
-			//serial->setTxBufferSize(32);
-			uBit.sleep(100);
-			
-			//ret = opencam(false);
-		}
 		if (ret)
 			bOnStarting = false;
 			

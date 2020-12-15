@@ -2,7 +2,7 @@
 //#include "mbed.h"
 //#include "MicroBitPin.h"
 //#include "MicroBitSerial.h"
-#include "Serial.h"
+//#include "Serial.h"
 #include "MicroBit.h"
 
 
@@ -23,9 +23,13 @@
 //using namespace pxt;
 
 namespace pixetto {
-	Serial *serial = nullptr;
-	//NRF52Serial *serial = nullptr;
-	//MicroBitSerial *serial = nullptr;
+	//Serial *serial = nullptr;
+#if MICROBIT_CODAL
+	codal::NRF52Serial *serial = nullptr;
+#else
+	MicroBitSerial *serial = nullptr;
+#endif
+
 	//bool bOnStarting = false;
 	MicroBit uBit;
 	

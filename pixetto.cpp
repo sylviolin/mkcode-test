@@ -251,11 +251,12 @@ namespace pixetto {
 				//serial = new NRF52Serial(txn, rxn);//, 64, 20);
 				serial = new MicroBitSerial(txn, rxn, 64, 20);
 				
-#ifdef mbcodal 
+//#ifdef mbcodal 
+			#if MICROBIT_CODAL
 			serial->setBaudrate(38400);
-#else
+			#else
 			serial->baud(38400);
-#endif
+			#endif
 			//serial->setRxBufferSize(64);
 			//serial->setTxBufferSize(32);
 			uBit.sleep(100);

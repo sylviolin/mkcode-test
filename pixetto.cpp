@@ -160,6 +160,7 @@ namespace pixetto {
 	#if MICROBIT_CODAL
 		do {
 			a = serial->getChar(ASYNC);
+			//return true;
 		} while (a != MICROBIT_NO_DATA);
 	#else
 		int read_len = 0;
@@ -291,10 +292,11 @@ namespace pixetto {
 		int try_streamon = 0;
 		do {
 			ssflush();
+			return 9;
+
 			uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON_CB, 0, PXT_PACKET_END};
 			serial->send(cmd_buf, 5);
 			//serial->write(cmd_buf, 5);
-			return 9;
 			
 			int read_len = 0;
 			int loop = 0;

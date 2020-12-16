@@ -286,6 +286,7 @@ namespace pixetto {
 			uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON_CB, 0, PXT_PACKET_END};
 			serial->send(cmd_buf, 5);
 			//serial->write(cmd_buf, 5);
+			return 9;
 			
 			int read_len = 0;
 			int loop = 0;
@@ -341,7 +342,6 @@ namespace pixetto {
 			//serial->setRxBufferSize(64);
 			//serial->setTxBufferSize(32);
 			uBit.sleep(100);
-			return 2;
 			
 			ret = test_opencam(false);
 		}

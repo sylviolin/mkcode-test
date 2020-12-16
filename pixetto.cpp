@@ -309,8 +309,17 @@ namespace pixetto {
 			
 			if (read_len == 0 || read_len == MICROBIT_NO_DATA) return 1;
 			
-			read_len = serial->read(&code_buf[1], 4, ASYNC);
-			
+			//read_len = serial->read(&code_buf[1], 4);
+			int readidx = 1;
+			do {
+				read_len = serial->read(&code_buf[readidx], 1, ASYNC);
+				
+				if (read_len == 0 || read_len == MICROBIT_NO_DATA)
+					loop++;
+				else
+					readidx++;
+			} while (readidx < 5 && loop < 50000);
+
 			if (code_buf[0] == PXT_PACKET_START &&
 				code_buf[4] == PXT_PACKET_END &&
 				code_buf[2] == PXT_RET_CAM_SUCCESS)

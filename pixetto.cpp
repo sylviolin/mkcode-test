@@ -341,6 +341,7 @@ namespace pixetto {
 			//serial->setRxBufferSize(64);
 			//serial->setTxBufferSize(32);
 			uBit.sleep(100);
+			return 2;
 			
 			ret = test_opencam(false);
 		}

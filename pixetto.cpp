@@ -521,8 +521,10 @@ namespace pixetto {
 
 		do {
 			read_len = serial->read(data_buf, 1, ASYNC);
-			loop++;
-			//uBit.sleep(100);
+			
+			if (read_len == 0 || read_len == MICROBIT_NO_DATA) {
+				loop++;
+			}
 		} while (data_buf[0] != PXT_PACKET_START && loop < 300000);
 		
 		if (read_len == 0 || read_len == MICROBIT_NO_DATA) {

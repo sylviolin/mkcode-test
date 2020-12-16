@@ -157,16 +157,16 @@ namespace pixetto {
 	{
 		uint8_t a;
 		
-	#if MICROBIT_CODAL
-		do {
-			a = serial->getChar(ASYNC);
-		} while (a != MICROBIT_NO_DATA);
-	#else
+	//#if MICROBIT_CODAL
+	//	do {
+	//		a = serial->getChar(ASYNC);
+	//	} while (a != MICROBIT_NO_DATA);
+	//#else
 		int read_len = 0;
 		do {
 			read_len = serial->read(&a, 1, ASYNC);
 		} while (read_len > 0 && a != MICROBIT_NO_DATA);
-	#endif
+	//#endif
 		
 		return true;
 	}
@@ -291,7 +291,8 @@ namespace pixetto {
 		int try_streamon = 0;
 		do {
 			ssflush();
-
+			return 9;
+			
 			uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON_CB, 0, PXT_PACKET_END};
 			serial->send(cmd_buf, 5);
 			//serial->write(cmd_buf, 5);

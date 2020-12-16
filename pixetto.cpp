@@ -339,7 +339,7 @@ namespace pixetto {
 			#else
 			serial->baud(38400);
 			#endif
-			return 3;
+			//return 3;
 			//serial->setRxBufferSize(64);
 			//serial->setTxBufferSize(32);
 			uBit.sleep(100);

@@ -204,7 +204,16 @@ namespace pixetto {
 		
 		if (read_len == 0 || read_len == MICROBIT_NO_DATA) return false;
 			
-		read_len = serial->read(&code_buf[1], 4);
+		//read_len = serial->read(&code_buf[1], 4);
+		int readidx = 1;
+		do {
+			read_len = serial->read(&code_buf[readidx], 1, ASYNC);
+			
+			if (read_len == 0 || read_len == MICROBIT_NO_DATA)
+				loop++;
+			else
+				readidx++;
+		} while (readidx < 5 && loop < 50000);
 
 		if (code_buf[0] == PXT_PACKET_START &&
 			code_buf[4] == PXT_PACKET_END &&
@@ -395,33 +404,7 @@ namespace pixetto {
 			
 		return ret;
     }
-    /*
-    //%
-    bool isDetected(){
-		int read_len = 0;
-		for (int a=0; a<10; a++)
-			data_buf[a] = 0xFF;
-	
-		uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_QUERY, 0, PXT_PACKET_END};
-		serial->send(cmd_buf, 5);
 
-		do {
-			read_len = serial->read(data_buf, 1, ASYNC);
-		} while (data_buf[0] != PXT_PACKET_START);
-
-		read_len = serial->read(&data_buf[1], 9);
-		 
-		m_x = data_buf[4];
-		m_y = data_buf[5];
-		m_w = data_buf[6];
-		m_h = data_buf[7];
-		
-		if (read_len != 9) return false;
-		if (data_buf[9] != PXT_PACKET_END) return false;
-		if (!verifyChecksum(data_buf, 10)) return false;
-		if (data_buf[2] == 0) return false;
-		return true;
-	} */
 	//%
     bool isDetected(){
 		if (bOnStarting) 
@@ -534,7 +517,7 @@ namespace pixetto {
 	
 		ssflush();
 		uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_QUERY, 0, PXT_PACKET_END};
-		serial->send(cmd_buf, 5);
+		serial->send(cmd_buf, 5, ASYNC);
 
 		do {
 			read_len = serial->read(data_buf, 1, ASYNC);
@@ -545,18 +528,47 @@ namespace pixetto {
 		if (read_len == 0 || read_len == MICROBIT_NO_DATA) {
 			if (!checkcam()) {
 				uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_RESET, 0, PXT_PACKET_END};
-				serial->send(cmd_buf, 5);
+				serial->send(cmd_buf, 5, ASYNC);
 				opencam(true);
 			}
 			return -2;
 		}
-
+		/*
 		read_len = serial->read(&data_buf[1], 2);//, ASYNC); // <len, func_id>
 		data_len = data_buf[1];
 		if (data_len > 3)
 			read_len = serial->read(&data_buf[3], data_len - 3);//, ASYNC);
 		else
 			return 1;
+		*/
+		int readidx = 1;
+		do {
+			read_len = serial->read(&data_buf[readidx], 1, ASYNC);
+			
+			if (read_len == 0 || read_len == MICROBIT_NO_DATA)
+				loop++;
+			else
+				readidx++;
+		} while (readidx < 3 && loop < 50000);		
+		
+		data_len = data_buf[1];
+		if (data_len > 3){
+			//read_len = serial->read(&data_buf[3], data_len - 3);//, ASYNC);
+
+			 readidx = 3;
+			do {
+				read_len = serial->read(&data_buf[readidx], 1, ASYNC);
+				
+				if (read_len == 0 || read_len == MICROBIT_NO_DATA)
+					loop++;
+				else
+					readidx++;
+			} while (readidx < data_len && loop < 50000);		
+
+		}
+		else
+			return 1;
+
 		
 		if (read_len != (data_len-3)) return 2;
 		if (data_buf[data_len-1] != PXT_PACKET_END) return 3;

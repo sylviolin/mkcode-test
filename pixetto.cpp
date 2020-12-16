@@ -158,8 +158,9 @@ namespace pixetto {
 		uint8_t a;
 		int read_len = 0;
 		do {
-			read_len = serial->read(&a, 1, ASYNC);
-		} while (read_len > 0 && read_len != MICROBIT_NO_DATA);
+			//read_len = serial->read(&a, 1, ASYNC);
+			a = getChar(ASYNC);
+		} while (a != DEVICE_NO_DATA); //MICROBIT_NO_DATA);
 		return true;
 	}
 	

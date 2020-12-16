@@ -291,7 +291,6 @@ namespace pixetto {
 		int try_streamon = 0;
 		do {
 			ssflush();
-			return 9;
 			
 			uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON_CB, 0, PXT_PACKET_END};
 			serial->send(cmd_buf, 5);

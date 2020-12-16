@@ -160,7 +160,7 @@ namespace pixetto {
 		do {
 			//read_len = serial->read(&a, 1, ASYNC);
 			a = getChar(ASYNC);
-		} while (a != DEVICE_NO_DATA); //MICROBIT_NO_DATA);
+		} while (a != MICROBIT_NO_DATA);
 		return true;
 	}
 	

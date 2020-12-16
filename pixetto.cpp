@@ -254,14 +254,10 @@ namespace pixetto {
 		
 		if (getPinName(tx, txn) && getPinName(rx, rxn))
 		{
-			if (serial == nullptr)
-				//serial = new NRF52Serial(*new NRF52Pin(txn, txn, PIN_CAPABILITY_ALL), *new NRF52Pin(rxn, rxn, PIN_CAPABILITY_ALL));
-				//serial = new NRF52Serial(txn, rxn);//, 64, 20);
-				serial = new MicroBitSerial(txn, rxn, 64, 20);
+			serial = new MicroBitSerial(txn, rxn, 64, 20);
 				
 			#if MICROBIT_CODAL
 			serial->setBaudrate(38400);
-			serial->baud(38400);
 			#else
 			serial->baud(38400);
 			#endif
@@ -334,10 +330,7 @@ namespace pixetto {
 		
 		if (getPinName(tx, txn) && getPinName(rx, rxn))
 		{
-			if (serial == nullptr)
-				serial = new MicroBitSerial(txn, rxn, 64, 20);
-
-//#ifdef csv---mbcodal 
+			serial = new MicroBitSerial(txn, rxn, 64, 20);
 
 			#if MICROBIT_CODAL
 			serial->setBaudrate(38400);

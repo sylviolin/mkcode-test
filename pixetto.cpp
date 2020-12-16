@@ -159,7 +159,7 @@ namespace pixetto {
 		
 	#if MICROBIT_CODAL
 		do {
-			a = getChar(ASYNC);
+			a = serial->getChar(ASYNC);
 		} while (a != MICROBIT_NO_DATA);
 	#else
 		int read_len = 0;

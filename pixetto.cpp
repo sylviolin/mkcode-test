@@ -156,11 +156,18 @@ namespace pixetto {
 	bool ssflush()
 	{
 		uint8_t a;
+		
+	#if MICROBIT_CODAL
+		do {
+			a = getChar(ASYNC);
+		while (a != MICROBIT_NO_DATA);
+	#else
 		int read_len = 0;
 		do {
-			//read_len = serial->read(&a, 1, ASYNC);
-			a = getChar(ASYNC);
-		} while (a != MICROBIT_NO_DATA);
+			read_len = serial->read(&a, 1, ASYNC);
+		} while (read_len > 0 && a != MICROBIT_NO_DATA);
+	#endif
+		
 		return true;
 	}
 	
@@ -339,7 +346,7 @@ namespace pixetto {
 			#else
 			serial->baud(38400);
 			#endif
-			//return 3;
+			return 3;
 			//serial->setRxBufferSize(64);
 			//serial->setTxBufferSize(32);
 			uBit.sleep(100);

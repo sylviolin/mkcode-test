@@ -328,11 +328,11 @@ namespace pixetto {
 			if (serial == nullptr)
 				serial = new MicroBitSerial(txn, rxn, 64, 20);
 
-#ifdef mbcodal 
+//#ifdef mbcodal 
 			serial->setBaudrate(38400);
-#else
+//#else
 			serial->baud(38400);
-#endif
+//#endif
 			//serial->setRxBufferSize(64);
 			//serial->setTxBufferSize(32);
 			uBit.sleep(100);

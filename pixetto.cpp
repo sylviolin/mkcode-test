@@ -4,6 +4,14 @@
 //#include "MicroBitSerial.h"
 #include "MicroBit.h"
 
+#ifdef CODAL_CONFIG_H
+#define MICROBIT_CODAL 1
+#else
+#define MICROBIT_CODAL 0
+#define target_panic(n) microbit_panic(n)
+#define target_wait(n) wait_ms(n)
+#endif
+
 #define PXT_PACKET_START 	0xFD
 #define PXT_PACKET_END   	0xFE
 #define PXT_CMD_STREAMOFF	0x7A

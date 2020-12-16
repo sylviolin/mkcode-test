@@ -308,7 +308,7 @@ namespace pixetto {
 			} while (code_buf[0] != PXT_PACKET_START && loop < 50000);
 			
 			if (read_len == 0 || read_len == MICROBIT_NO_DATA) return 1;
-				
+			return 7;	
 			read_len = serial->read(&code_buf[1], 4);
 
 			if (code_buf[0] == PXT_PACKET_START &&

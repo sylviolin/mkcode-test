@@ -112,7 +112,7 @@ enum PixLanesField {
         LANES_RY2
 };
 
-//using namespace pxt;
+using namespace pxt;
 //using namespace codal;
 
 //#if MICROBIT_CODAL

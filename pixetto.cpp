@@ -39,9 +39,7 @@ enum PixSerialPin {
 //using namespace codal;
 
 namespace pixetto {
-	//MicroBit uBit;
-	//MicroBit uBit;
-	
+	MicroBit uBit;
 	MicroBitSerial *serial = nullptr;
 	uint8_t data_buf[DATA_SIZE] = {0xFF};
 	int data_len = 0;

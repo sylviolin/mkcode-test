@@ -512,7 +512,6 @@ namespace pixetto {
 		ssflush();
 		uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_QUERY, 0, PXT_PACKET_END};
 		serial->send(cmd_buf, 5, SYNC_SPINWAIT); //ASYNC);
-		return 7;
 		
 		do {
 			read_len = serial->read(data_buf, 1, ASYNC);

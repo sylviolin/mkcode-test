@@ -728,11 +728,11 @@ namespace pixetto {
 		return m_eqAnswer;
 	}
 
-	/*//%
+	//%
 	String getEquationExpr() {
 		ManagedString s = m_eqExpr;
 		return PSTR(s);
-	}*/
+	}
 	
 	//%
 	float getApriltagField(int field) {

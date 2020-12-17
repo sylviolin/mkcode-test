@@ -171,7 +171,7 @@ namespace pixetto {
 		int read_idx = 0;
 		int loop = 0;
 		do {
-			read_len = serial->read(buf[read_idx], 1, ASYNC);
+			read_len = serial->read(&buf[read_idx], 1, ASYNC);
 			
 			if (read_len == 0 || read_len == MICROBIT_NO_DATA)
 				loop++;
@@ -347,7 +347,6 @@ namespace pixetto {
 			serial->send(cmd_buf, 5, ASYNC);
 			
 			int read_len = 0;
-			int loop = 0;
 			uint8_t code_buf[5] = {0xFF};
 			
 			/*
@@ -531,7 +530,6 @@ namespace pixetto {
 			return -1;
 		
 		int read_len = 0;
-		int loop = 0;
 		int a = 0;
 		for (a=0; a<DATA_SIZE; a++)
 			data_buf[a] = 0xFF;

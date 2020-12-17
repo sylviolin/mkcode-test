@@ -520,6 +520,7 @@ namespace pixetto {
 		} while (data_buf[0] != PXT_PACKET_START && loop < 300000);
 		*/
 		int read_len = 0;
+		int loop = 0;
 		do {
 			read_len = ssread(data_buf, 1, 50000);
 			loop++;

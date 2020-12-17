@@ -112,7 +112,7 @@ enum PixLanesField {
 //using namespace pxt;
 //using namespace codal;
 
-extern MicroBit uBit;
+//extern MicroBit uBit;
 
 namespace pixetto {
 	MicroBitSerial *serial = nullptr;

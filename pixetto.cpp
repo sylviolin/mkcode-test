@@ -1,3 +1,4 @@
+#include "pxt.h"
 #include "MicroBit.h"
 
 #ifdef CODAL_CONFIG_H
@@ -729,10 +730,9 @@ namespace pixetto {
 	}
 
 	//%
-	ManagedString getEquationExpr() {
+	String getEquationExpr() {
 		ManagedString s = m_eqExpr;
-		//return PSTR(s);
-		return s;
+		return PSTR(s);
 	}
 	
 	//%

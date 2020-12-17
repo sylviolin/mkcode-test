@@ -249,52 +249,19 @@ namespace pixetto {
 			serial->send(cmd_buf, 5, ASYNC);
 			
 			int read_len = 0;
-			int loop = 0;
 			uint8_t code_buf[5] = {0xFF};
-			do {
-				read_len = serial->read(code_buf, 1, ASYNC);
-				
-				if (read_len == 0 || read_len == MICROBIT_NO_DATA) {
-					loop++;
-				}
-			} while (code_buf[0] != PXT_PACKET_START && loop < 50000);
 			
-			if (read_len == 0 || read_len == MICROBIT_NO_DATA) return 1;
+			read_len = ssread(code_buf, 1, 50000);			
+			if (read_len == 0 || read_len == MICROBIT_NO_DATA) return false;
 			
-			int readidx = 1;
-			do {
-				read_len = serial->read(&code_buf[readidx], 1, ASYNC);
-				
-				if (read_len == 0 || read_len == MICROBIT_NO_DATA)
-					loop++;
-				else
-					readidx++;
-			} while (readidx < 5 && loop < 50000);
-			
-			/*
-			uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON_CB, 0, PXT_PACKET_END};
-			serial->send(cmd_buf, 5);
-			
-			int read_len = 0;
-			int loop = 0;
-			uint8_t code_buf[5] = {0xFF};
-			do {
-				read_len = serial->read(code_buf, 1, ASYNC);
-				
-				if (read_len == 0 || read_len == MICROBIT_NO_DATA) {
-					loop++;
-				}
-			} while (code_buf[0] != PXT_PACKET_START && loop < 50000);
-			
-			if (read_len == 0 || read_len == MICROBIT_NO_DATA) break;
-				
-			read_len = serial->read(&code_buf[1], 4);
-			*/
-			
-			if (code_buf[0] == PXT_PACKET_START &&
+			read_len = ssread(&code_buf[1], 4, 50000);
+
+			if (read_len == 4 &&
+			    code_buf[0] == PXT_PACKET_START &&
 				code_buf[4] == PXT_PACKET_END &&
 				code_buf[2] == PXT_RET_CAM_SUCCESS)
 				return true;
+				
 			try_streamon++;
 			uBit.sleep(500);
 		} while (try_streamon < 4);
@@ -430,8 +397,6 @@ namespace pixetto {
 		if (bOnStarting) 
 			return false;
 		
-		int read_len = 0;
-		int loop = 0;
 		int a = 0;
 		for (a=0; a<DATA_SIZE; a++)
 			data_buf[a] = 0xFF;
@@ -440,10 +405,18 @@ namespace pixetto {
 		uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_QUERY, 0, PXT_PACKET_END};
 		serial->send(cmd_buf, 5, ASYNC);
 
+		int read_len = 0;
+		int loop = 0;
+		/*
 		do {
 			read_len = serial->read(data_buf, 1, ASYNC);
 			loop++;
 			//uBit.sleep(100);
+		} while (data_buf[0] != PXT_PACKET_START && loop < 300000);
+		*/
+		do {
+			read_len = ssread(data_buf, 1, 50000);
+			loop++;
 		} while (data_buf[0] != PXT_PACKET_START && loop < 300000);
 		
 		if (read_len == 0 || read_len == MICROBIT_NO_DATA) {
@@ -455,10 +428,10 @@ namespace pixetto {
 			return false;
 		}
 
-		read_len = serial->read(&data_buf[1], 2);//, ASYNC); // <len, func_id>
+		read_len = ssread(&data_buf[1], 2, 50000);
 		data_len = data_buf[1];
 		if (data_len > 3)
-			read_len = serial->read(&data_buf[3], data_len - 3);//, ASYNC);
+			read_len = ssread(&data_buf[3], data_len - 3, 50000);
 		else
 			return false;
 		
@@ -529,7 +502,6 @@ namespace pixetto {
 		if (bOnStarting) 
 			return -1;
 		
-		int read_len = 0;
 		int a = 0;
 		for (a=0; a<DATA_SIZE; a++)
 			data_buf[a] = 0xFF;
@@ -547,7 +519,11 @@ namespace pixetto {
 			}
 		} while (data_buf[0] != PXT_PACKET_START && loop < 300000);
 		*/
-		read_len = ssread(data_buf, 1, 300000);
+		int read_len = 0;
+		do {
+			read_len = ssread(data_buf, 1, 50000);
+			loop++;
+		} while (data_buf[0] != PXT_PACKET_START && loop < 300000);
 		
 		if (read_len == 0 || read_len == MICROBIT_NO_DATA) {
 			if (!checkcam()) {

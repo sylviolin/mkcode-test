@@ -122,7 +122,7 @@ enum PixLanesField {
 //#endif
 
 namespace pixetto {
-	//MicroBit uBit;
+	MicroBit uBit;
 	
 	MicroBitSerial *serial = nullptr;
 	uint8_t data_buf[DATA_SIZE] = {0xFF};

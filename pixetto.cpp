@@ -122,7 +122,7 @@ enum PixLanesField {
 //#endif
 
 namespace pixetto {
-	MicroBit uBit;
+	//MicroBit uBit;
 	
 	MicroBitSerial *serial = nullptr;
 	uint8_t data_buf[DATA_SIZE] = {0xFF};
@@ -238,8 +238,8 @@ namespace pixetto {
 	
 	bool opencam(bool reset) 
 	{
-		//if (reset)
-		//	uBit.sleep(8000);
+		if (reset)
+			uBit.sleep(8000);
 			
 		int try_streamon = 0;
 		do {

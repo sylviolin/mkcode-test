@@ -729,9 +729,10 @@ namespace pixetto {
 	}
 
 	//%
-	String getEquationExpr() {
+	ManagedString getEquationExpr() {
 		ManagedString s = m_eqExpr;
-		return PSTR(s);
+		//return PSTR(s);
+		return s;
 	}
 	
 	//%

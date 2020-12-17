@@ -5,7 +5,7 @@ namespace pixetto {
 	//% shim=pixetto::begin
 	//% weight=100
 	export function begin(): boolean {
-		return false
+		return false;
     }
     
 }

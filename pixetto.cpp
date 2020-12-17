@@ -15,7 +15,7 @@
 //using namespace codal;
 
 namespace pixetto {
-	MicroBit uBit;
+	//MicroBit uBit;
 	bool bOnStarting = false;
 	
     //% 

@@ -39,7 +39,7 @@ enum PixSerialPin {
 //using namespace codal;
 
 namespace pixetto {
-	MicroBit uBit;
+	//MicroBit uBit;
 	MicroBitSerial *serial = nullptr;
 	uint8_t data_buf[DATA_SIZE] = {0xFF};
 	int data_len = 0;
@@ -103,8 +103,8 @@ namespace pixetto {
 
 	bool opencam(bool reset) 
 	{
-		if (reset)
-			uBit.sleep(8000);
+		//if (reset)
+		//	uBit.sleep(8000);
 			
 		int try_streamon = 0;
 		do {
@@ -128,7 +128,7 @@ namespace pixetto {
 				return true;
 				
 			try_streamon++;
-			uBit.sleep(500);
+			//uBit.sleep(500);
 		} while (try_streamon < 4);
 		
 		return false;
@@ -142,7 +142,7 @@ namespace pixetto {
 		PinName txn, rxn;
 		//uBit.init();
 		
-		uBit.sleep(3000);
+		//uBit.sleep(3000);
 		
 		if (getPinName(tx, txn) && getPinName(rx, rxn))
 		{
@@ -155,7 +155,7 @@ namespace pixetto {
 			#endif
 			//serial->setRxBufferSize(64);
 			//serial->setTxBufferSize(32);
-			uBit.sleep(100);
+			//uBit.sleep(100);
 			
 			ret = opencam(false);
 		}

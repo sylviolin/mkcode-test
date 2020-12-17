@@ -131,7 +131,7 @@ namespace pixetto {
 	char m_eqExpr[17] = {0};
 	float m_posx=0, m_posy=0, m_posz=0, m_rotx=0, m_roty=0, m_rotz=0, m_centerx=0, m_centery=0;
 	bool bOnStarting = false;
-	
+	/*
     bool getPinName(PixSerialPin p, PinName& name) {
       switch(p) {
         case P0: name = MICROBIT_PIN_P0;  return true;
@@ -145,16 +145,18 @@ namespace pixetto {
         case P16: name = MICROBIT_PIN_P16; return true;
       }
       return false;
-    }
+    }*/
 	
     //% 
     bool begin(PixSerialPin rx, PixSerialPin tx){
+		bool ret = false;
+
 		bOnStarting = true;
 		
-		uBit.init();
-		
-		bool ret = false;
+		/*
 		PinName txn, rxn;
+		* 
+		uBit.init();
 		uBit.sleep(3000);
 		
 		if (getPinName(tx, txn) && getPinName(rx, rxn))
@@ -171,7 +173,7 @@ namespace pixetto {
 			uBit.sleep(100);
 			
 			//ret = opencam(false);
-		}
+		}*/
 		if (ret)
 			bOnStarting = false;
 			

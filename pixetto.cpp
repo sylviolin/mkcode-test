@@ -1,7 +1,3 @@
-//#include "pxt.h"
-//#include "mbed.h"
-//#include "MicroBitPin.h"
-//#include "MicroBitSerial.h"
 #include "MicroBit.h"
 
 #ifdef CODAL_CONFIG_H
@@ -115,15 +111,9 @@ enum PixLanesField {
 //using namespace pxt;
 //using namespace codal;
 
-//#if MICROBIT_CODAL
-//#error "This is V2"
-//#else
-//#error "This is V1"
-//#endif
 extern MicroBit uBit;
+
 namespace pixetto {
-	//MicroBit uBit;
-	
 	MicroBitSerial *serial = nullptr;
 	uint8_t data_buf[DATA_SIZE] = {0xFF};
 	int data_len = 0;
@@ -263,7 +253,7 @@ namespace pixetto {
 				return true;
 				
 			try_streamon++;
-			//uBit.sleep(500);
+			uBit.sleep(500);
 		} while (try_streamon < 4);
 		
 		return false;
@@ -276,7 +266,7 @@ namespace pixetto {
 		
 		bool ret = false;
 		PinName txn, rxn;
-		//uBit.sleep(3000);
+		uBit.sleep(3000);
 		
 		if (getPinName(tx, txn) && getPinName(rx, rxn))
 		{
@@ -289,7 +279,7 @@ namespace pixetto {
 			#endif
 			//serial->setRxBufferSize(64);
 			//serial->setTxBufferSize(32);
-			//uBit.sleep(100);
+			uBit.sleep(100);
 			
 			ret = opencam(false);
 		}
@@ -302,8 +292,8 @@ namespace pixetto {
     
     int test_opencam(bool reset) 
 	{
-		//if (reset)
-		//	uBit.sleep(8000);
+		if (reset)
+			uBit.sleep(8000);
 			
 		int ret = 0;
 		int try_streamon = 0;
@@ -355,7 +345,7 @@ namespace pixetto {
 				ret = 3;
 
 			try_streamon++;
-			//uBit.sleep(500);
+			uBit.sleep(500);
 		} while (try_streamon < 4);
 
 		if (ret > 0) return ret;
@@ -368,7 +358,7 @@ namespace pixetto {
 		
 		int ret = false;
 		PinName txn, rxn;
-		//uBit.sleep(3000);
+		uBit.sleep(3000);
 		
 		if (getPinName(tx, txn) && getPinName(rx, rxn))
 		{
@@ -382,7 +372,7 @@ namespace pixetto {
 			
 			//serial->setRxBufferSize(64);
 			//serial->setTxBufferSize(32);
-			//uBit.sleep(100);
+			uBit.sleep(100);
 			
 			ret = test_opencam(false);
 		}

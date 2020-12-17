@@ -1,4 +1,4 @@
 {
-  "pixetto.begin|block": "初始化視覺感測器",
+  "pixetto.begin|block": "初始化視覺感測器 RX %rx TX %tx",
   "{id:category}Pixetto": "Pixetto"
 }

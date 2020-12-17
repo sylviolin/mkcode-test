@@ -19,15 +19,14 @@ namespace pixetto {
 	bool bOnStarting = false;
 	
     //% 
-    bool begin(){
+    bool begin(PixSerialPin rx, PixSerialPin tx){
+		bOnStarting = true;
 		bool ret = false;
 
-		bOnStarting = true;
-		
 		/*
 		PinName txn, rxn;
-		* 
 		uBit.init();
+		
 		uBit.sleep(3000);
 		
 		if (getPinName(tx, txn) && getPinName(rx, rxn))
@@ -43,7 +42,7 @@ namespace pixetto {
 			//serial->setTxBufferSize(32);
 			uBit.sleep(100);
 			
-			//ret = opencam(false);
+			ret = opencam(false);
 		}*/
 		if (ret)
 			bOnStarting = false;

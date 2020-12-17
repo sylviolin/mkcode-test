@@ -168,20 +168,21 @@ namespace pixetto {
 	int ssread(uint8_t *buf, int len, int wait_loop)
 	{
 		int read_len = 0;
-		int readidx = 0;
+		int read_idx = 0;
+		int loop = 0;
 		do {
-			read_len = serial->read(buf[readidx], 1, ASYNC);
+			read_len = serial->read(buf[read_idx], 1, ASYNC);
 			
 			if (read_len == 0 || read_len == MICROBIT_NO_DATA)
 				loop++;
 			else
-				readidx++;
-		} while (readidx < len && loop < wait_loop);
+				read_idx++;
+		} while (read_idx < len && loop < wait_loop);
 		
 		if (read_len == 0 || read_len == MICROBIT_NO_DATA)
-			return read_len;
-		else
-			return readidx;
+			read_idx = read_len;
+
+		return read_idx;
 	}
 	
 	bool verifyChecksum(uint8_t *buf, int len)

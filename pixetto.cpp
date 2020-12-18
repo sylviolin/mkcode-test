@@ -241,8 +241,14 @@ namespace pixetto {
 			
 			int read_len = 0;
 			uint8_t code_buf[5] = {0xFF};
+			int loop = 0;
 			
-			read_len = ssread(code_buf, 1, 50000);			
+			do {
+				read_len = serial->read(code_buf, 1);
+				loop++;
+			} while (code_buf[0] != PXT_PACKET_START && loop < 300000);
+
+			//read_len = ssread(code_buf, 1, 50000);			
 			if (read_len == 0 || read_len == MICROBIT_NO_DATA) return false;
 			
 			//read_len = ssread(&code_buf[1], 4, 50000);
@@ -405,7 +411,8 @@ namespace pixetto {
 		} while (data_buf[0] != PXT_PACKET_START && loop < 300000);
 		*/
 		do {
-			read_len = ssread(data_buf, 1, 50000);
+			//read_len = ssread(data_buf, 1, 50000);
+			read_len = serial->read(data_buf, 1);
 			loop++;
 		} while (data_buf[0] != PXT_PACKET_START && loop < 300000);
 		
@@ -418,10 +425,13 @@ namespace pixetto {
 			return false;
 		}
 
-		read_len = ssread(&data_buf[1], 2, 50000);
+		//read_len = ssread(&data_buf[1], 2, 50000);
+		read_len = serial->read(&data_buf[1], 2);
 		data_len = data_buf[1];
-		if (data_len > 3)
-			read_len = ssread(&data_buf[3], data_len - 3, 50000);
+		if (data_len > 3) {
+			read_len = serial->read(&data_buf[3], data_len - 3);
+			//read_len = ssread(&data_buf[3], data_len - 3, 50000);
+		}
 		else
 			return false;
 		

@@ -246,7 +246,7 @@ namespace pixetto {
 			int loop = 0;
 			
 			do {
-				read_len = serial->read(code_buf, 1);
+				read_len = serial->read(code_buf, 1, ASYNC);
 				loop++;
 			} while (code_buf[0] != PXT_PACKET_START && loop < 300000);
 
@@ -405,16 +405,9 @@ namespace pixetto {
 
 		int read_len = 0;
 		int loop = 0;
-		/*
+
 		do {
 			read_len = serial->read(data_buf, 1, ASYNC);
-			loop++;
-			//uBit.sleep(100);
-		} while (data_buf[0] != PXT_PACKET_START && loop < 300000);
-		*/
-		do {
-			//read_len = ssread(data_buf, 1, 50000);
-			read_len = serial->read(data_buf, 1);
 			loop++;
 		} while (data_buf[0] != PXT_PACKET_START && loop < 300000);
 		
@@ -427,12 +420,10 @@ namespace pixetto {
 			return false;
 		}
 
-		//read_len = ssread(&data_buf[1], 2, 50000);
 		read_len = serial->read(&data_buf[1], 2);
 		data_len = data_buf[1];
 		if (data_len > 3) {
 			read_len = serial->read(&data_buf[3], data_len - 3);
-			//read_len = ssread(&data_buf[3], data_len - 3, 50000);
 		}
 		else
 			return false;

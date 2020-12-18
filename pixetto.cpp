@@ -272,7 +272,7 @@ namespace pixetto {
 		
 		bool ret = false;
 		PinName txn, rxn;
-		uBit.sleep(3000);
+		uBit.sleep(4000);
 		
 		if (getPinName(tx, txn) && getPinName(rx, rxn))
 		{
@@ -285,7 +285,7 @@ namespace pixetto {
 			#endif
 			//serial->setRxBufferSize(64);
 			//serial->setTxBufferSize(32);
-			uBit.sleep(100);
+			uBit.sleep(1000);
 			
 			ret = opencam(false);
 		}

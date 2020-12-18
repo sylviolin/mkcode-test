@@ -299,6 +299,7 @@ namespace pixetto {
 			uint8_t cmd_buf[5] = {PXT_PACKET_START, 0x05, PXT_CMD_STREAMON_CB, 0, PXT_PACKET_END};
 			serial->send(cmd_buf, 5, ASYNC);
 			
+			int loop = 0;
 			int read_len = 0;
 			uint8_t code_buf[5] = {0xFF};
 			

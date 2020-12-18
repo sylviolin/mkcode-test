@@ -238,7 +238,7 @@ namespace pixetto {
 			do {
 				read_len = serial->read(code_buf, 1, ASYNC);
 				loop++;
-			} while (code_buf[0] != PXT_PACKET_START && loop < 500000);
+			} while (code_buf[0] != PXT_PACKET_START && loop < 300000);
 
 			if (read_len == 0 || read_len == MICROBIT_NO_DATA) return false;
 			
@@ -262,7 +262,7 @@ namespace pixetto {
 		
 		bool ret = false;
 		PinName txn, rxn;
-		uBit.sleep(3000);
+		uBit.sleep(6000);
 		
 		if (getPinName(tx, txn) && getPinName(rx, rxn))
 		{
@@ -341,7 +341,7 @@ namespace pixetto {
 		
 		int ret = false;
 		PinName txn, rxn;
-		uBit.sleep(3000);
+		uBit.sleep(6000);
 		
 		if (getPinName(tx, txn) && getPinName(rx, rxn))
 		{
@@ -355,7 +355,7 @@ namespace pixetto {
 			
 			//serial->setRxBufferSize(64);
 			//serial->setTxBufferSize(32);
-			uBit.sleep(100);
+			uBit.sleep(1000);
 			
 			ret = test_opencam(false);
 		}

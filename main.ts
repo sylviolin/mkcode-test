@@ -86,7 +86,7 @@ namespace pixetto {
         //% block="9"
         Digit_9
     }
-    
+       
     export enum PixHandLetter {
 		//% block="Aa"
 		A=0,

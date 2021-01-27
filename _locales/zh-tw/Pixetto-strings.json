@@ -80,7 +80,7 @@
   "pixetto.PixTrafficSign.SIGN_WRONG_WAY|block": "禁止直行",
   "pixetto.PixTrafficSign.SIGN_YIELD_TO_PEDESTRIAN|block": "禮讓行人",
   "pixetto.begin|block": "初始化視覺感測器 RX %rx TX %tx",
-  "pixetto.enableFunc|block": "開啟功能 %func"
+  "pixetto.enableFunc|block": "開啟功能 %func",
   "pixetto.getEquationAnswer|block": "數字運算答案",
   "pixetto.getEquationExpr|block": "數字運算字串",
   "pixetto.getFuncID|block": "目前功能 %func_id",

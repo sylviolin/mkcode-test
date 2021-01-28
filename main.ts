@@ -63,7 +63,16 @@ namespace pixetto {
 		//% block="Green light"
 		SIGN_GREEN_LIGHT
     }
-  
+	
+	export enum PixTemplate {
+		//% block="1"
+		Template_1,
+		//% block="2"
+		Template_2,
+		//% block="3"
+		Template_3
+	}
+	
     export enum PixHandDigit {
         //% block="0"
         Digit_0,
@@ -284,14 +293,14 @@ namespace pixetto {
     //% block="Template Matching detects %id"
     //% shim=pixetto::get_template_id
     //% weight=77
-    export function get_template_id(id: number): boolean {
+    export function get_template_id(id: PixTemplate): boolean {
         return false;
     }
 
     //% block="Keypoint detects %id"
     //% shim=pixetto::get_keypoint_id
     //% weight=76
-    export function get_keypoint_id(id: number): boolean {
+    export function get_keypoint_id(id: PixTemplate): boolean {
         return false;
     }
 

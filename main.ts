@@ -66,7 +66,7 @@ namespace pixetto {
 	
 	export enum PixTemplate {
 		//% block="1"
-		Template_1,
+		Template_1=1,
 		//% block="2"
 		Template_2,
 		//% block="3"

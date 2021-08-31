@@ -658,6 +658,8 @@ namespace pixetto {
     bool get_traffic_sign(int sign) {
 		if (data_buf[2] == TRAFFIC_SIGN_DETECTION && data_buf[3] == sign)
 			return true;
+		if (data_buf[2] == LANE_AND_SIGN && m_type == sign)
+			return true;
         return false;
     }
 

@@ -69,7 +69,9 @@ enum PixFunction {
         //% block="Simple Classifier"
         SIMPLE_CLASSIFIER=18,
         //% block="Voice Commands"
-        VOICE_COMMANDS=19
+        VOICE_COMMANDS=19,
+        //% block="Lanes and Traffic Sign Detection"
+        LANE_AND_SIGN=20        
 };
     
 enum PixApriltagField {
@@ -448,6 +450,20 @@ namespace pixetto {
 			m_w = data_buf[7];
 			m_h = data_buf[8];
 		}
+		else if (data_buf[2] == LANE_AND_SIGN) {
+			if (data_buf[18] == 0 || data_buf[18] == 2) {
+				m_x = -1; m_y = -1;
+			}
+			else {
+				m_x = data_buf[3];
+				m_y = data_buf[4];
+			}
+
+			if (data_buf[18] == 0 || data_buf[18] == 1)
+				m_type = -1;
+			else
+				m_type = data_buf[13];
+		}
 		else {
 			m_type = data_buf[3];
 			m_x = data_buf[4];
@@ -541,6 +557,20 @@ namespace pixetto {
 		else if (data_buf[2] == LANES_DETECTION) {
 			m_x = data_buf[3];
 			m_y = data_buf[4];
+		}
+		else if (data_buf[2] == LANE_AND_SIGN) {
+			if (data_buf[18] == 0 || data_buf[18] == 2) {
+				m_x = -1; m_y = -1;
+			}
+			else {
+				m_x = data_buf[3];
+				m_y = data_buf[4];
+			}
+
+			if (data_buf[18] == 0 || data_buf[18] == 1)
+				m_type = -1;
+			else
+				m_type = data_buf[13];
 		}
 		else if (data_buf[2] == SIMPLE_CLASSIFIER) {
 			m_type = data_buf[3] * 256 + data_buf[4];

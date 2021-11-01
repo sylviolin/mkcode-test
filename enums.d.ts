@@ -49,7 +49,7 @@
     SIMPLE_CLASSIFIER = 18,
     //% block="Voice Commands"
     VOICE_COMMANDS = 19,
-    //% block="Lanes and Traffic Sign Detection"
+    //% block="Autonomous Driving"
     LANE_AND_SIGN = 20,
     }
 
